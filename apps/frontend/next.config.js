@@ -67,7 +67,7 @@ const nextConfig = {
       // This eliminates CORS entirely (same-origin from browser perspective)
       {
         source: '/auth/:path*',
-        destination: `${backendUrl}/api/:path*`,
+        destination: `${backendUrl}/api/auth/:path*`,
       },
       {
         source: '/api/:path*',
