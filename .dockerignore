@@ -1,23 +1,13 @@
-# We want the docker builds to be clean, and as fast as possible. Don't send
-# any half-built stuff in the build context as a pre-caution (also saves copying
-# 180k files in node_modules that isn't used!).
-**/node_modules
-node_modules/*
-node_modules
-docker-data/*
-dist
-.nx
-/apps/frontend/.next
-/apps/backend/dist
-/apps/workers/dist
-/apps/cron/dist
-/apps/commands/dist
-.devcontainer
-**/.git
-**/*.md
-**/LICENSE
-**/npm-debug.log
-**/*.vscode
 .git
-.github
-reports
+.next
+node_modules
+apps/frontend/.next
+apps/frontend/node_modules
+apps/backend/node_modules
+apps/workers/node_modules
+packages/*/node_modules
+packages/*/*/node_modules
+README.md
+Dockerfile
+docker-compose.frontend.yml
+nginx_vaiclaw_frontend.conf

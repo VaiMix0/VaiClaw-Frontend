@@ -23,25 +23,25 @@ export const customFetch = (
       typeof document === 'undefined'
         ? null
         : document.cookie
-            .split(';')
-            .find((p) => p.includes('auth='))
-            ?.split('=')[1];
+          .split(';')
+          .find((p) => p.includes('auth='))
+          ?.split('=')[1];
 
     const authNonSecuredOrg =
       typeof document === 'undefined'
         ? null
         : document.cookie
-            .split(';')
-            .find((p) => p.includes('showorg='))
-            ?.split('=')[1];
+          .split(';')
+          .find((p) => p.includes('showorg='))
+          ?.split('=')[1];
 
     const authNonSecuredImpersonate =
       typeof document === 'undefined'
         ? null
         : document.cookie
-            .split(';')
-            .find((p) => p.includes('impersonate='))
-            ?.split('=')[1];
+          .split(';')
+          .find((p) => p.includes('impersonate='))
+          ?.split('=')[1];
 
     const fetchRequest = await fetch(params.baseUrl + url, {
       ...(secured ? { credentials: 'include' } : {}),
@@ -50,8 +50,8 @@ export const customFetch = (
         ...(showorg
           ? { showorg }
           : authNonSecuredOrg
-          ? { showorg: authNonSecuredOrg }
-          : {}),
+            ? { showorg: authNonSecuredOrg }
+            : {}),
         ...(options.body instanceof FormData
           ? {}
           : { 'Content-Type': 'application/json' }),
@@ -59,10 +59,10 @@ export const customFetch = (
         ...(loggedAuth ? { auth: loggedAuth } : {}),
         ...options?.headers,
         ...(auth
-          ? { auth }
+          ? { Authorization: `Bearer ${auth}` }
           : authNonSecuredCookie
-          ? { auth: authNonSecuredCookie }
-          : {}),
+            ? { Authorization: `Bearer ${authNonSecuredCookie}` }
+            : {}),
         ...(authNonSecuredImpersonate
           ? { impersonate: authNonSecuredImpersonate }
           : {}),
@@ -81,7 +81,7 @@ export const customFetch = (
     }
 
     // @ts-ignore
-    return new Promise((res) => {}) as Response;
+    return new Promise((res) => { }) as Response;
   };
 };
 

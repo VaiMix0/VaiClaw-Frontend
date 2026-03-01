@@ -86,10 +86,9 @@ export const Features: FC<{
     const list = [];
     list.push(`${channelsOr} ${channelsOr === 1 ? 'channel' : 'channels'}`);
     list.push(
-      `${
-        currentPricing.posts_per_month > 10000
-          ? 'Unlimited'
-          : currentPricing.posts_per_month
+      `${currentPricing.posts_per_month > 10000
+        ? 'Unlimited'
+        : currentPricing.posts_per_month
       } posts per month`
     );
     if (currentPricing.team_members) {
@@ -286,7 +285,7 @@ export const MainBillingComponent: FC<{
               },
             })
           ).json();
-          setSubscription((subs) => ({
+          setSubscription((subs: Subscription | undefined) => ({
             ...subs!,
             cancelAt: cancel_at,
           }));
@@ -363,7 +362,7 @@ export const MainBillingComponent: FC<{
                 },
               })
             ).json();
-            setSubscription((subs) => ({
+            setSubscription((subs: Subscription | undefined) => ({
               ...subs!,
               cancelAt: cancel_at,
             }));
@@ -395,7 +394,7 @@ export const MainBillingComponent: FC<{
           await track(TrackEnum.InitiateCheckout, {
             value:
               pricing[billing][
-                monthlyOrYearly === 'on' ? 'year_price' : 'month_price'
+              monthlyOrYearly === 'on' ? 'year_price' : 'month_price'
               ],
           });
           window.location.href = url;
@@ -413,7 +412,7 @@ export const MainBillingComponent: FC<{
           }
         } else {
           setPeriod(monthlyOrYearly === 'on' ? 'YEARLY' : 'MONTHLY');
-          setSubscription((subs) => ({
+          setSubscription((subs: Subscription | undefined) => ({
             ...subs!,
             subscriptionTier: billing,
             cancelAt: null,
@@ -474,7 +473,7 @@ export const MainBillingComponent: FC<{
               </div>
               <div className="text-[14px] flex gap-[10px]">
                 {currentPackage === name.toUpperCase() &&
-                subscription?.cancelAt ? (
+                  subscription?.cancelAt ? (
                   <div className="gap-[3px] flex flex-col">
                     <div>
                       <Button
@@ -498,8 +497,8 @@ export const MainBillingComponent: FC<{
                     }
                     className={clsx(
                       subscription &&
-                        name.toUpperCase() === 'FREE' &&
-                        '!bg-red-500'
+                      name.toUpperCase() === 'FREE' &&
+                      '!bg-red-500'
                     )}
                     onClick={moveToCheckout(
                       name.toUpperCase() as 'STANDARD' | 'PRO'
@@ -508,18 +507,18 @@ export const MainBillingComponent: FC<{
                     {currentPackage === name.toUpperCase()
                       ? 'Current Plan'
                       : name.toUpperCase() === 'FREE'
-                      ? subscription?.cancelAt
-                        ? `Downgrade on ${dayjs
+                        ? subscription?.cancelAt
+                          ? `Downgrade on ${dayjs
                             .utc(subscription?.cancelAt)
                             .local()
                             .format('D MMM, YYYY')}`
-                        : 'Cancel subscription'
-                      : // @ts-ignore
-                      (user?.tier === 'FREE' ||
+                          : 'Cancel subscription'
+                        : // @ts-ignore
+                        (user?.tier === 'FREE' ||
                           user?.tier?.current === 'FREE') &&
-                        user.allowTrial
-                      ? t('start_7_days_free_trial', 'Start 7 days free trial')
-                      : 'Purchase'}
+                          user.allowTrial
+                          ? t('start_7_days_free_trial', 'Start 7 days free trial')
+                          : 'Purchase'}
                   </Button>
                 )}
                 {subscription &&

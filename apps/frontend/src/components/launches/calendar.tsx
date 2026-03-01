@@ -137,14 +137,14 @@ const usePostActions = (onMutate?: () => void) => {
             <AddEditModal
               {...(isDuplicate
                 ? {
-                    onlyValues: data.posts.map(
-                      ({ image, settings, content }: any) => ({
-                        image,
-                        settings,
-                        content,
-                      })
-                    ),
-                  }
+                  onlyValues: data.posts.map(
+                    ({ image, settings, content }: any) => ({
+                      image,
+                      settings,
+                      content,
+                    })
+                  ),
+                }
                 : {})}
               allIntegrations={integrations.map((p) => ({ ...p }))}
               reopenModal={editPost(post)}
@@ -153,12 +153,12 @@ const usePostActions = (onMutate?: () => void) => {
                 isDuplicate
                   ? integrations
                   : integrations
-                      .slice(0)
-                      .filter((f) => f.id === data.integration)
-                      .map((p) => ({
-                        ...p,
-                        picture: data.integrationPicture,
-                      }))
+                    .slice(0)
+                    .filter((f) => f.id === data.integration)
+                    .map((p) => ({
+                      ...p,
+                      picture: data.integrationPicture,
+                    }))
               }
               date={publishDate}
             />
@@ -357,7 +357,7 @@ export const WeekView = () => {
                 className={clsx(
                   'text-[14px] font-[600] flex items-center justify-center gap-[6px]',
                   day.day === newDayjs().format('L') &&
-                    'text-newTableTextFocused'
+                  'text-newTableTextFocused'
                 )}
               >
                 {day.day === newDayjs().format('L') && (
@@ -585,11 +585,11 @@ export const CalendarColumn: FC<{
       const check =
         display === 'day'
           ? pList.format('YYYY-MM-DD HH:mm') ===
-            getDate.format('YYYY-MM-DD HH:mm')
+          getDate.format('YYYY-MM-DD HH:mm')
           : display === 'week'
-          ? pList.isSameOrAfter(getDate.startOf('hour')) &&
+            ? pList.isSameOrAfter(getDate.startOf('hour')) &&
             pList.isBefore(getDate.endOf('hour'))
-          : pList.format('DD/MM/YYYY') === getDate.format('DD/MM/YYYY');
+            : pList.format('DD/MM/YYYY') === getDate.format('DD/MM/YYYY');
       return check;
     });
   }, [posts, display, getDate]);
@@ -723,28 +723,28 @@ export const CalendarColumn: FC<{
     const set: any = !sets.length
       ? undefined
       : await new Promise((resolve) => {
-          modal.openModal({
-            title: t('select_set', 'Select a Set'),
-            closeOnClickOutside: true,
-            askClose: false,
-            closeOnEscape: true,
-            withCloseButton: true,
-            onClose: () => resolve('exit'),
-            children: (
-              <SetSelectionModal
-                sets={sets}
-                onSelect={(selectedSet) => {
-                  resolve(selectedSet);
-                  modal.closeAll();
-                }}
-                onContinueWithoutSet={() => {
-                  resolve(undefined);
-                  modal.closeAll();
-                }}
-              />
-            ),
-          });
+        modal.openModal({
+          title: t('select_set', 'Select a Set'),
+          closeOnClickOutside: true,
+          askClose: false,
+          closeOnEscape: true,
+          withCloseButton: true,
+          onClose: () => resolve('exit'),
+          children: (
+            <SetSelectionModal
+              sets={sets}
+              onSelect={(selectedSet) => {
+                resolve(selectedSet);
+                modal.closeAll();
+              }}
+              onContinueWithoutSet={() => {
+                resolve(undefined);
+                modal.closeAll();
+              }}
+            />
+          ),
         });
+      });
 
     if (set === 'exit') return;
 
@@ -770,20 +770,20 @@ export const CalendarColumn: FC<{
           mutate={reloadCalendarView}
           {...(signature?.id && !set
             ? {
-                onlyValues: [
-                  {
-                    content: '\n' + signature.content,
-                  },
-                ],
-              }
+              onlyValues: [
+                {
+                  content: '\n' + signature.content,
+                },
+              ],
+            }
             : {})}
           date={
             randomHour
               ? getDate.hour(Math.floor(Math.random() * 24))
               : getDate.format('YYYY-MM-DDTHH:mm:ss') ===
                 newDayjs().startOf('hour').format('YYYY-MM-DDTHH:mm:ss')
-              ? newDayjs().add(10, 'minute')
-              : getDate
+                ? newDayjs().add(10, 'minute')
+                : getDate
           }
           {...(set?.content ? { set: JSON.parse(set.content) } : {})}
           reopenModal={() => ({})}
@@ -878,8 +878,8 @@ export const CalendarColumn: FC<{
                 display === ('month' as any)
                   ? 'flex-1 min-h-[40px] w-full'
                   : !postList.length
-                  ? 'min-h-full w-full p-[5px]'
-                  : 'min-h-[40px] w-full',
+                    ? 'min-h-full w-full p-[5px]'
+                    : 'min-h-[40px] w-full',
                 'flex items-center justify-center cursor-pointer pb-[2.5px]'
               )}
             >
@@ -1018,7 +1018,7 @@ const CalendarItem: FC<{
             'group-hover:hidden cursor-pointer'
           )}
         >
-          {post.tags.map((p) => p.tag.name).join(', ')}
+          {post.tags.map((p: any) => p.tag.name).join(', ')}
         </div>
         <div
           className={clsx(
@@ -1095,12 +1095,12 @@ const CalendarItem: FC<{
           <div className="text-start">
             {state === 'DRAFT' ? t('draft', 'Draft') + ': ' : ''}
           </div>
-            <div className="w-full relative">
-              <div className="absolute top-0 start-0 w-full text-ellipsis break-words line-clamp-1 text-start">
-                {stripHtmlValidation('none', post.content, false, true, false) ||
-                  t('no_content', 'no content')}
-              </div>
+          <div className="w-full relative">
+            <div className="absolute top-0 start-0 w-full text-ellipsis break-words line-clamp-1 text-start">
+              {stripHtmlValidation('none', post.content, false, true, false) ||
+                t('no_content', 'no content')}
             </div>
+          </div>
         </div>
         {showTime && (
           <div className="text-textColor/50 text-[12px] whitespace-nowrap flex items-center">

@@ -1,0 +1,11 @@
+services:
+  vaiclaw-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vaiclaw-frontend
+    restart: unless-stopped
+    ports:
+      - "3002:4200" # Expose Port 3002 ra VPS host, map vào 4200 của Nextjs
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=https://vaiclaw.vaimix.com/api
