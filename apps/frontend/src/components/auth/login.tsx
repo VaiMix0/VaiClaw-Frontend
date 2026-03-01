@@ -58,6 +58,17 @@ export function Login() {
         });
       }
       setLoading(false);
+    } else if (login.status === 200 || login.status === 201) {
+      const body = await login.json();
+      if (body.access_token) {
+        // Store token and redirect
+        localStorage.setItem('vaiclaw_token', body.access_token);
+        window.location.href = '/';
+      }
+    } else {
+      const errorMsg = await login.text().catch(() => 'Login failed');
+      form.setError('email', { message: errorMsg });
+      setLoading(false);
     }
   };
   return (

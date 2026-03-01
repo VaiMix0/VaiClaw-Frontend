@@ -17,6 +17,5 @@ ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
 RUN pnpm install
 RUN NODE_OPTIONS="--max-old-space-size=4096" pnpm run build
 
-# Chạy Next.js ở chế độ Production (Cổng mặc định 3000)
-# Bạn cũng có thể dùng `pnpm run pm2` nếu có file hệ sinh thái PM2.
-CMD ["pnpm", "run", "start:prod:frontend"]
+# Chạy Next.js ở chế độ Production (Cổng 4200 như cài đặt của frontend)
+CMD ["npx", "next", "start", "apps/frontend", "-p", "4200"]

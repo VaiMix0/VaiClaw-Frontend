@@ -13,24 +13,24 @@ const nextConfig = {
       headers: [{
         key: "Document-Policy",
         value: "js-profiling",
-      }, ],
-    }, ];
+      },],
+    },];
   },
   reactStrictMode: false,
   transpilePackages: ['crypto-hash'],
   // Enable production sourcemaps for Sentry
   productionBrowserSourceMaps: true,
-  
+
   // Custom webpack config to ensure sourcemaps are generated properly
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     // Enable sourcemaps for both client and server in production
     if (!dev) {
       config.devtool = isServer ? 'source-map' : 'hidden-source-map';
     }
-    
+
     return config;
   },
-  
+
   images: {
     remotePatterns: [
       {
@@ -54,6 +54,7 @@ const nextConfig = {
     ];
   },
   async rewrites() {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
     return [
       {
         source: '/uploads/:path*',
@@ -61,6 +62,16 @@ const nextConfig = {
           process.env.STORAGE_PROVIDER === 'local'
             ? '/api/uploads/:path*'
             : '/404',
+      },
+      // Proxy all /auth/* and /api/* calls to the VaiClaw backend
+      // This eliminates CORS entirely (same-origin from browser perspective)
+      {
+        source: '/auth/:path*',
+        destination: `${backendUrl}/api/:path*`,
+      },
+      {
+        source: '/api/:path*',
+        destination: `${backendUrl}/api/:path*`,
       },
     ];
   },

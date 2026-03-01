@@ -121,18 +121,15 @@ export function RegisterAfter({
     })
       .then(async (response) => {
         setLoading(false);
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           fireEvents('register');
           return track(TrackEnum.CompleteRegistration).then(() => {
-            if (response.headers.get('activate') === 'true') {
-              router.push('/auth/activate');
-            } else {
-              router.push('/auth/login');
-            }
+            router.push('/auth/login');
           });
         } else {
+          const errText = await response.text().catch(() => 'Registration failed');
           form.setError('email', {
-            message: await response.text(),
+            message: errText,
           });
         }
       })
