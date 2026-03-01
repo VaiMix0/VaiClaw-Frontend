@@ -54,7 +54,8 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+    // NEXT_PUBLIC_BACKEND_URL = https://vaiclaw.vaimix.com/api  (already includes /api)
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
     return [
       {
         source: '/uploads/:path*',
@@ -63,15 +64,11 @@ const nextConfig = {
             ? '/api/uploads/:path*'
             : '/404',
       },
-      // Proxy all /auth/* and /api/* calls to the VaiClaw backend
-      // This eliminates CORS entirely (same-origin from browser perspective)
+      // Proxy /auth/* → https://vaiclaw.vaimix.com/api/auth/*
+      // (backendUrl already ends with /api, so we just append /auth/:path*)
       {
         source: '/auth/:path*',
-        destination: `${backendUrl}/api/auth/:path*`,
-      },
-      {
-        source: '/api/:path*',
-        destination: `${backendUrl}/api/:path*`,
+        destination: `${backendUrl}/auth/:path*`,
       },
     ];
   },
