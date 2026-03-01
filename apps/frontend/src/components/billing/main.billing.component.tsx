@@ -4,7 +4,7 @@ import { Slider } from '@gitroom/react/form/slider';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@gitroom/react/form/button';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { Subscription } from '@prisma/client';
+import { Subscription } from '@gitroom/frontend/prisma.mock';
 import { useDebouncedCallback } from 'use-debounce';
 import ReactLoading from 'react-loading';
 import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';

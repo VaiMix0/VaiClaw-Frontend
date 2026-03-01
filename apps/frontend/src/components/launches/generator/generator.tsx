@@ -136,8 +136,8 @@ const FirstStep: FC = (props) => {
             content: load.hook + '\n' + p.content,
             ...(p?.image?.path
               ? {
-                  image: [p.image],
-                }
+                image: [p.image],
+              }
               : {}),
           };
         }
@@ -145,8 +145,8 @@ const FirstStep: FC = (props) => {
           content: p.content,
           ...(p?.image?.path
             ? {
-                image: [p.image],
-              }
+              image: [p.image],
+            }
             : {}),
         };
       });
@@ -190,6 +190,12 @@ const FirstStep: FC = (props) => {
       <FormProvider {...form}>
         <div className="flex flex-col">
           <div className="pb-[10px] rounded-[4px]">
+            <div className="flex mb-4 gap-2 items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8b5cf6]">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+              <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#622aff] to-[#8b5cf6]">VaiClaw AI Generator</h2>
+            </div>
             <div className="flex">
               <div className="flex-1">
                 {!showStep ? (

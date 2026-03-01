@@ -2,7 +2,7 @@
 
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/frontend/prisma.mock';
 import { Autocomplete } from '@mantine/core';
 import useSWR from 'swr';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';

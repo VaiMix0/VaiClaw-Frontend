@@ -275,32 +275,32 @@ export const TopMenu: FC = () => {
         {
           // @ts-ignore
           user?.orgId &&
-            // @ts-ignore
-            (user.tier !== 'FREE' || !isGeneral || !billingEnabled) &&
-            firstMenu
-              .filter((f) => {
-                if (f.hide) {
-                  return false;
-                }
-                if (f.requireBilling && !billingEnabled) {
-                  return false;
-                }
-                if (f.name === 'Billing' && user?.isLifetime) {
-                  return false;
-                }
-                if (f.role) {
-                  return f.role.includes(user?.role!);
-                }
-                return true;
-              })
-              .map((item, index) => (
-                <MenuItem
-                  path={item.path}
-                  label={item.name}
-                  icon={item.icon}
-                  key={item.name}
-                />
-              ))
+          // @ts-ignore
+          (user.tier !== 'FREE' || !isGeneral || !billingEnabled) &&
+          firstMenu
+            .filter((f) => {
+              if (f.hide) {
+                return false;
+              }
+              if (f.requireBilling && !billingEnabled) {
+                return false;
+              }
+              if (f.name === 'Billing' && user?.isLifetime) {
+                return false;
+              }
+              if (f.role) {
+                return f.role.includes(user?.role!);
+              }
+              return true;
+            })
+            .map((item, index) => (
+              <MenuItem
+                path={item.path}
+                label={item.name}
+                icon={item.icon}
+                key={item.name}
+              />
+            ))
         }
       </div>
       <div className="flex flex-col minCustom:gap-[16px] blurMe">
@@ -328,6 +328,25 @@ export const TopMenu: FC = () => {
               key={item.name}
             />
           ))}
+
+        {/* Quota UI Display */}
+        {user && !user.isLifetime && (
+          <div className="mt-8 mx-4 p-4 rounded-xl bg-[#15161a] border border-[#2b2d31]">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[12px] font-medium text-gray-400">Post Quota</span>
+              <span className="text-[12px] font-bold text-white">45 / {user.tier === 'FREE' ? '15' : 'Unlimited'}</span>
+            </div>
+            <div className="h-2 w-full bg-[#2b2d31] rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#622aff] to-[#8b5cf6] rounded-full"
+                style={{ width: user.tier === 'FREE' ? '100%' : '15%' }}
+              />
+            </div>
+            <div className="mt-3 text-[11px] text-gray-500 text-center">
+              {user.tier === 'FREE' ? 'Upgrade to Pro for unlimited posts' : 'You are on the Pro plan'}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

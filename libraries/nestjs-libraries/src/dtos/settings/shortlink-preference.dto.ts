@@ -1,5 +1,5 @@
 import { IsEnum } from 'class-validator';
-import { ShortLinkPreference } from '@prisma/client';
+export enum ShortLinkPreference { DUB = 'DUB', SHORTIO = 'SHORTIO', KUTT = 'KUTT', LINKDRIP = 'LINKDRIP' }
 
 export class ShortlinkPreferenceDto {
   @IsEnum(ShortLinkPreference)

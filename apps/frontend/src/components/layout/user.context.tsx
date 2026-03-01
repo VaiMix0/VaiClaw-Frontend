@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, FC, ReactNode, useContext } from 'react';
-import { User } from '@prisma/client';
+import { User } from '@gitroom/frontend/prisma.mock';
 import {
   pricing,
   PricingInnerInterface,

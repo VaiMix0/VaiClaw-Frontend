@@ -6,7 +6,7 @@ import {
   MinLength,
   ValidateIf,
 } from 'class-validator';
-import { Provider } from '@prisma/client';
+export type Provider = 'LOCAL' | 'GITHUB' | 'GOOGLE';
 
 export class CreateOrgUserDto {
   @IsString()

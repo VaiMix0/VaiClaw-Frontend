@@ -1,7 +1,7 @@
 import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
 import React, { FC, useCallback, useState } from 'react';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/frontend/prisma.mock';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { Button } from '@gitroom/react/form/button';
 import { Slider } from '@gitroom/react/form/slider';
