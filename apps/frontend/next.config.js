@@ -54,8 +54,6 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    // NEXT_PUBLIC_BACKEND_URL = https://vaiclaw.vaimix.com/api  (already includes /api)
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
     return [
       {
         source: '/uploads/:path*',
@@ -63,12 +61,6 @@ const nextConfig = {
           process.env.STORAGE_PROVIDER === 'local'
             ? '/api/uploads/:path*'
             : '/404',
-      },
-      // Proxy /auth/* → https://vaiclaw.vaimix.com/api/auth/*
-      // (backendUrl already ends with /api, so we just append /auth/:path*)
-      {
-        source: '/auth/:path*',
-        destination: `${backendUrl}/auth/:path*`,
       },
     ];
   },
