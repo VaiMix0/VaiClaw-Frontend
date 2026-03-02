@@ -62,7 +62,9 @@ export function Login() {
       } else if (login.status === 200 || login.status === 201) {
         const body = await login.json();
         if (body.access_token) {
-          // Store token and redirect
+          // VaiClaw returns JWT in JSON body — set it as auth cookie
+          // for Postiz middleware compatibility (it checks cookie, not localStorage)
+          document.cookie = `auth=${body.access_token};path=/;max-age=${365 * 24 * 60 * 60}`;
           localStorage.setItem('vaiclaw_token', body.access_token);
           window.location.href = '/';
         } else if (body.ok === false) {

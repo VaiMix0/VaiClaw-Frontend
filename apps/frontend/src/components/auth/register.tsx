@@ -122,6 +122,14 @@ export function RegisterAfter({
       .then(async (response) => {
         setLoading(false);
         if (response.status === 200 || response.status === 201) {
+          // VaiClaw returns {ok: false, error: "..."} on failure at status 200
+          const body = await response.json().catch(() => ({}));
+          if (body.ok === false) {
+            form.setError('email', {
+              message: body.error || 'Registration failed',
+            });
+            return;
+          }
           fireEvents('register');
           return track(TrackEnum.CompleteRegistration).then(() => {
             router.push('/auth/login');
@@ -134,6 +142,7 @@ export function RegisterAfter({
         }
       })
       .catch((e) => {
+        setLoading(false);
         form.setError('email', {
           message:
             'General error: ' +
