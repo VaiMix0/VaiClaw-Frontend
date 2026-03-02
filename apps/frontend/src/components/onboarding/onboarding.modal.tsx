@@ -10,12 +10,16 @@ import { AddProviderComponent } from '@gitroom/frontend/components/launches/add.
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 
+import { useSearchParams } from 'next/navigation';
+
 interface OnboardingModalProps {
   onClose: () => void;
 }
 
 export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
-  const [step, setStep] = useState(1);
+  const searchParams = useSearchParams();
+  const initialStep = searchParams.get('step') ? parseInt(searchParams.get('step')!) : 1;
+  const [step, setStep] = useState(initialStep);
   const modals = useModals();
   const t = useT();
 
@@ -28,7 +32,7 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
         <button
           className="outline-none absolute end-[20px] top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa z-50 text-white"
           type="button"
-          onClick={modals.closeAll}
+          onClick={onClose}
         >
           <svg
             viewBox="0 0 15 15"
@@ -48,12 +52,12 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
         <div className="flex-1 flex p-[40px]">
           <div className="flex flex-col gap-[24px] flex-1">
             {/* Step indicators */}
-            <div className="flex items-center justify-center gap-[16px]">
+            <div className="flex items-center justify-center gap-[16px] overflow-x-auto">
               {/* Step 1 Indicator */}
-              <div className="flex items-center gap-[8px]">
+              <div className="flex items-center gap-[8px] whitespace-nowrap">
                 <div
                   className={clsx(
-                    'w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-semibold transition-colors',
+                    'min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors',
                     step === 1
                       ? 'bg-boxFocused text-textItemFocused'
                       : 'bg-[#15161A] text-gray-500 border border-[#2b2d31]'
@@ -64,18 +68,19 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
                 <span
                   className={clsx(
                     'text-[14px]',
-                    step === 1 ? 'font-medium' : 'text-customColor18'
+                    step === 1 ? 'font-[500]' : 'text-customColor18'
                   )}
                 >
                   {t('select_plan', 'Select Plan')}
                 </span>
               </div>
               <div className={clsx("w-[24px] h-[2px]", step >= 2 ? "bg-boxFocused" : "bg-[#2b2d31]")} />
+
               {/* Step 2 Indicator */}
-              <div className="flex items-center gap-[8px]">
+              <div className="flex items-center gap-[8px] whitespace-nowrap">
                 <div
                   className={clsx(
-                    'w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-semibold transition-colors',
+                    'min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors',
                     step === 2
                       ? 'bg-boxFocused text-textItemFocused'
                       : step > 2 ? 'bg-boxFocused text-textItemFocused' : 'bg-[#15161A] text-gray-500 border border-[#2b2d31]'
@@ -86,21 +91,22 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
                 <span
                   className={clsx(
                     'text-[14px]',
-                    step === 2 || step > 2 ? 'font-medium' : 'text-customColor18'
+                    step === 2 || step > 2 ? 'font-[500]' : 'text-customColor18'
                   )}
                 >
-                  {t('connect_channels', 'Connect Channels')}
+                  {t('brand_setup', 'Brand Setup')}
                 </span>
               </div>
               <div className={clsx("w-[24px] h-[2px]", step >= 3 ? "bg-boxFocused" : "bg-[#2b2d31]")} />
+
               {/* Step 3 Indicator */}
-              <div className="flex items-center gap-[8px]">
+              <div className="flex items-center gap-[8px] whitespace-nowrap">
                 <div
                   className={clsx(
-                    'w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-semibold transition-colors',
+                    'min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors',
                     step === 3
                       ? 'bg-boxFocused text-textItemFocused'
-                      : 'bg-[#15161A] text-gray-500 border border-[#2b2d31]'
+                      : step > 3 ? 'bg-boxFocused text-textItemFocused' : 'bg-[#15161A] text-gray-500 border border-[#2b2d31]'
                   )}
                 >
                   3
@@ -108,7 +114,30 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
                 <span
                   className={clsx(
                     'text-[14px]',
-                    step === 3 ? 'font-medium' : 'text-customColor18'
+                    step === 3 || step > 3 ? 'font-[500]' : 'text-customColor18'
+                  )}
+                >
+                  {t('connect_channels', 'Connect Channels')}
+                </span>
+              </div>
+              <div className={clsx("w-[24px] h-[2px]", step >= 4 ? "bg-boxFocused" : "bg-[#2b2d31]")} />
+
+              {/* Step 4 Indicator */}
+              <div className="flex items-center gap-[8px] whitespace-nowrap">
+                <div
+                  className={clsx(
+                    'min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors',
+                    step === 4
+                      ? 'bg-boxFocused text-textItemFocused'
+                      : 'bg-[#15161A] text-gray-500 border border-[#2b2d31]'
+                  )}
+                >
+                  4
+                </div>
+                <span
+                  className={clsx(
+                    'text-[14px]',
+                    step === 4 ? 'font-[500]' : 'text-customColor18'
                   )}
                 >
                   {t('watch_tutorial', 'Watch Tutorial')}
@@ -123,14 +152,20 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
               />
             )}
             {step === 2 && (
-              <OnboardingStep2Channels
+              <OnboardingStep2BrandSetup
                 onBack={() => setStep(1)}
                 onNext={() => setStep(3)}
-                onSkip={() => setStep(3)}
               />
             )}
             {step === 3 && (
-              <OnboardingStep3Tutorial onBack={() => setStep(2)} onFinish={onClose} />
+              <OnboardingStep2Channels
+                onBack={() => setStep(2)}
+                onNext={() => setStep(4)}
+                onSkip={() => setStep(4)}
+              />
+            )}
+            {step === 4 && (
+              <OnboardingStep3Tutorial onBack={() => setStep(3)} onFinish={onClose} />
             )}
           </div>
         </div>
@@ -241,11 +276,106 @@ const OnboardingStep1Plans: FC<{ onNext: () => void }> = ({ onNext }) => {
       <div className="flex justify-end pt-[16px]">
         <button
           onClick={onNext}
-          className="group flex items-center gap-[12px] bg-gradient-to-r from-[#622aff] to-[#8b5cf6] hover:from-[#7c3aff] hover:to-[#9d6eff] text-white font-semibold px-[36px] py-[16px] rounded-[14px] text-[16px] transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+          className="group flex items-center gap-[12px] bg-gradient-to-r from-[#622aff] to-[#8b5cf6] hover:from-[#7c3aff] hover:to-[#9d6eff] text-white font-[600] px-[36px] py-[16px] rounded-[14px] text-[16px] transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
         >
           {t('start_trial', 'Start My Free Trial')}
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
             <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const OnboardingStep2BrandSetup: FC<{ onBack: () => void; onNext: () => void }> = ({ onBack, onNext }) => {
+  const t = useT();
+  const [industry, setIndustry] = useState('');
+  const [brandVoice, setBrandVoice] = useState('');
+
+  return (
+    <div className="flex flex-col gap-[24px]">
+      <div className="flex gap-[4px] flex-col text-center mt-[16px]">
+        <div className="text-[24px] font-[600]">
+          {t('setup_brand_title', 'Configure Your Brand & Industry')}
+        </div>
+        <div className="text-[14px] text-customColor18 max-w-[600px] mx-auto mt-[8px]">
+          {t('setup_brand_desc', 'Help our AI understand your niche to generate perfectly tailored posts for your audience.')}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-[20px] max-w-[500px] mx-auto w-full mt-[16px]">
+        <div className="flex flex-col gap-[8px]">
+          <label className="text-[15px] font-[500] text-textColor">{t('industry', 'Industry / Niche')}</label>
+          <select
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+            className="bg-newBgColorInner border border-newBorder rounded-[8px] h-[48px] px-[16px] text-textColor outline-none focus:border-[#622aff] cursor-pointer"
+          >
+            <option value="" disabled>{t('select_industry', 'Select an industry...')}</option>
+            <option value="fashion">👗 Fashion & Beauty</option>
+            <option value="food">🍔 Food & Beverage</option>
+            <option value="tech">💻 Technology & Gadgets</option>
+            <option value="education">📚 Education & Coaching</option>
+            <option value="entertainment">🎭 Entertainment & Gaming</option>
+            <option value="business">💼 B2B & Finance</option>
+            <option value="other">✨ Other</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-[8px]">
+          <label className="text-[15px] font-[500] text-textColor">{t('brand_voice', 'Brand Voice')}</label>
+          <select
+            value={brandVoice}
+            onChange={(e) => setBrandVoice(e.target.value)}
+            className="bg-newBgColorInner border border-newBorder rounded-[8px] h-[48px] px-[16px] text-textColor outline-none focus:border-[#622aff] cursor-pointer"
+          >
+            <option value="" disabled>{t('select_voice', 'Select a brand voice...')}</option>
+            <option value="professional">👔 Professional & Authoritative</option>
+            <option value="casual">👋 Casual & Friendly</option>
+            <option value="humorous">😂 Humorous & Witty</option>
+            <option value="enthusiastic">🎉 Enthusiastic & Energetic</option>
+            <option value="empathetic">❤️ Empathetic & Caring</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="flex justify-end pt-[32px] mt-[8px]">
+        <button
+          onClick={onBack}
+          className="group flex items-center gap-[8px] bg-[#1a1b23] hover:bg-[#2b2d31] border-2 border-[#2b2d31] font-[500] px-[24px] py-[14px] rounded-[12px] text-[15px] mr-[12px] transition-all"
+        >
+          {t('back', 'Back')}
+        </button>
+        <button
+          onClick={() => {
+            if (industry) localStorage.setItem('onboarding_industry', industry);
+            if (brandVoice) localStorage.setItem('onboarding_voice', brandVoice);
+            onNext();
+          }}
+          disabled={!industry || !brandVoice}
+          className={clsx(
+            "group flex items-center gap-[12px] text-white font-[600] px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all",
+            industry && brandVoice
+              ? "bg-gradient-to-r from-[#622aff] to-[#8b5cf6] hover:from-[#7c3aff] hover:to-[#9d6eff] shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+              : "bg-gray-600 opacity-50 cursor-not-allowed"
+          )}
+        >
+          {t('continue', 'Continue')}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={clsx(industry && brandVoice && "group-hover:translate-x-1 transition-transform")}
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
           </svg>
         </button>
       </div>
@@ -266,7 +396,11 @@ const OnboardingStep2Channels: FC<{ onBack: () => void; onNext: () => void; onSk
   }, []);
 
   const load = useCallback(async (path: string) => {
-    const list = (await (await fetch(path)).json()).integrations;
+    let list = (await (await fetch(path)).json()).integrations || [];
+    if (typeof window !== 'undefined') {
+      const mocked = JSON.parse(localStorage.getItem('mocked_channels') || '[]');
+      list = [...list, ...mocked];
+    }
     return list;
   }, []);
 
@@ -355,39 +489,47 @@ const OnboardingStep2Channels: FC<{ onBack: () => void; onNext: () => void; onSk
       </div>
 
       {/* Action buttons */}
-      <div className="flex justify-end pt-[24px] mt-[8px]">
+      <div className="flex justify-between pt-[24px] mt-[8px]">
         <button
-          onClick={onBack}
-          className="group flex items-center gap-[8px] bg-[#1a1b23] hover:bg-[#2b2d31] border-2 border-[#2b2d31] font-medium px-[24px] py-[14px] rounded-[12px] text-[15px] transition-all"
+          onClick={onSkip}
+          className="group flex items-center gap-[8px] border border-gray-500 hover:border-gray-400 font-[500] px-[24px] py-[14px] rounded-[12px] text-[15px] transition-all"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform">
-            <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
-          </svg>
-          {t('back', 'Back')}
+          {t('skip_for_now', 'Skip for Now')}
         </button>
-        <button
-          onClick={onNext}
-          className="group flex items-center gap-[12px] bg-gradient-to-r from-[#622aff] to-[#8b5cf6] hover:from-[#7c3aff] hover:to-[#9d6eff] text-white font-semibold px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
-        >
-          {sortedIntegrations.length > 0
-            ? t('continue', 'Continue')
-            : t('continue_without_channels', 'Continue without channels')}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="group-hover:translate-x-1 transition-transform"
+        <div className="flex justify-end text-right">
+          <button
+            onClick={onBack}
+            className="group flex items-center gap-[8px] bg-[#1a1b23] hover:bg-[#2b2d31] border-2 border-[#2b2d31] font-[500] px-[24px] py-[14px] rounded-[12px] text-[15px] mr-[12px] transition-all"
           >
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform">
+              <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+            </svg>
+            {t('back', 'Back')}
+          </button>
+          <button
+            onClick={onNext}
+            className="group flex items-center gap-[12px] bg-gradient-to-r from-[#622aff] to-[#8b5cf6] hover:from-[#7c3aff] hover:to-[#9d6eff] text-white font-[600] px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+          >
+            {sortedIntegrations.length > 0
+              ? t('continue', 'Continue')
+              : t('continue_without_channels', 'Continue without channels')}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="group-hover:translate-x-1 transition-transform"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );

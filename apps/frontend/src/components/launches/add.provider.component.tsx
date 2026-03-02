@@ -437,6 +437,7 @@ export const AddProviderComponent: FC<{
           });
           return;
         };
+
         const gotoIntegration = async (externalUrl?: string) => {
           const params = [
             externalUrl ? `externalUrl=${externalUrl}` : '',

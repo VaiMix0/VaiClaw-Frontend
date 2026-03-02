@@ -329,21 +329,20 @@ export const TopMenu: FC = () => {
             />
           ))}
 
-        {/* Quota UI Display */}
+        {/* Quota UI Display (Condensed for sidebar) */}
         {user && !user.isLifetime && (
-          <div className="mt-8 mx-4 p-4 rounded-xl bg-[#15161a] border border-[#2b2d31]">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[12px] font-medium text-gray-400">Post Quota</span>
-              <span className="text-[12px] font-bold text-white">45 / {user.tier === 'FREE' ? '15' : 'Unlimited'}</span>
+          <div
+            className="mt-2 w-full flex flex-col gap-1 items-center justify-center cursor-pointer"
+            title={user.tier === 'FREE' ? 'Post Quota: 45 / 15 (Upgrade to Pro)' : 'Post Quota: 45 / Unlimited'}
+          >
+            <div className="text-[9px] font-[600] text-textItemBlur">
+              Quota
             </div>
-            <div className="h-2 w-full bg-[#2b2d31] rounded-full overflow-hidden">
+            <div className="h-[6px] w-[32px] bg-[#2b2d31] rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-[#622aff] to-[#8b5cf6] rounded-full"
                 style={{ width: user.tier === 'FREE' ? '100%' : '15%' }}
               />
-            </div>
-            <div className="mt-3 text-[11px] text-gray-500 text-center">
-              {user.tier === 'FREE' ? 'Upgrade to Pro for unlimited posts' : 'You are on the Pro plan'}
             </div>
           </div>
         )}

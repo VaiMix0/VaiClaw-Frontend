@@ -26,6 +26,7 @@ import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { useIntegrationList } from '@gitroom/frontend/components/launches/helpers/use.integration.list';
 import useCookie from 'react-use-cookie';
 import { Onboarding } from '@gitroom/frontend/components/onboarding/onboarding';
+import { DashboardEmptyState } from '@gitroom/frontend/components/launches/dashboard.empty.state';
 
 export const SVGLine = () => {
   return (
@@ -183,9 +184,9 @@ export const MenuGroupComponent: FC<
             className="line-clamp-1"
             {...(collapsed
               ? {
-                  'data-tooltip-id': 'tooltip',
-                  'data-tooltip-content': group.name,
-                }
+                'data-tooltip-id': 'tooltip',
+                'data-tooltip-content': group.name,
+              }
               : {})}
           >
             {group.name}
@@ -252,9 +253,9 @@ export const MenuComponent: FC<
       })}
       {...(collapsed
         ? {
-            'data-tooltip-id': 'tooltip',
-            'data-tooltip-content': integration.name,
-          }
+          'data-tooltip-id': 'tooltip',
+          'data-tooltip-content': integration.name,
+        }
         : {})}
       key={integration.id}
       className={clsx(
@@ -314,12 +315,12 @@ export const MenuComponent: FC<
         // @ts-ignore
         ref={drag}
         {...(integration.disabled &&
-        totalNonDisabledChannels === user?.totalChannels
+          totalNonDisabledChannels === user?.totalChannels
           ? {
-              'data-tooltip-id': 'tooltip',
-              'data-tooltip-content':
-                t('channel_disabled_upgrade_plan', 'This channel is disabled, please upgrade your plan to enable it.'),
-            }
+            'data-tooltip-id': 'tooltip',
+            'data-tooltip-content':
+              t('channel_disabled_upgrade_plan', 'This channel is disabled, please upgrade your plan to enable it.'),
+          }
           : {})}
         role="Handle"
         className={clsx(
@@ -435,10 +436,10 @@ export const LaunchesComponent = () => {
   );
   const refreshChannel = useCallback(
     (
-        integration: Integration & {
-          identifier: string;
-        }
-      ) =>
+      integration: Integration & {
+        identifier: string;
+      }
+    ) =>
       async () => {
         const { url } = await (
           await fetch(
@@ -584,10 +585,16 @@ export const LaunchesComponent = () => {
           </div>
         </div>
         <div className="bg-newBgColorInner flex-1 flex-col flex p-[20px] gap-[12px]">
-          <Filters />
-          <div className="flex-1 flex">
-            <Calendar />
-          </div>
+          {sortedIntegrations.length === 0 ? (
+            <DashboardEmptyState />
+          ) : (
+            <>
+              <Filters />
+              <div className="flex-1 flex overflow-hidden">
+                <Calendar />
+              </div>
+            </>
+          )}
         </div>
       </CalendarWeekProvider>
     </DNDProvider>

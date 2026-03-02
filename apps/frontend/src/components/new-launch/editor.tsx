@@ -67,6 +67,7 @@ import {
   DelayIcon,
 } from '@gitroom/frontend/components/ui/icons';
 import { DelayComponent } from '@gitroom/frontend/components/new-launch/delay.component';
+import { AIPromptHelper } from '@gitroom/frontend/components/new-launch/ai.prompt.helper';
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 1024; // 1 GB
 
@@ -363,7 +364,7 @@ export const EditorWrapper: FC<{
         'relative flex-col gap-[20px] flex-1',
         (items.length === 1 || !canEdit || !comments) && 'flex',
         ((!canEdit && !isCreateSet) || !comments) &&
-          'bg-newSettings rounded-[12px]'
+        'bg-newSettings rounded-[12px]'
       )}
     >
       {isCreateSet && current !== 'global' && (
@@ -571,7 +572,7 @@ export const Editor: FC<{
       uppy.clear();
     },
     allowedFileTypes: 'image/*,video/mp4',
-    onStart: () => {},
+    onStart: () => { },
     onEnd: () => setLoading(false),
   });
 
@@ -806,6 +807,11 @@ export const Editor: FC<{
                             />
                           </>
                         )}
+                      {editorType !== 'none' && (
+                        <div className="flex items-center ml-[4px]">
+                          <AIPromptHelper editor={editorRef?.current?.editor} />
+                        </div>
+                      )}
                       <div
                         data-tooltip-id="tooltip"
                         data-tooltip-content={t('insert_emoji', 'Insert Emoji')}
@@ -842,8 +848,8 @@ export const Editor: FC<{
                   onChange={(value) => {
                     setImages(value.target.value);
                   }}
-                  onOpen={() => {}}
-                  onClose={() => {}}
+                  onOpen={() => { }}
+                  onClose={() => { }}
                 />
               )}
             </div>
@@ -920,108 +926,108 @@ export const OnlyEditor = forwardRef<
       }),
       ...(editorType === 'html' || editorType === 'markdown'
         ? [
-            Link.configure({
-              openOnClick: false,
-              autolink: true,
-              defaultProtocol: 'https',
-              protocols: ['http', 'https'],
-              isAllowedUri: (url, ctx) => {
-                try {
-                  // prevent transforming plain emails like foo@bar.com into links
-                  const trimmed = String(url).trim();
-                  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                  if (emailPattern.test(trimmed)) {
-                    return false;
-                  }
-
-                  // construct URL
-                  const parsedUrl = url.includes(':')
-                    ? new URL(url)
-                    : new URL(`${ctx.defaultProtocol}://${url}`);
-
-                  // use default validation
-                  if (!ctx.defaultValidate(parsedUrl.href)) {
-                    return false;
-                  }
-
-                  // disallowed protocols
-                  const disallowedProtocols = ['ftp', 'file', 'mailto'];
-                  const protocol = parsedUrl.protocol.replace(':', '');
-
-                  if (disallowedProtocols.includes(protocol)) {
-                    return false;
-                  }
-
-                  // only allow protocols specified in ctx.protocols
-                  const allowedProtocols = ctx.protocols.map((p) =>
-                    typeof p === 'string' ? p : p.scheme
-                  );
-
-                  if (!allowedProtocols.includes(protocol)) {
-                    return false;
-                  }
-
-                  // all checks have passed
-                  return true;
-                } catch {
+          Link.configure({
+            openOnClick: false,
+            autolink: true,
+            defaultProtocol: 'https',
+            protocols: ['http', 'https'],
+            isAllowedUri: (url, ctx) => {
+              try {
+                // prevent transforming plain emails like foo@bar.com into links
+                const trimmed = String(url).trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailPattern.test(trimmed)) {
                   return false;
                 }
-              },
-              shouldAutoLink: (url) => {
-                try {
-                  // prevent auto-linking of plain emails like foo@bar.com
-                  const trimmed = String(url).trim();
-                  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                  if (emailPattern.test(trimmed)) {
-                    return false;
-                  }
 
-                  // construct URL
-                  const parsedUrl = url.includes(':')
-                    ? new URL(url)
-                    : new URL(`https://${url}`);
+                // construct URL
+                const parsedUrl = url.includes(':')
+                  ? new URL(url)
+                  : new URL(`${ctx.defaultProtocol}://${url}`);
 
-                  // only auto-link if the domain is not in the disallowed list
-                  const disallowedDomains = [
-                    'example-no-autolink.com',
-                    'another-no-autolink.com',
-                  ];
-                  const domain = parsedUrl.hostname;
-
-                  return !disallowedDomains.includes(domain);
-                } catch {
+                // use default validation
+                if (!ctx.defaultValidate(parsedUrl.href)) {
                   return false;
                 }
-              },
-            }),
-          ]
+
+                // disallowed protocols
+                const disallowedProtocols = ['ftp', 'file', 'mailto'];
+                const protocol = parsedUrl.protocol.replace(':', '');
+
+                if (disallowedProtocols.includes(protocol)) {
+                  return false;
+                }
+
+                // only allow protocols specified in ctx.protocols
+                const allowedProtocols = ctx.protocols.map((p) =>
+                  typeof p === 'string' ? p : p.scheme
+                );
+
+                if (!allowedProtocols.includes(protocol)) {
+                  return false;
+                }
+
+                // all checks have passed
+                return true;
+              } catch {
+                return false;
+              }
+            },
+            shouldAutoLink: (url) => {
+              try {
+                // prevent auto-linking of plain emails like foo@bar.com
+                const trimmed = String(url).trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailPattern.test(trimmed)) {
+                  return false;
+                }
+
+                // construct URL
+                const parsedUrl = url.includes(':')
+                  ? new URL(url)
+                  : new URL(`https://${url}`);
+
+                // only auto-link if the domain is not in the disallowed list
+                const disallowedDomains = [
+                  'example-no-autolink.com',
+                  'another-no-autolink.com',
+                ];
+                const domain = parsedUrl.hostname;
+
+                return !disallowedDomains.includes(domain);
+              } catch {
+                return false;
+              }
+            },
+          }),
+        ]
         : []),
       ...(internal?.integration?.id
         ? [
-            Mention.configure({
-              HTMLAttributes: {
-                class: 'mention',
-              },
-              renderHTML({ options, node }) {
-                return [
-                  'span',
-                  mergeAttributes(options.HTMLAttributes, {
-                    'data-mention-id': node.attrs.id || '',
-                    'data-mention-label': node.attrs.label || '',
-                  }),
-                  `@${node.attrs.label}`,
-                ];
-              },
-              suggestion: suggestion(loadList),
-            }),
-          ]
+          Mention.configure({
+            HTMLAttributes: {
+              class: 'mention',
+            },
+            renderHTML({ options, node }) {
+              return [
+                'span',
+                mergeAttributes(options.HTMLAttributes, {
+                  'data-mention-id': node.attrs.id || '',
+                  'data-mention-label': node.attrs.label || '',
+                }),
+                `@${node.attrs.label}`,
+              ];
+            },
+            suggestion: suggestion(loadList),
+          }),
+        ]
         : []),
       ...(editorType === 'html' || editorType === 'markdown'
         ? [
-            Heading.configure({
-              levels: [1, 2, 3],
-            }),
-          ]
+          Heading.configure({
+            levels: [1, 2, 3],
+          }),
+        ]
         : []),
       History.configure({
         depth: 100, // default is 100

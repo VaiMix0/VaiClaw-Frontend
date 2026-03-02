@@ -1,75 +1,119 @@
+import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { OnboardingModal } from '@gitroom/frontend/components/onboarding/onboarding.modal';
-import { ContextWrapper } from '@gitroom/frontend/components/layout/user.context';
+
+vi.mock('@gitroom/frontend/components/layout/new-modal', () => ({
+    useModals: () => ({ closeAll: vi.fn(), openModal: vi.fn() }),
+}));
+
+vi.mock('@gitroom/react/translation/get.transation.service.client', () => ({
+    useT: () => (key: string, defaultString: string) => defaultString,
+}));
+
+vi.mock('@gitroom/helpers/utils/custom.fetch', () => ({
+    useFetch: () => vi.fn().mockResolvedValue({ json: () => Promise.resolve([]) }),
+}));
+
+vi.mock('swr', () => ({
+    default: vi.fn().mockReturnValue({ data: [] }),
+}));
+
+vi.mock('@gitroom/frontend/components/launches/add.provider.component', () => ({
+    AddProviderComponent: () => <div data-testid="add-provider">Add Provider Mock</div>,
+}));
+
+// Mock ResizeObserver for some potential internal library usage
+global.ResizeObserver = class ResizeObserver {
+    observe() { }
+    unobserve() { }
+    disconnect() { }
+};
 
 describe('OnboardingModal Flow', () => {
-    it('renders step 1 (Select Plan) correctly', () => {
-        act(() => {
-            render(
-                <ContextWrapper user={{ id: '1', totalChannels: 0, tier: 'Free' }}>
-                    <OnboardingModal onClose={() => { }} />
-                </ContextWrapper>
-            );
-        });
-
-        // Welcome Header
-        expect(screen.getByText(/We are so happy to have you!/i)).toBeTruthy();
-
-        // Should see Step 1 indicator
-        expect(screen.getByText(/STEP 1/i)).toBeTruthy();
+    beforeEach(() => {
+        localStorage.clear();
     });
 
-    it('can navigate to step 2 (Connect Channels) after selecting Free Plan', () => {
-        act(() => {
-            render(
-                <ContextWrapper user={{ id: '1', totalChannels: 0, tier: 'Free' }}>
-                    <OnboardingModal onClose={() => { }} />
-                </ContextWrapper>
-            );
-        });
+    it('renders step 1 (Select Plan) correctly', () => {
+        render(<OnboardingModal onClose={() => { }} />);
 
-        const freePlanButton = screen.getByText(/Free Forever/i);
-        expect(freePlanButton).toBeTruthy();
+        // Welcome Header
+        expect(screen.getByText('Choose your subscription tier')).toBeTruthy();
 
-        // Simulate clicking the Free Plan button
-        act(() => {
-            fireEvent.click(freePlanButton);
-        });
+        // Should see Step indicators
+        expect(screen.getByText('Select Plan')).toBeTruthy();
+        expect(screen.getByText('Brand Setup')).toBeTruthy();
+        expect(screen.getByText('Connect Channels')).toBeTruthy();
+    });
 
-        // Click Start Trial
-        const startTrialBtn = screen.getByText(/Start My Free Trial/i);
+    it('can navigate to step 2 (Brand Setup) and requires inputs before continuing', () => {
+        render(<OnboardingModal onClose={() => { }} />);
+
+        const startTrialBtn = screen.getByText('Start My Free Trial');
+
         act(() => {
             fireEvent.click(startTrialBtn);
         });
 
         // Should navigate to Step 2
-        expect(screen.getByText(/STEP 2/i)).toBeTruthy();
-        expect(screen.getByText(/Connect Channels/i)).toBeTruthy();
-    });
+        expect(screen.getByText('Configure Your Brand & Industry')).toBeTruthy();
 
-    it('can navigate to step 3 (Tutorial) after continuing from channels', () => {
+        const continueBtn = screen.getByText('Continue');
+
+        // Button should be disabled initially
+        expect((continueBtn as HTMLButtonElement).disabled).toBe(true);
+
+        // Select industry
+        const industrySelect = screen.getAllByRole('combobox')[0];
+        fireEvent.change(industrySelect, { target: { value: 'tech' } });
+
+        // Button still disabled
+        expect((continueBtn as HTMLButtonElement).disabled).toBe(true);
+
+        // Select brand voice
+        const voiceSelect = screen.getAllByRole('combobox')[1];
+        fireEvent.change(voiceSelect, { target: { value: 'professional' } });
+
+        // Button should be enabled now
+        expect((continueBtn as HTMLButtonElement).disabled).toBe(false);
+
+        // Continue to step 3
         act(() => {
-            render(
-                <ContextWrapper user={{ id: '1', totalChannels: 0, tier: 'Free' }}>
-                    <OnboardingModal onClose={() => { }} />
-                </ContextWrapper>
-            );
+            fireEvent.click(continueBtn);
         });
 
-        // Go to step 2
-        const freePlanButton = screen.getByText(/Free Forever/i);
-        act(() => { fireEvent.click(freePlanButton); });
-
-        const startTrialBtn = screen.getByText(/Start My Free Trial/i);
-        act(() => { fireEvent.click(startTrialBtn); });
-
-        // Go to step 3
-        const continueBtn = screen.getByText(/Continue without channels/i);
-        act(() => { fireEvent.click(continueBtn); });
+        // Check local storage
+        expect(localStorage.getItem('onboarding_industry')).toBe('tech');
+        expect(localStorage.getItem('onboarding_voice')).toBe('professional');
 
         // Should navigate to Step 3
-        expect(screen.getByText(/STEP 3/i)).toBeTruthy();
-        expect(screen.getByText(/Learn How to Use Postiz/i)).toBeTruthy();
+        expect(screen.getByText('Connect Your Channels')).toBeTruthy();
+    });
+
+    it('can skip step 3 (Connect Channels) and go to step 4 (Tutorial)', () => {
+        render(<OnboardingModal onClose={() => { }} />);
+
+        // Go to Step 2
+        act(() => { fireEvent.click(screen.getByText('Start My Free Trial')); });
+
+        // Complete Step 2
+        fireEvent.change(screen.getAllByRole('combobox')[0], { target: { value: 'tech' } });
+        fireEvent.change(screen.getAllByRole('combobox')[1], { target: { value: 'professional' } });
+        act(() => { fireEvent.click(screen.getByText('Continue')); });
+
+        // Step 3
+        expect(screen.getByText('Connect Your Channels')).toBeTruthy();
+
+        // Click Skip for Now
+        const skipBtn = screen.getByText('Skip for Now');
+        act(() => { fireEvent.click(skipBtn); });
+
+        // Should navigate to Step 4
+        expect(screen.getByText('Learn How to Use Postiz')).toBeTruthy();
+
+        // Finish Button
+        const getStartedBtn = screen.getByText('Get Started');
+        expect(getStartedBtn).toBeTruthy();
     });
 });

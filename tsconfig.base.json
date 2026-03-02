@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -14,7 +15,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -25,15 +29,34 @@
     "noFallthroughCasesInSwitch": true,
     "strict": true,
     "paths": {
-      "@gitroom/backend/*": ["apps/backend/src/*"],
-      "@gitroom/frontend/*": ["apps/frontend/src/*"],
-      "@gitroom/helpers/*": ["libraries/helpers/src/*"],
-      "@gitroom/nestjs-libraries/*": ["libraries/nestjs-libraries/src/*"],
-      "@gitroom/react/*": ["libraries/react-shared-libraries/src/*"],
-      "@gitroom/plugins/*": ["libraries/plugins/src/*"],
-      "@gitroom/orchestrator/*": ["apps/orchestrator/src/*"],
-      "@gitroom/extension/*": ["apps/extension/src/*"]
+      "@gitroom/backend/*": [
+        "apps/backend/src/*"
+      ],
+      "@gitroom/frontend/*": [
+        "apps/frontend/src/*"
+      ],
+      "@gitroom/helpers/*": [
+        "libraries/helpers/src/*"
+      ],
+      "@gitroom/nestjs-libraries/*": [
+        "libraries/nestjs-libraries/src/*"
+      ],
+      "@gitroom/react/*": [
+        "libraries/react-shared-libraries/src/*"
+      ],
+      "@gitroom/plugins/*": [
+        "libraries/plugins/src/*"
+      ],
+      "@gitroom/orchestrator/*": [
+        "apps/orchestrator/src/*"
+      ],
+      "@gitroom/extension/*": [
+        "apps/extension/src/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

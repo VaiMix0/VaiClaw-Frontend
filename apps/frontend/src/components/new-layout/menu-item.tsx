@@ -22,7 +22,7 @@ export const MenuItem: FC<{ label: string; icon: ReactNode; path: string }> = ({
       )}
     >
       <div className="custom:hidden">{icon}</div>
-      <div className="text-[10px]">{label}</div>
+      <div className="text-[9px] truncate w-full text-center leading-tight">{label}</div>
     </Link>
   );
 };

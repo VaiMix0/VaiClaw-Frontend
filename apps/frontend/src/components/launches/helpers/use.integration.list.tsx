@@ -8,7 +8,12 @@ export const useIntegrationList = () => {
   const fetch = useFetch();
 
   const load = useCallback(async (path: string) => {
-    return (await (await fetch(path)).json()).integrations;
+    let list = (await (await fetch(path)).json()).integrations || [];
+    if (typeof window !== 'undefined') {
+      const mocked = JSON.parse(localStorage.getItem('mocked_channels') || '[]');
+      list = [...list, ...mocked];
+    }
+    return list;
   }, []);
 
   return useSWR('/integrations/list', load, {
