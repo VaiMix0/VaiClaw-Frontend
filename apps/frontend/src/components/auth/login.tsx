@@ -41,33 +41,49 @@ export function Login() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     setNotActivated(false);
-    const login = await fetchData('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        ...data,
-        provider: 'LOCAL',
-      }),
-    });
-    if (login.status === 400) {
-      const errorMessage = await login.text();
-      if (errorMessage === 'User is not activated') {
-        setNotActivated(true);
+    try {
+      const login = await fetchData('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...data,
+          provider: 'LOCAL',
+        }),
+      });
+      if (login.status === 400) {
+        const errorMessage = await login.text();
+        if (errorMessage === 'User is not activated') {
+          setNotActivated(true);
+        } else {
+          form.setError('email', {
+            message: errorMessage,
+          });
+        }
+        setLoading(false);
+      } else if (login.status === 200 || login.status === 201) {
+        const body = await login.json();
+        if (body.access_token) {
+          // Store token and redirect
+          localStorage.setItem('vaiclaw_token', body.access_token);
+          window.location.href = '/';
+        } else if (body.ok === false) {
+          // VaiClaw returns {ok: false, error: "..."} on failure
+          form.setError('email', {
+            message: body.error || 'Login failed',
+          });
+          setLoading(false);
+        } else {
+          form.setError('email', { message: 'Unexpected response from server' });
+          setLoading(false);
+        }
       } else {
-        form.setError('email', {
-          message: errorMessage,
-        });
+        const errorMsg = await login.text().catch(() => 'Login failed');
+        form.setError('email', { message: errorMsg });
+        setLoading(false);
       }
-      setLoading(false);
-    } else if (login.status === 200 || login.status === 201) {
-      const body = await login.json();
-      if (body.access_token) {
-        // Store token and redirect
-        localStorage.setItem('vaiclaw_token', body.access_token);
-        window.location.href = '/';
-      }
-    } else {
-      const errorMsg = await login.text().catch(() => 'Login failed');
-      form.setError('email', { message: errorMsg });
+    } catch (e: any) {
+      form.setError('email', {
+        message: 'Connection error: ' + (e?.message || e?.toString() || 'Unknown error'),
+      });
       setLoading(false);
     }
   };
