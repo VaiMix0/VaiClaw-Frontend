@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "dotenv -e ../../.env -- next dev -p 4200",
-    "build": "next build",
+    "prebuild": "node -e \"const fs=require('fs');const src='../../libraries/react-shared-libraries/src/translation/locales';const dst='./public/locales';if(!fs.existsSync(dst)){fs.cpSync(src,dst,{recursive:true});console.log('Copied locales to public/')}\"",
+    "build": "npm run prebuild && next build",
     "build:sentry": "dotenv -e ../../.env -- next build",
     "start": "dotenv -e ../../.env -- next start -p 4200",
     "pm2": "pm2 start pnpm --name frontend -- start"
