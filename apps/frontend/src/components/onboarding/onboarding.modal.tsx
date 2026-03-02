@@ -341,10 +341,7 @@ const OnboardingStep2Channels: FC<{ onBack: () => void; onNext: () => void; onSk
       )}
 
       {/* Available platforms - using AddProviderComponent */}
-      <div className="flex flex-col gap-[12px]">
-        <div className="text-[14px] font-medium">
-          {t('click_channel_to_add', 'Click a channel to add it')}
-        </div>
+      <div className="flex flex-col gap-[12px] mt-4">
         {data && (
           <AddProviderComponent
             invite={false}

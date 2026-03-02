@@ -41,9 +41,22 @@ export const SettingsModal: FC<{
   const t = useT();
   const { onClose, integration } = props;
   const modal = useModals();
-  const [values, setValues] = useState(
-    JSON.parse(integration?.additionalSettings || '[]')
-  );
+  const [values, setValues] = useState(() => {
+    let list = [];
+    try {
+      list = JSON.parse(integration?.additionalSettings || '[]');
+    } catch (e) { }
+
+    if (!list.find((p: any) => p.id === 'postforme_fallback')) {
+      list.push({
+        id: 'postforme_fallback',
+        title: 'Dự phòng Postforme (Fallback)',
+        description: 'Đăng bài tự động qua dịch vụ Postforme dự phòng nếu thiết bị kết nối của bạn bị mất mạng khi đến lịch đăng bài.',
+        value: false
+      });
+    }
+    return list;
+  });
   const changeValue = useCallback(
     (index: number) => (value: any) => {
       const newValues = [...values];

@@ -788,3 +788,103 @@ html[dir='rtl'] [dir='ltr'] {
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   VaiMix Design System – TechForge-Inspired Theme (Hybrid Integrations)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══ Mesh Gradient Backgrounds ═══ */
+.mesh-section {
+  background:
+    radial-gradient(ellipse 70% 40% at 30% 50%, rgba(10, 102, 194, 0.08), transparent),
+    radial-gradient(ellipse 50% 40% at 70% 60%, rgba(124, 58, 237, 0.05), transparent),
+    var(--new-bgColor);
+}
+
+.mesh-dark {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(10, 102, 194, 0.12), transparent),
+    radial-gradient(ellipse 40% 40% at 80% 30%, rgba(124, 58, 237, 0.1), transparent),
+    linear-gradient(180deg, var(--new-bgColorInner) 0%, var(--new-bgColor) 100%);
+}
+
+/* ═══ Glassmorphism Cards ═══ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(10, 102, 194, 0.08), 0 0 40px rgba(124, 58, 237, 0.04);
+  transform: translateY(-4px);
+}
+
+.glass-card-strong {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-strong:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 64px rgba(10, 102, 194, 0.12);
+  transform: translateY(-6px);
+}
+
+/* ═══ Gradient Text ═══ */
+.gradient-text {
+  background: linear-gradient(135deg, #2E96F0, #FF8C33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ Glow Borders ═══ */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(10, 102, 194, 0.3), rgba(124, 58, 237, 0.2), rgba(255, 107, 0, 0.1));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ═══ Float Animations ═══ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(10, 102, 194, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(10, 102, 194, 0.4); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+

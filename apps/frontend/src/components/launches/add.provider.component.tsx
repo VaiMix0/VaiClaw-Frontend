@@ -19,6 +19,8 @@ import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import clsx from 'clsx';
 import copy from 'copy-to-clipboard';
 import { capitalize } from 'lodash';
+import { DevicePairingModal } from '@gitroom/frontend/components/devices/qr-connect.modal';
+
 const resolver = classValidatorResolver(ApiKeyDto);
 
 export const useAddProvider = (update?: () => void, invite?: boolean) => {
@@ -386,6 +388,10 @@ export const AddProviderComponent: FC<{
   const router = useRouter();
   const fetch = useFetch();
   const modal = useModals();
+
+  const [isPairingOpen, setIsPairingOpen] = React.useState(false);
+  // Optional mockup state for device connection - easily swappable with Zustand global state later
+  const [isDeviceOnline, setIsDeviceOnline] = React.useState(false);
   const getSocialLink = useCallback(
     (
       invite: boolean,
@@ -606,143 +612,124 @@ export const AddProviderComponent: FC<{
   const t = useT();
 
   return (
-    <div className="w-full flex flex-col gap-[20px] rounded-[4px] relative]">
-      <div className="flex flex-col gap-[30px]">
-        {/* Official Channels Section */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-[16px] font-semibold text-white border-b border-[#2b2d31] pb-2">
-            {t('official_channels', 'Official Channels')}
-          </h3>
-          <div
-            className={clsx(
-              'grid grid-cols-5 gap-[10px] justify-items-center justify-center',
-              onboarding ? 'grid-cols-9' : 'grid-cols-5'
-            )}
-          >
-            {social
-              .filter((item) => {
-                if (!props.invite) {
-                  return !item.isChromeExtension;
-                }
+    <>
+      {isPairingOpen && (
+        <DevicePairingModal
+          onClose={() => setIsPairingOpen(false)}
+          onConnected={(dev) => {
+            setIsDeviceOnline(true);
+            setIsPairingOpen(false);
+            toaster.show(`Đã kết nối thiết bị: ${dev?.name || 'Thành công'}`, 'success');
+          }}
+        />
+      )}
 
-                return (
-                  !item.isChromeExtension &&
-                  !item.isExternal &&
-                  !item.isWeb3 &&
-                  !item.customFields
-                );
-              })
-              .map((item) => (
+      <div className={clsx("w-full flex gap-6 rounded-[4px] relative", onboarding ? "flex-col" : "flex-col lg:flex-row")}>
+
+        {/* Nhóm 1: Kênh Cá Nhân (Android Edge Device) */}
+        <div className="flex-1 glass-card glow-border p-6 flex flex-col gap-4 min-h-[400px]">
+          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+              <h3 className="text-xl font-heading font-bold text-white mb-1">Thiết bị Android (Cá nhân)</h3>
+              <p className="text-sm text-gray-400">Kết nối điện thoại để đăng lên MXH Cá nhân</p>
+            </div>
+            <div className={clsx("px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-2", isDeviceOnline ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-red-500/10 text-red-400 border-red-500/20")}>
+              <div className={clsx("w-2 h-2 rounded-full", isDeviceOnline ? "bg-green-400 animate-pulse" : "bg-red-400")} />
+              {isDeviceOnline ? 'Online' : 'Offline'}
+            </div>
+          </div>
+
+          {!isDeviceOnline ? (
+            <div className="flex flex-col items-center justify-center flex-1 gap-6 text-center">
+              <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center animate-float-slow">
+                <svg className="w-10 h-10 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-gray-300 font-medium mb-1">Chưa có thiết bị nào kết nối</p>
+                <p className="text-sm text-gray-500 max-w-[250px] mx-auto">Vui lòng gắn ứng dụng VaiClaw để hỗ trợ việc đăng bài.</p>
+              </div>
+              <div className="flex flex-col w-full max-w-[200px] gap-3">
+                <button onClick={() => setIsPairingOpen(true)} className="w-full py-2.5 rounded-xl bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-500 hover:to-accent-400 text-white font-medium shadow-lg shadow-accent-500/20 transition-all cursor-pointer">
+                  Kết Nối Thiết Bị
+                </button>
+                <button className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 font-medium transition-all cursor-pointer">
+                  Tải App Android
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 flex flex-col pt-2 animate-fadeIn">
+              <p className="text-sm text-gray-400 mb-4">Các nền tảng có thể thêm qua thiết bị này:</p>
+              <div className="grid grid-cols-3 gap-3">
+                {social.filter(item => {
+                  if (!props.invite) return item.isChromeExtension;
+                  return item.isChromeExtension && !item.isExternal && !item.isWeb3 && !item.customFields;
+                }).map(item => (
+                  <div
+                    key={item.identifier}
+                    onClick={getSocialLink(props.invite, item.identifier, item.isExternal, item.isWeb3, item.isChromeExtension, item.customFields)}
+                    title={item.toolTip || ''}
+                    className="aspect-square rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent-500/50 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer group"
+                  >
+                    {item.identifier === 'youtube' ? (
+                      <img className="w-8 h-8 group-hover:scale-110 transition-transform" src={`/icons/platforms/youtube.svg`} />
+                    ) : (
+                      <img className="w-8 h-8 rounded-full group-hover:scale-110 transition-transform" src={`/icons/platforms/${item.identifier}.png`} />
+                    )}
+                    <span className="text-xs font-medium text-gray-300 group-hover:text-white text-center leading-tight">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Optional: disconnect button */}
+              <div className="mt-auto pt-6 flex justify-center">
+                <button onClick={() => setIsDeviceOnline(false)} className="text-xs text-red-400 hover:text-red-300 hover:underline cursor-pointer">Ngắt kết nối thiết bị thử nghiệm</button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Nhóm 2: Kênh Doanh Nghiệp (Cloud API) */}
+        <div className="flex-1 glass-card p-6 flex flex-col gap-4 min-h-[400px]">
+          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+              <h3 className="text-xl font-heading font-bold text-white mb-1">Cloud API (Official)</h3>
+              <p className="text-sm text-gray-400">Kết nối trực tiếp qua API chính thức</p>
+            </div>
+            <div className="w-10 h-10 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center shadow-lg shadow-primary-500/10">
+              <svg className="w-5 h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+          </div>
+
+          <div className="flex-1 pt-2">
+            <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
+              {social.filter(item => {
+                if (!props.invite) return !item.isChromeExtension;
+                return !item.isChromeExtension && !item.isExternal && !item.isWeb3 && !item.customFields;
+              }).map(item => (
                 <div
                   key={item.identifier}
-                  onClick={getSocialLink(
-                    props.invite,
-                    item.identifier,
-                    item.isExternal,
-                    item.isWeb3,
-                    item.isChromeExtension,
-                    item.customFields
-                  )}
-                  {...(!!item.toolTip
-                    ? {
-                      'data-tooltip-id': 'tooltip',
-                      'data-tooltip-content': item.toolTip,
-                    }
-                    : {})}
-                  className={
-                    'w-full h-[100px] text-[14px] p-[10px] rounded-[8px] bg-[#1a1b23] hover:bg-[#2b2d31] border border-[#2b2d31] hover:border-[#622aff] transition-colors text-textColor relative justify-center items-center flex flex-col gap-[10px] cursor-pointer'
-                  }
+                  onClick={getSocialLink(props.invite, item.identifier, item.isExternal, item.isWeb3, item.isChromeExtension, item.customFields)}
+                  title={item.toolTip || ''}
+                  className="aspect-square rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 border border-white/5 hover:border-primary-500/50 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer group shadow-sm hover:shadow-primary-500/20"
                 >
-                  <div>
-                    {item.identifier === 'youtube' ? (
-                      <img src={`/icons/platforms/youtube.svg`} />
-                    ) : (
-                      <img
-                        className={clsx(
-                          'w-[32px] h-[32px]',
-                          item.identifier !== 'google_my_business' &&
-                          'rounded-full'
-                        )}
-                        src={`/icons/platforms/${item.identifier}.png`}
-                      />
-                    )}
-                  </div>
-                  <div className="whitespace-pre-wrap text-center font-medium">
-                    {item.name}
-                  </div>
+                  {item.identifier === 'youtube' ? (
+                    <img className="w-8 h-8 group-hover:scale-110 transition-transform" src={`/icons/platforms/youtube.svg`} />
+                  ) : (
+                    <img className="w-8 h-8 rounded-full group-hover:scale-110 transition-transform" src={`/icons/platforms/${item.identifier}.png`} />
+                  )}
+                  <span className="text-xs font-medium text-gray-300 group-hover:text-white text-center px-1 leading-tight">{item.name}</span>
                 </div>
               ))}
+            </div>
           </div>
         </div>
 
-        {/* Personal Channels Section */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-[16px] font-semibold text-white border-b border-[#2b2d31] pb-2">
-            {t('personal_channels', 'Personal Channels (Proxy)')}
-            <span className="ml-2 text-[12px] font-normal text-gray-400 bg-[#2b2d31] px-2 py-0.5 rounded-full">{t('requires_extension', 'Requires Extension')}</span>
-          </h3>
-          <div
-            className={clsx(
-              'grid grid-cols-5 gap-[10px] justify-items-center justify-center',
-              onboarding ? 'grid-cols-9' : 'grid-cols-5'
-            )}
-          >
-            {social
-              .filter((item) => {
-                if (!props.invite) {
-                  return item.isChromeExtension;
-                }
-
-                return (
-                  item.isChromeExtension &&
-                  !item.isExternal &&
-                  !item.isWeb3 &&
-                  !item.customFields
-                );
-              })
-              .map((item) => (
-                <div
-                  key={item.identifier}
-                  onClick={getSocialLink(
-                    props.invite,
-                    item.identifier,
-                    item.isExternal,
-                    item.isWeb3,
-                    item.isChromeExtension,
-                    item.customFields
-                  )}
-                  {...(!!item.toolTip
-                    ? {
-                      'data-tooltip-id': 'tooltip',
-                      'data-tooltip-content': item.toolTip,
-                    }
-                    : {})}
-                  className={
-                    'w-full h-[100px] text-[14px] p-[10px] rounded-[8px] bg-[#1a1b23] hover:bg-[#2b2d31] border border-[#2b2d31] hover:border-[#8b5cf6] transition-colors text-textColor relative justify-center items-center flex flex-col gap-[10px] cursor-pointer opacity-90'
-                  }
-                >
-                  <div>
-                    {item.identifier === 'youtube' ? (
-                      <img src={`/icons/platforms/youtube.svg`} />
-                    ) : (
-                      <img
-                        className={clsx(
-                          'w-[32px] h-[32px]',
-                          item.identifier !== 'google_my_business' &&
-                          'rounded-full'
-                        )}
-                        src={`/icons/platforms/${item.identifier}.png`}
-                      />
-                    )}
-                  </div>
-                  <div className="whitespace-pre-wrap text-center font-medium">
-                    {item.name}
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
