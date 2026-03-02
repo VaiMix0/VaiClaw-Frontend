@@ -322,6 +322,7 @@ const OnboardingStep2Channels: FC<{ onBack: () => void; onNext: () => void; onSk
                     src={integration.picture}
                     className="rounded-full"
                     alt={integration.identifier}
+                    style={{ width: 'auto', height: 'auto' }}
                     width={28}
                     height={28}
                   />
@@ -329,6 +330,7 @@ const OnboardingStep2Channels: FC<{ onBack: () => void; onNext: () => void; onSk
                     src={`/icons/platforms/${integration.identifier}.png`}
                     className="rounded-full absolute -bottom-[3px] -end-[3px] border border-fifth"
                     alt={integration.identifier}
+                    style={{ width: 'auto', height: 'auto' }}
                     width={14}
                     height={14}
                   />

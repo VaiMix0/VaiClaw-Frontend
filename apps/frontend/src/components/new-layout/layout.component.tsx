@@ -110,27 +110,29 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex-1 bg-newBgLineColor rounded-[12px] overflow-hidden flex flex-col gap-[1px] blurMe">
-                    <div className="flex bg-newBgColorInner h-[80px] px-[20px] items-center">
-                      <div className="text-[24px] font-[600] flex flex-1">
-                        <Title />
-                      </div>
-                      <div className="flex gap-[20px] text-textItemBlur">
-                        <StreakComponent />
-                        <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                        <OrganizationSelector />
-                        <div className="hover:text-newTextColor">
-                          <ModeComponent />
+                  <div className="flex-1 bg-newBgLineColor rounded-[12px] overflow-auto flex flex-col gap-[1px] blurMe">
+                    <div className="flex flex-col flex-1 gap-[1px] min-w-[1000px]">
+                      <div className="flex bg-newBgColorInner h-[80px] px-[20px] items-center shrink-0">
+                        <div className="text-[24px] font-[600] flex flex-1">
+                          <Title />
                         </div>
-                        <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                        <LanguageComponent />
-                        <ChromeExtensionComponent />
-                        <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                        <AttachToFeedbackIcon />
-                        <NotificationComponent />
+                        <div className="flex gap-[20px] text-textItemBlur">
+                          <StreakComponent />
+                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                          <OrganizationSelector />
+                          <div className="hover:text-newTextColor">
+                            <ModeComponent />
+                          </div>
+                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                          <LanguageComponent />
+                          <ChromeExtensionComponent />
+                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                          <AttachToFeedbackIcon />
+                          <NotificationComponent />
+                        </div>
                       </div>
+                      <div className="flex flex-1 gap-[1px]">{children}</div>
                     </div>
-                    <div className="flex flex-1 gap-[1px]">{children}</div>
                   </div>
                 </div>
               )}
