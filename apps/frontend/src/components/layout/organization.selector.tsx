@@ -11,7 +11,9 @@ export const OrganizationSelector: FC<{ asOpenSelect?: boolean }> = ({
   const fetch = useFetch();
   const user = useUser();
   const load = useCallback(async () => {
-    return await (await fetch('/user/organizations')).json();
+    const res = await (await fetch('/user/organizations')).json();
+    // VaiClaw may return {ok: false, error: "..."} instead of an array
+    return Array.isArray(res) ? res : [];
   }, []);
   const { isLoading, data } = useSWR('organizations', load, {
     revalidateIfStale: false,
@@ -51,7 +53,7 @@ export const OrganizationSelector: FC<{ asOpenSelect?: boolean }> = ({
           {!asOpenSelect && (
             <div className="flex items-center">
               <svg
-                className={user?.tier.current === 'FREE' ? 'animate-bounce drop-shadow-glow': ''}
+                className={user?.tier.current === 'FREE' ? 'animate-bounce drop-shadow-glow' : ''}
                 width="24"
                 height="24"
                 viewBox="0 0 26 26"
