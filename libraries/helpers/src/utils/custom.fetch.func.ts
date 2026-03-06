@@ -22,10 +22,19 @@ export const customFetch = (
     const authNonSecuredCookie =
       typeof document === 'undefined'
         ? null
-        : document.cookie
-          .split(';')
-          .find((p) => p.includes('auth='))
-          ?.split('=')[1];
+        : (() => {
+          const part = document.cookie
+            .split(';')
+            .find((p) => p.trim().startsWith('auth='));
+          return part ? part.trim().slice('auth='.length) : null;
+        })();
+
+    if (typeof window !== 'undefined' && url.includes('/user/self')) {
+      console.log("[customFetch DEBUG] url:", url);
+      console.log("[customFetch DEBUG] document.cookie:", typeof document !== 'undefined' ? document.cookie : 'no-document');
+      console.log("[customFetch DEBUG] authNonSecuredCookie parsed:", authNonSecuredCookie);
+      console.log("[customFetch DEBUG] isSecured flag:", secured);
+    }
 
     const authNonSecuredOrg =
       typeof document === 'undefined'

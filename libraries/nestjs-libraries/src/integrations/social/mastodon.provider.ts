@@ -7,7 +7,7 @@ import {
 import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
 import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
 import dayjs from 'dayjs';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 
 export class MastodonProvider extends SocialAbstract implements SocialProvider {
   override maxConcurrentJob = 5; // Mastodon instances typically have generous limits

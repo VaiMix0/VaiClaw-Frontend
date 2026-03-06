@@ -54,7 +54,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
       >
         <VariableContextComponent
           storageProvider={
-            process.env.STORAGE_PROVIDER! as 'local' | 'cloudflare'
+            (process.env.STORAGE_PROVIDER || 'local') as 'local' | 'cloudflare'
           }
           environment={process.env.NODE_ENV!}
           backendUrl={process.env.NEXT_PUBLIC_BACKEND_URL!}
@@ -71,7 +71,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           mcpUrl={process.env.MCP_URL}
           dub={!!process.env.STRIPE_PUBLISHABLE_KEY}
           facebookPixel={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL!}
-          telegramBotName={process.env.TELEGRAM_BOT_NAME!}
+
           neynarClientId={process.env.NEYNAR_CLIENT_ID!}
           isSecured={!process.env.NOT_SECURED}
           disableImageCompression={!!process.env.DISABLE_IMAGE_COMPRESSION}

@@ -1,18 +1,30 @@
 // apps/frontend/src/lib/vaiclaw-api.ts
 
-const API = process.env.NEXT_PUBLIC_VAICLAW_API || 'http://localhost:8080'
+// Use NEXT_PUBLIC_BACKEND_URL (strips /api suffix), fallback to port 3001
+const _backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001/api'
+const API = _backendBase.replace(/\/api$/, '')
 
 export class VaiClawAPI {
-    private token: string = ''
+    /** Lấy JWT từ cookie auth= (giống custom.fetch.func.ts) */
+    private getToken(): string {
+        if (typeof document === 'undefined') return '';
+        const match = document.cookie
+            .split(';')
+            .find((p) => p.trim().startsWith('auth='));
+        return match ? match.trim().slice('auth='.length) : '';
+    }
 
-    setToken(token: string) { this.token = token }
+    /** @deprecated Không cần gọi thủ công nữa — token được đọc tự động từ cookie */
+    setToken(_token: string) { }
 
     private async fetch(path: string, options: RequestInit = {}) {
+        const token = this.getToken();
         const res = await fetch(`${API}${path}`, {
             ...options,
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.token}`,
+                ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
                 ...options.headers,
             },
         })
@@ -26,9 +38,9 @@ export class VaiClawAPI {
         })
     }
 
-    register(tenant_name: string, name: string, email: string, password_hash: string) {
+    register(email: string, password: string, company_name: string) {
         return this.fetch('/api/v1/platform/register', {
-            method: 'POST', body: JSON.stringify({ tenant_name, name, email, password_hash })
+            method: 'POST', body: JSON.stringify({ email, password, company_name })
         })
     }
 
@@ -58,6 +70,22 @@ export class VaiClawAPI {
             method: 'POST',
             body: JSON.stringify({ content_id: contentId, account_id: accountId, platform, body })
         })
+    }
+
+    // Niche Config (multi-niche)
+    listNiches() {
+        return this.fetch('/api/v1/niches')
+    }
+    getNiche(niche: string) {
+        return this.fetch(`/api/v1/niches/${niche}`)
+    }
+    upsertNiche(niche: string, config: { enabled?: boolean; brand_voice?: any; platforms?: string[] }) {
+        return this.fetch(`/api/v1/niches/${niche}`, {
+            method: 'PUT', body: JSON.stringify(config)
+        })
+    }
+    deleteNiche(niche: string) {
+        return this.fetch(`/api/v1/niches/${niche}`, { method: 'DELETE' })
     }
 
     // Schedule

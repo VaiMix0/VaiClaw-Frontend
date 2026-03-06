@@ -1,5 +1,5 @@
 import { timer } from '@gitroom/helpers/utils/timer';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 import { ApplicationFailure } from '@temporalio/activity';
 
 export class RefreshToken extends ApplicationFailure {

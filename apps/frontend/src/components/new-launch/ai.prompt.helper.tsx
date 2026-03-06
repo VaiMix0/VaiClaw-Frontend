@@ -4,6 +4,8 @@ import { Button } from '@gitroom/react/form/button';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
 import clsx from 'clsx';
 import { Editor } from '@tiptap/react';
+import useSWR from 'swr';
+import { api } from '@gitroom/frontend/lib/vaiclaw-api';
 
 export const AIPromptHelper: FC<{ editor: Editor }> = ({ editor }) => {
     const t = useT();
@@ -11,6 +13,15 @@ export const AIPromptHelper: FC<{ editor: Editor }> = ({ editor }) => {
     const [prompt, setPrompt] = useState('');
     const [loading, setLoading] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const { data } = useSWR('/v1/niches', async () => {
+        try {
+            const res = await api.listNiches();
+            return res?.data || [];
+        } catch (e) {
+            return [];
+        }
+    });
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -34,8 +45,18 @@ export const AIPromptHelper: FC<{ editor: Editor }> = ({ editor }) => {
         // Simulate AI generation delay
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const industry = localStorage.getItem('onboarding_industry') || 'your industry';
-        const voice = localStorage.getItem('onboarding_voice') || 'engaging';
+        // 3-Tier Fallback: API -> LocalStorage -> Default
+        let industry = 'tech';
+        let voice = 'professional';
+
+        const activeNiche = data?.find((n: any) => n.enabled);
+        if (activeNiche) {
+            industry = activeNiche.niche;
+            voice = activeNiche.brand_voice?.tone || 'professional';
+        } else {
+            industry = localStorage.getItem('onboarding_industry') || 'tech';
+            voice = localStorage.getItem('onboarding_voice') || 'professional';
+        }
 
         // In a real scenario, this would call your backend agent.graph.service.ts
         // For now, we simulate a response based on the prompt

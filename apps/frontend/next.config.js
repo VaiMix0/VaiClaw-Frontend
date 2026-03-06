@@ -66,7 +66,7 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
+const sentryOptions = {
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
   authToken: process.env.SENTRY_AUTH_TOKEN,
@@ -109,10 +109,13 @@ export default withSentryConfig(nextConfig, {
   debug: process.env.NODE_ENV === 'development',
 
   // Error handling for CI/CD
+  /** @param {Error} error */
   errorHandler: (error) => {
     console.warn("Sentry build error occurred:", error.message);
     console.warn("This might be due to missing Sentry environment variables or network issues");
     // Don't fail the build if Sentry upload fails in monorepo context
     return;
   },
-});
+};
+
+export default process.env.NODE_ENV === 'development' ? nextConfig : withSentryConfig(nextConfig, sentryOptions);

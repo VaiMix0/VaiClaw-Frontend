@@ -19,7 +19,7 @@ import {
   BlobRef,
 } from '@atproto/api';
 import dayjs from 'dayjs';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 import { AuthService } from '@gitroom/helpers/auth/auth.service';
 import sharp from 'sharp';
 import { Plug } from '@gitroom/helpers/decorators/plug.decorator';

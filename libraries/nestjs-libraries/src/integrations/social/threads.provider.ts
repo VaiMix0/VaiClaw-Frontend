@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
 import { capitalize, chunk } from 'lodash';
 import { Plug } from '@gitroom/helpers/decorators/plug.decorator';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 import { stripHtmlValidation } from '@gitroom/helpers/utils/strip.html.validation';
 
 export class ThreadsProvider extends SocialAbstract implements SocialProvider {

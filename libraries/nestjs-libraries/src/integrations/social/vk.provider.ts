@@ -11,7 +11,7 @@ import { createHash, randomBytes } from 'crypto';
 import axios from 'axios';
 import FormDataNew from 'form-data';
 import mime from 'mime-types';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 
 export class VkProvider extends SocialAbstract implements SocialProvider {
   override maxConcurrentJob = 2; // VK has moderate API limits

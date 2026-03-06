@@ -10,10 +10,9 @@ import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.ab
 //@ts-ignore
 import mime from 'mime';
 import TelegramBot from 'node-telegram-bot-api';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 import striptags from 'striptags';
 
-const telegramBot = new TelegramBot(process.env.TELEGRAM_TOKEN!);
 // Added to support local storage posting
 const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5000';
 const mediaStorage = process.env.STORAGE_PROVIDER || 'local';
@@ -23,7 +22,7 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
   identifier = 'telegram';
   name = 'Telegram';
   isBetweenSteps = false;
-  isWeb3 = true;
+  isWeb3 = false;
   scopes = [] as string[];
   editor = 'html' as const;
   maxLength() {
@@ -51,93 +50,81 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
     };
   }
 
+  async customFields() {
+    return [
+      {
+        key: 'botToken',
+        label: 'Bot Token (from @BotFather)',
+        validation: `/^\\d+:[A-Za-z0-9_-]{35,}$/`,
+        type: 'password' as const,
+      },
+      {
+        key: 'chatId',
+        label: 'Channel / Group ID hoặc @username',
+        validation: `/^.{3,}$/`,
+        type: 'text' as const,
+      },
+    ];
+  }
+
   async authenticate(params: {
     code: string;
     codeVerifier: string;
     refresh?: string;
   }) {
-    const chat = await telegramBot.getChat(params.code);
+    try {
+      const body = JSON.parse(Buffer.from(params.code, 'base64').toString());
+      const { botToken, chatId } = body;
 
-    console.log(JSON.stringify(chat));
-    if (!chat?.id) {
-      return 'No chat found';
+      if (!botToken || !chatId) {
+        return 'Bot Token và Chat ID là bắt buộc';
+      }
+
+      const bot = new TelegramBot(botToken);
+
+      // Verify bot token is valid
+      const me = await bot.getMe();
+      if (!me?.id) {
+        return 'Bot Token không hợp lệ';
+      }
+
+      // Verify chat exists and bot has access
+      let chat: any;
+      try {
+        chat = await bot.getChat(chatId);
+      } catch (e) {
+        return 'Không tìm thấy kênh/nhóm. Bot cần được thêm vào kênh/nhóm trước.';
+      }
+
+      if (!chat?.id) {
+        return 'Không tìm thấy kênh/nhóm';
+      }
+
+      const photo =
+        !chat?.photo?.big_file_id
+          ? ''
+          : await bot.getFileLink(chat.photo.big_file_id).catch(() => '');
+
+      // Store botToken as accessToken so we can use it when posting
+      const accessToken = JSON.stringify({ botToken, numericChatId: String(chat.id) });
+
+      return {
+        id: String(chat.username ? chat.username : chat.id),
+        name: chat.title || me.first_name,
+        accessToken,
+        refreshToken: '',
+        expiresIn: dayjs().add(200, 'year').unix() - dayjs().unix(),
+        picture: photo || '',
+        username: chat.username || '',
+      };
+    } catch (e) {
+      console.error('Telegram authenticate error:', e);
+      return 'Xác thực thất bại. Vui lòng kiểm tra lại Bot Token và Chat ID.';
     }
-
-    const photo = !chat?.photo?.big_file_id
-      ? ''
-      : await telegramBot.getFileLink(chat.photo.big_file_id);
-
-    // Modified id to work with chat.username (public groups/channels) or chat.id (private groups/channels) when chat.username is not available
-    return {
-      id: String(chat.username ? chat.username : chat.id),
-      name: chat.title!,
-      accessToken: String(chat.id),
-      refreshToken: '',
-      expiresIn: dayjs().add(200, 'year').unix() - dayjs().unix(),
-      picture: photo || '',
-      username: chat.username!,
-    };
   }
 
-  async getBotId(query: { id?: number; word: string }) {
-    // Added allowed_updates Ensure only necessary updates are fetched
-    const res = await telegramBot.getUpdates({
-      ...(query.id ? { offset: query.id } : {}),
-      allowed_updates: ['message', 'channel_post'],
-    });
-    //message.text is for groups, channel_post.text is for channels
-    const match = res.find(
-      (p) =>
-        (p?.message?.text === `/connect ${query.word}` &&
-          p?.message?.chat?.id) ||
-        (p?.channel_post?.text === `/connect ${query.word}` &&
-          p?.channel_post?.chat?.id)
-    );
-    // get correct chatId based on the channel type
-    const chatId = match?.message?.chat?.id || match?.channel_post?.chat?.id;
-
-    // prevents the code from running while chatId is still undefined to avoid the error 'ETELEGRAM: 400 Bad Request: chat_id is empty'. the code would still work eventually but console spam is not pretty
-    if (chatId) {
-      //get the numberic ID of the bot
-      const botId = (await telegramBot.getMe()).id;
-      // check if the bot is an admin in the chat
-      const isAdmin = await this.botIsAdmin(chatId, botId);
-      // get the messageId of the message that triggered the connection
-      const connectMessageId =
-        match?.message?.message_id || match?.channel_post?.message_id;
-
-      if (!isAdmin) {
-        // alternatively you can replace this with a console.log if you do not want to inform the user of the bot's admin status
-        telegramBot.sendMessage(
-          chatId,
-          "Connection Successful. I don't have admin privileges to delete these messages, please go ahead and remove them yourself."
-        );
-      } else {
-        // Delete the message that triggered the connection
-        await telegramBot.deleteMessage(chatId, connectMessageId);
-        // Send success message to the chat
-        const successMessage = await telegramBot.sendMessage(
-          chatId,
-          'Connection Successful. Message will be deleted in 10 seconds.'
-        );
-        // Delete the success message after 10 seconds
-        setTimeout(async () => {
-          await telegramBot.deleteMessage(chatId, successMessage.message_id);
-          console.log('Success message deleted.');
-        }, 10000);
-      }
-    }
-
-    // modified lastChatId to work with any type of channel (private/public groups/channels)
-    return chatId
-      ? { chatId }
-      : res.length > 0
-      ? {
-          lastChatId:
-            res?.[res.length - 1]?.message?.chat?.id ||
-            res?.[res.length - 1]?.channel_post?.chat?.id,
-        }
-      : {};
+  private parseAccessToken(accessToken: string): { botToken: string; numericChatId: string } {
+    return JSON.parse(accessToken);
   }
 
   private processMedia(mediaFiles: PostDetails['media']) {
@@ -171,7 +158,8 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
   }
 
   private async sendMessage(
-    accessToken: string,
+    bot: TelegramBot,
+    chatId: string,
     message: PostDetails,
     replyToMessageId?: number
   ): Promise<number | null> {
@@ -182,12 +170,11 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
       .replace(/<\/strong>/g, '</b>')
       .replace(/<p>(.*?)<\/p>/g, '$1\n');
 
-    console.log(text);
     const processedMedia = this.processMedia(mediaFiles);
 
     // if there's no media, bot sends a text message only
     if (processedMedia.length === 0) {
-      const response = await telegramBot.sendMessage(accessToken, text, {
+      const response = await bot.sendMessage(chatId, text, {
         parse_mode: 'HTML',
         ...(replyToMessageId ? { reply_to_message_id: replyToMessageId } : {}),
       });
@@ -203,21 +190,21 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
       };
       const response =
         media.type === 'video'
-          ? await telegramBot.sendVideo(
-              accessToken,
-              media.media,
-              options,
-              media.fileOptions
-            )
+          ? await bot.sendVideo(
+            chatId,
+            media.media,
+            options,
+            media.fileOptions
+          )
           : media.type === 'photo'
-          ? await telegramBot.sendPhoto(
-              accessToken,
+            ? await bot.sendPhoto(
+              chatId,
               media.media,
               options,
               media.fileOptions
             )
-          : await telegramBot.sendDocument(
-              accessToken,
+            : await bot.sendDocument(
+              chatId,
               media.media,
               options,
               media.fileOptions
@@ -235,8 +222,8 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
           parse_mode: 'HTML',
         }));
 
-        const response = await telegramBot.sendMediaGroup(
-          accessToken,
+        const response = await bot.sendMediaGroup(
+          chatId,
           mediaGroup as any[],
           {
             ...(replyToMessageId && i === 0
@@ -256,22 +243,24 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
   async post(
     id: string,
     accessToken: string,
-    postDetails: PostDetails[]
+    postDetails: PostDetails[],
+    integration: Integration
   ): Promise<PostResponse[]> {
+    const { botToken, numericChatId } = this.parseAccessToken(accessToken);
+    const bot = new TelegramBot(botToken);
     const [firstPost] = postDetails;
 
-    const messageId = await this.sendMessage(accessToken, firstPost);
+    const messageId = await this.sendMessage(bot, numericChatId, firstPost);
 
     // for private groups/channels message.id is undefined so the link generated by Postiz will be unusable "https://t.me/c/undefined/16"
-    // to avoid that, we use accessToken instead of message.id and we generate the link manually removing the -100 from the start.
+    // to avoid that, we use numericChatId instead of message.id and we generate the link manually removing the -100 from the start.
     if (messageId) {
       return [
         {
           id: firstPost.id,
           postId: String(messageId),
-          releaseURL: `https://t.me/${
-            id !== 'undefined' ? id : `c/${accessToken.replace('-100', '')}`
-          }/${messageId}`,
+          releaseURL: `https://t.me/${id !== 'undefined' ? id : `c/${numericChatId.replace('-100', '')}`
+            }/${messageId}`,
           status: 'completed',
         },
       ];
@@ -288,19 +277,20 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
     postDetails: PostDetails[],
     integration: Integration
   ): Promise<PostResponse[]> {
+    const { botToken, numericChatId } = this.parseAccessToken(accessToken);
+    const bot = new TelegramBot(botToken);
     const [commentPost] = postDetails;
     const replyToId = Number(lastCommentId || postId);
 
-    const messageId = await this.sendMessage(accessToken, commentPost, replyToId);
+    const messageId = await this.sendMessage(bot, numericChatId, commentPost, replyToId);
 
     if (messageId) {
       return [
         {
           id: commentPost.id,
           postId: String(messageId),
-          releaseURL: `https://t.me/${
-            id !== 'undefined' ? id : `c/${accessToken.replace('-100', '')}`
-          }/${messageId}`,
+          releaseURL: `https://t.me/${id !== 'undefined' ? id : `c/${numericChatId.replace('-100', '')}`
+            }/${messageId}`,
           status: 'completed',
         },
       ];
@@ -315,24 +305,5 @@ export class TelegramProvider extends SocialAbstract implements SocialProvider {
       result.push(media.slice(i, i + size));
     }
     return result;
-  }
-
-  async botIsAdmin(chatId: number, botId: number): Promise<boolean> {
-    try {
-      const chatMember = await telegramBot.getChatMember(chatId, botId);
-
-      if (
-        chatMember.status === 'administrator' ||
-        chatMember.status === 'creator'
-      ) {
-        const permissions = chatMember.can_delete_messages;
-        return !!permissions; // Return true if bot can delete messages
-      }
-
-      return false;
-    } catch (error) {
-      console.error('Error checking bot privileges:', error);
-      return false;
-    }
   }
 }

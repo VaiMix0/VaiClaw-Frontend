@@ -1,4 +1,25 @@
-import { Integration } from '@prisma/client';
+// Local Integration type — replaces @prisma/client which has no generated schema in this project.
+export interface Integration {
+  id: string;
+  name: string;
+  token: string;
+  refreshToken: string;
+  picture?: string | null;
+  internalId: string;
+  rootInternalId?: string | null;
+  providerIdentifier: string;
+  organizationId: string;
+  tokenExpiration?: Date | null;
+  customInstanceDetails?: string | null;
+  profile?: string | null;
+  disabled?: boolean;
+  inBetweenSteps?: boolean;
+  refreshNeeded?: boolean;
+  additionalSettings?: string | null;
+  deletedAt?: Date | null;
+  identifier?: string;
+  [key: string]: any;
+}
 
 export interface ClientInformation {
   client_id: string;
@@ -137,7 +158,7 @@ export type FetchPageInformationResult = {
 
 export interface SocialProvider
   extends IAuthenticator,
-    ISocialMediaIntegration {
+  ISocialMediaIntegration {
   identifier: string;
   refreshWait?: boolean;
   convertToJPEG?: boolean;

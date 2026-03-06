@@ -26,8 +26,8 @@ const ThirdPartyContext = createContext({
   title: '',
   identifier: '',
   description: '',
-  close: () => {},
-  onChange: (data: any) => {},
+  close: () => { },
+  onChange: (data: any) => { },
   fields: [],
   data: [
     {
@@ -175,7 +175,7 @@ export const ThirdPartyMedia: FC<{
     refreshWhenOffline: false,
   });
 
-  if (isLoading || !data.length) {
+  if (isLoading || !data?.length) {
     return null;
   }
 

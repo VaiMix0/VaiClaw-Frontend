@@ -38,6 +38,7 @@ import GmbProvider from '@gitroom/frontend/components/new-launch/providers/gmb/g
 import MoltbookProvider from '@gitroom/frontend/components/new-launch/providers/moltbook/moltbook.provider';
 import SkoolProvider from '@gitroom/frontend/components/new-launch/providers/skool/skool.provider';
 import WhopProvider from '@gitroom/frontend/components/new-launch/providers/whop/whop.provider';
+import ZaloProvider from '@gitroom/frontend/components/new-launch/providers/zalo/zalo.provider';
 
 export const Providers = [
   {
@@ -167,7 +168,11 @@ export const Providers = [
   {
     identifier: 'whop',
     component: WhopProvider,
-  }
+  },
+  {
+    identifier: 'zalo',
+    component: ZaloProvider,
+  },
 ];
 export const ShowAllProviders = forwardRef((props, ref) => {
   const { date, current, global, selectedIntegrations, allIntegrations } =

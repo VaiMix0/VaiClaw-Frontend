@@ -13,7 +13,7 @@ import { lookup } from 'mime-types';
 import axios from 'axios';
 import WebSocket from 'ws';
 import { Tool } from '@gitroom/nestjs-libraries/integrations/tool.decorator';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 
 // @ts-ignore
 global.WebSocket = WebSocket;

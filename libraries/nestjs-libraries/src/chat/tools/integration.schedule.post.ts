@@ -8,7 +8,7 @@ import { PostsService } from '@gitroom/nestjs-libraries/database/prisma/posts/po
 import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
 import { AllProvidersSettings } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/all.providers.settings';
 import { validate } from 'class-validator';
-import { Integration } from '@prisma/client';
+import { Integration } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
 import { checkAuth } from '@gitroom/nestjs-libraries/chat/auth.context';
 import { stripHtmlValidation } from '@gitroom/helpers/utils/strip.html.validation';
 import { weightedLength } from '@gitroom/helpers/utils/count.length';

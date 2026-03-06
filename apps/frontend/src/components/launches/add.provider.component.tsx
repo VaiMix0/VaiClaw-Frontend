@@ -410,15 +410,39 @@ export const AddProviderComponent: FC<{
       async () => {
         const onboardingParam = onboarding ? 'onboarding=true' : '';
         const openWeb3 = async () => {
-          const { component: Web3Providers } = web3List.find(
+          const web3Provider = web3List.find(
             (item) => item.identifier === identifier
-          )!;
-          const { url } = await (
-            await fetch(
-              `/integrations/social/${identifier}${onboarding ? '?onboarding=true' : ''
-              }`
-            )
-          ).json();
+          );
+          if (!web3Provider) {
+            toaster.show(
+              t('could_not_connect_to_platform', 'Could not connect to the platform'),
+              'warning'
+            );
+            return;
+          }
+          const { component: Web3Providers } = web3Provider;
+          let nonce: string | undefined;
+          try {
+            const data = await (
+              await fetch(
+                `/integrations/social/${identifier}${onboarding ? '?onboarding=true' : ''}`
+              )
+            ).json();
+            nonce = data?.url;
+          } catch (e) {
+            toaster.show(
+              t('could_not_connect_to_platform', 'Could not connect to the platform'),
+              'warning'
+            );
+            return;
+          }
+          if (!nonce) {
+            toaster.show(
+              t('could_not_connect_to_platform', 'Could not connect to the platform'),
+              'warning'
+            );
+            return;
+          }
           modal.openModal({
             title: `Add ${capitalize(identifier)}`,
             withCloseButton: true,
@@ -428,10 +452,12 @@ export const AddProviderComponent: FC<{
             children: (
               <Web3Providers
                 onComplete={(code, newState) => {
-                  window.location.href = `/integrations/social/${identifier}?code=${code}&state=${newState}${onboarding ? '&onboarding=true' : ''
-                    }`;
+                  if (!code || !newState) {
+                    return;
+                  }
+                  window.location.href = `/integrations/social/${identifier}?code=${code}&state=${newState}${onboarding ? '&onboarding=true' : ''}`;
                 }}
-                nonce={url}
+                nonce={nonce}
               />
             ),
           });
@@ -445,12 +471,36 @@ export const AddProviderComponent: FC<{
           ]
             .filter(Boolean)
             .join('&');
-          const { url, err } = await (
-            await fetch(
-              `/integrations/social/${identifier}${params ? `?${params}` : ''}`
-            )
-          ).json();
+          let responseData: { url?: string; err?: string } = {};
+          try {
+            responseData = await (
+              await fetch(
+                `/integrations/social/${identifier}${params ? `?${params}` : ''}`
+              )
+            ).json();
+          } catch (e) {
+            toaster.show(
+              t(
+                'could_not_connect_to_platform',
+                'Could not connect to the platform'
+              ),
+              'warning'
+            );
+            return;
+          }
+          const { url, err } = responseData;
           if (err) {
+            toaster.show(
+              t(
+                'could_not_connect_to_platform',
+                'Could not connect to the platform'
+              ),
+              'warning'
+            );
+            return;
+          }
+
+          if (!url) {
             toaster.show(
               t(
                 'could_not_connect_to_platform',

@@ -17,7 +17,7 @@ interface VariableContextInterface {
   discordUrl: string;
   uploadDirectory: string;
   facebookPixel: string;
-  telegramBotName: string;
+
   neynarClientId: string;
   isSecured: boolean;
   disableImageCompression: boolean;
@@ -43,7 +43,7 @@ const VariableContext = createContext({
   discordUrl: '',
   uploadDirectory: '',
   isSecured: false,
-  telegramBotName: '',
+
   facebookPixel: '',
   neynarClientId: '',
   disableImageCompression: false,

@@ -158,7 +158,7 @@ export const ContinueIntegration: FC<{
               jwt: extensionToken,
               backendUrl,
             },
-            () => {}
+            () => { }
           );
         } catch {
           // Silently ignore — extension may not be available
@@ -177,8 +177,7 @@ export const ContinueIntegration: FC<{
       }
 
       navigateOrShow(
-        `/launches?added=${provider}&msg=Channel Updated${
-          onboarding ? '&onboarding=true' : ''
+        `/launches?added=${provider}&msg=Channel Updated${onboarding ? '&onboarding=true&step=3' : ''
         }`,
         returnURL,
         'Channel Updated'
@@ -214,8 +213,7 @@ export const ContinueIntegration: FC<{
         }
 
         navigateOrShow(
-          `/launches?added=${provider}&msg=Channel Added${
-            twoStepState.onboarding ? '&onboarding=true' : ''
+          `/launches?added=${provider}&msg=Channel Added${twoStepState.onboarding ? '&onboarding=true&step=3' : ''
           }`,
           twoStepState.returnURL,
           'Channel Added'

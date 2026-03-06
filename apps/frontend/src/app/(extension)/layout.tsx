@@ -27,7 +27,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         <VariableContextComponent
           language="en"
           storageProvider={
-            process.env.STORAGE_PROVIDER! as 'local' | 'cloudflare'
+            (process.env.STORAGE_PROVIDER || 'local') as 'local' | 'cloudflare'
           }
           stripeClient=""
           environment={process.env.NODE_ENV!}
@@ -44,7 +44,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           mcpUrl={process.env.MCP_URL}
           dub={false}
           facebookPixel={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL!}
-          telegramBotName={process.env.TELEGRAM_BOT_NAME!}
+
           neynarClientId={process.env.NEYNAR_CLIENT_ID!}
           isSecured={!process.env.NOT_SECURED}
           disableImageCompression={!!process.env.DISABLE_IMAGE_COMPRESSION}
@@ -54,9 +54,9 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           transloadit={
             process.env.TRANSLOADIT_AUTH && process.env.TRANSLOADIT_TEMPLATE
               ? [
-                  process.env.TRANSLOADIT_AUTH!,
-                  process.env.TRANSLOADIT_TEMPLATE!,
-                ]
+                process.env.TRANSLOADIT_AUTH!,
+                process.env.TRANSLOADIT_TEMPLATE!,
+              ]
               : []
           }
         >

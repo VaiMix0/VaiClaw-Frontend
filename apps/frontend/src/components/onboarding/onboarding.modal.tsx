@@ -20,8 +20,30 @@ export const OnboardingModal: FC<OnboardingModalProps> = ({ onClose }) => {
   const searchParams = useSearchParams();
   const initialStep = searchParams.get('step') ? parseInt(searchParams.get('step')!) : 1;
   const [step, setStep] = useState(initialStep);
+  const [loading, setLoading] = useState(true);
   const modals = useModals();
   const t = useT();
+  const fetchApi = useFetch();
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetchApi('/v1/niches');
+        const data = await res.json();
+        // Skip step 2 if they already have configurations loaded
+        if (data?.data && data.data.length > 0) {
+          setStep(Math.max(initialStep, 3));
+        }
+      } catch (e) {
+        console.error('Failed to load niches during onboarding', e);
+      }
+      setLoading(false);
+    })();
+  }, [fetchApi, initialStep]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="w-full min-h-full flex-1 p-[40px] flex relative">
@@ -292,6 +314,8 @@ const OnboardingStep2BrandSetup: FC<{ onBack: () => void; onNext: () => void }> 
   const t = useT();
   const [industry, setIndustry] = useState('');
   const [brandVoice, setBrandVoice] = useState('');
+  const [saving, setSaving] = useState(false);
+  const fetchApi = useFetch();
 
   return (
     <div className="flex flex-col gap-[24px]">
@@ -348,12 +372,26 @@ const OnboardingStep2BrandSetup: FC<{ onBack: () => void; onNext: () => void }> 
           {t('back', 'Back')}
         </button>
         <button
-          onClick={() => {
-            if (industry) localStorage.setItem('onboarding_industry', industry);
-            if (brandVoice) localStorage.setItem('onboarding_voice', brandVoice);
+          onClick={async () => {
+            if (!industry || !brandVoice) return;
+            setSaving(true);
+            try {
+              localStorage.setItem('onboarding_industry', industry);
+              localStorage.setItem('onboarding_voice', brandVoice);
+              await fetchApi(`/v1/niches/${industry}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                  enabled: true,
+                  brand_voice: { tone: brandVoice, style: 'informative', emoji_level: 'Moderate', formality: brandVoice }
+                })
+              });
+            } catch (e) {
+              console.error('Failed to save niche to API', e);
+            }
+            setSaving(false);
             onNext();
           }}
-          disabled={!industry || !brandVoice}
+          disabled={!industry || !brandVoice || saving}
           className={clsx(
             "group flex items-center gap-[12px] text-white font-[600] px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all",
             industry && brandVoice
@@ -361,7 +399,7 @@ const OnboardingStep2BrandSetup: FC<{ onBack: () => void; onNext: () => void }> 
               : "bg-gray-600 opacity-50 cursor-not-allowed"
           )}
         >
-          {t('continue', 'Continue')}
+          {saving ? t('saving', 'Saving...') : t('continue', 'Continue')}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"

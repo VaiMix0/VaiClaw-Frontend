@@ -10,11 +10,10 @@ import { Input } from '@gitroom/react/form/input';
 import { Button } from '@gitroom/react/form/button';
 import copy from 'copy-to-clipboard';
 import { useToaster } from '@gitroom/react/toaster/toaster';
-import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 export const TelegramProvider: FC<Web3ProviderInterface> = (props) => {
   const { onComplete, nonce } = props;
-  const { telegramBotName } = useVariables();
+
   const fetch = useFetch();
   const word = useRef(makeId(4));
   const stop = useRef(false);
@@ -25,8 +24,7 @@ export const TelegramProvider: FC<Web3ProviderInterface> = (props) => {
     while (true) {
       const data = await (
         await fetch(
-          `/integrations/telegram/updates?word=${word.current}${
-            id ? `&id=${id}` : ''
+          `/integrations/telegram/updates?word=${word.current}${id ? `&id=${id}` : ''
           }`
         )
       ).json();
@@ -66,7 +64,7 @@ export const TelegramProvider: FC<Web3ProviderInterface> = (props) => {
     <>
       <div className="justify-center items-center flex flex-col pt-[16px]">
         <div>
-          {t('please_add', 'Please add')} <strong>@{telegramBotName}</strong>{' '}
+          {t('please_add', 'Please add')} <strong>your bot</strong>{' '}
           {t(
             'to_your_telegram_group_channel_and_click_here',
             'to your\n          telegram group / channel and click here:'

@@ -1,5 +1,8 @@
-const { join } = require('path');
-module.exports = {
+import { join } from 'path';
+import tailwindScrollbar from 'tailwind-scrollbar';
+import tailwindcssRtl from 'tailwindcss-rtl';
+
+export default {
   darkMode: 'class',
   content: ['./src/**/*.{ts,tsx,html}', '../../libraries/**/*.{ts,tsx,html}'],
   theme: {
@@ -274,8 +277,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwind-scrollbar'),
-    require('tailwindcss-rtl'),
+    tailwindScrollbar,
+    tailwindcssRtl,
     function ({ addVariant }) {
       addVariant('child', '& > *');
       addVariant('child-hover', '& > *:hover');

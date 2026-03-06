@@ -1,103 +1,181 @@
 import React from 'react';
 import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { AIPromptHelper } from '@gitroom/frontend/components/new-launch/ai.prompt.helper';
 
 vi.mock('@gitroom/react/translation/get.transation.service.client', () => ({
     useT: () => (key: string, defaultString: string) => defaultString,
 }));
 
+vi.mock('@gitroom/react/form/button', () => ({
+    Button: (props: any) => <button {...props}>{props.children}</button>,
+}));
+
+vi.mock('@gitroom/frontend/components/layout/loading', () => ({
+    LoadingComponent: () => <div>Loading...</div>,
+}));
+
+// SWR module-level mock — swrData is reassigned per-test
+let swrData: any = null;
+vi.mock('swr', () => ({
+    default: (_key: string) => ({ data: swrData }),
+}));
+
+// api mock
+vi.mock('@gitroom/frontend/lib/vaiclaw-api', () => ({
+    api: {
+        listNiches: vi.fn().mockResolvedValue({ data: [] }),
+    },
+}));
+
 describe('AIPromptHelper Component', () => {
     let mockEditor: any;
 
     beforeEach(() => {
-        mockEditor = {
-            commands: {
-                insertContent: vi.fn()
-            }
-        };
+        vi.useFakeTimers();
+        mockEditor = { commands: { insertContent: vi.fn() } };
         localStorage.clear();
+        swrData = null; // default: no API data
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
     });
 
     it('renders the AI Generate button correctly', () => {
         render(<AIPromptHelper editor={mockEditor} />);
-
-        const button = screen.getByText('AI Generate');
-        expect(button).toBeTruthy();
+        expect(screen.getByText('AI Generate')).toBeTruthy();
     });
 
     it('toggles the prompt modal when clicked', () => {
         render(<AIPromptHelper editor={mockEditor} />);
 
-        const generateBtn = screen.getByText('AI Generate');
-
-        // Modal shouldn't be visible initially
         expect(screen.queryByText('Write with AI')).not.toBeTruthy();
-
-        // Open
-        fireEvent.click(generateBtn);
+        fireEvent.click(screen.getByText('AI Generate'));
         expect(screen.getByText('Write with AI')).toBeTruthy();
 
-        // Cancel
-        const cancelBtn = screen.getByText('Cancel');
-        fireEvent.click(cancelBtn);
-
-        // Should close
+        fireEvent.click(screen.getByText('Cancel'));
         expect(screen.queryByText('Write with AI')).not.toBeTruthy();
     });
 
     it('disables the generate button when prompt is empty', () => {
         render(<AIPromptHelper editor={mockEditor} />);
-
-        // Open
         fireEvent.click(screen.getByText('AI Generate'));
 
         const generateBtn = screen.getByText('Generate');
         expect((generateBtn as HTMLButtonElement).disabled).toBe(true);
 
-        const textarea = screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...');
-
-        // Type prompt
-        fireEvent.change(textarea, { target: { value: 'This is a test prompt' } });
-
-        // Button should be enabled
+        fireEvent.change(
+            screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...'),
+            { target: { value: 'This is a test prompt' } }
+        );
         expect((generateBtn as HTMLButtonElement).disabled).toBe(false);
     });
 
-    it('generates content using localStorage traits and inserts it into the editor', async () => {
-        // Mock traits previously saved from Onboarding
+    it('generates content using localStorage traits (fallback) and inserts into editor', async () => {
         localStorage.setItem('onboarding_industry', 'fitness');
         localStorage.setItem('onboarding_voice', 'energetic');
 
         render(<AIPromptHelper editor={mockEditor} />);
-
-        // Open the helper
         fireEvent.click(screen.getByText('AI Generate'));
 
-        // Type prompt
-        const textarea = screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...');
-        fireEvent.change(textarea, { target: { value: 'New gym equipment arrival' } });
+        fireEvent.change(
+            screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...'),
+            { target: { value: 'New gym equipment arrival' } }
+        );
 
-        // Click Generate
-        const generateBtn = screen.getByText('Generate');
-        fireEvent.click(generateBtn);
+        // Click generate, advance fake timer past 2s delay
+        await act(async () => {
+            fireEvent.click(screen.getByText('Generate'));
+            vi.advanceTimersByTime(2500);
+        });
 
-        // Wait for generation to complete (simulated delay is 2s, but we can fast-forward timers in jest/vitest, though waiting with waitFor might suffice for this demonstration)
-        // Note: The simulated delay in the actual component means this test might take time, so if needed, vi.useFakeTimers() is recommended.
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('gym equipment arrival')
+        );
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('fitness')
+        );
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('energetic')
+        );
+    });
 
-        await waitFor(() => {
-            expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
-                expect.stringContaining('gym equipment arrival')
-            );
-            expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
-                expect.stringContaining('fitness')
-            );
-            expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
-                expect.stringContaining('energetic')
-            );
-        }, { timeout: 3000 });
+    it('uses API niche data when available (priority over localStorage)', async () => {
+        swrData = [{ niche: 'technology', enabled: true, brand_voice: { tone: 'expert' } }];
+        localStorage.setItem('onboarding_industry', 'fitness');
+        localStorage.setItem('onboarding_voice', 'energetic');
 
-        // Verify popup is closed
-        expect(screen.queryByText('Write with AI')).not.toBeInTheDocument();
+        render(<AIPromptHelper editor={mockEditor} />);
+        fireEvent.click(screen.getByText('AI Generate'));
+
+        fireEvent.change(
+            screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...'),
+            { target: { value: 'Test prompt' } }
+        );
+
+        await act(async () => {
+            fireEvent.click(screen.getByText('Generate'));
+            vi.advanceTimersByTime(2500);
+        });
+
+        // Should use 'technology' and 'expert' from API, not 'fitness'/'energetic'
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('technology')
+        );
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('expert')
+        );
+    });
+
+    it('falls back to localStorage when API returns no active niche', async () => {
+        swrData = [{ niche: 'inactive-niche', enabled: false }];
+        localStorage.setItem('onboarding_industry', 'fitness');
+        localStorage.setItem('onboarding_voice', 'energetic');
+
+        render(<AIPromptHelper editor={mockEditor} />);
+        fireEvent.click(screen.getByText('AI Generate'));
+
+        fireEvent.change(
+            screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...'),
+            { target: { value: 'Test prompt' } }
+        );
+
+        await act(async () => {
+            fireEvent.click(screen.getByText('Generate'));
+            vi.advanceTimersByTime(2500);
+        });
+
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('fitness')
+        );
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('energetic')
+        );
+    });
+
+    it('uses default values when both API and localStorage are empty', async () => {
+        swrData = null;
+        localStorage.clear();
+
+        render(<AIPromptHelper editor={mockEditor} />);
+        fireEvent.click(screen.getByText('AI Generate'));
+
+        fireEvent.change(
+            screen.getByPlaceholderText('E.g. Write a post announcing our new summer collection...'),
+            { target: { value: 'Test prompt' } }
+        );
+
+        await act(async () => {
+            fireEvent.click(screen.getByText('Generate'));
+            vi.advanceTimersByTime(2500);
+        });
+
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('tech')
+        );
+        expect(mockEditor.commands.insertContent).toHaveBeenCalledWith(
+            expect.stringContaining('professional')
+        );
     });
 });
