@@ -44,6 +44,7 @@ import { useHasScroll } from '@gitroom/frontend/components/ui/is.scroll.hook';
 import { useShortlinkPreference } from '@gitroom/frontend/components/settings/shortlink-preference.component';
 import dayjs from 'dayjs';
 import { Button } from '@gitroom/react/form/button';
+import { AiConfirmationFlow } from '@gitroom/frontend/components/new-launch/ai.confirmation.flow';
 
 function countCharacters(text: string, type: string): number {
   if (type !== 'x') {
@@ -61,6 +62,7 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
   const toaster = useToaster();
   const modal = useModals();
   const [showSettings, setShowSettings] = useState(false);
+  const [aiConfirmed, setAiConfirmed] = useState(false);
   const { data: shortlinkPreferenceData } = useShortlinkPreference();
 
   const { addEditSets, mutate, customClose, dummy } = props;
@@ -260,14 +262,13 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
 
       for (const item of notEnoughChars) {
         toaster.show(
-          `${capitalize(item.integration.identifier.split('-')[0])} (${
-            item.integration.name
+          `${capitalize(item.integration.identifier.split('-')[0])} (${item.integration.name
           }):` +
-            ' ' +
-            t(
-              'post_needs_content_or_image',
-              'Your post should have at least one character or one image.'
-            ),
+          ' ' +
+          t(
+            'post_needs_content_or_image',
+            'Your post should have at least one character or one image.'
+          ),
           'warning'
         );
         setLoading(false);
@@ -279,8 +280,7 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
         for (const item of checkAllValid) {
           if (item.valid === false) {
             toaster.show(
-              `${capitalize(item.integration.identifier.split('-')[0])} (${
-                item.integration.name
+              `${capitalize(item.integration.identifier.split('-')[0])} (${item.integration.name
               }): ${t('please_fix_your_settings', 'Please fix your settings')}`,
               'warning'
             );
@@ -292,8 +292,7 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
 
           if (item.errors !== true) {
             toaster.show(
-              `${capitalize(item.integration.identifier.split('-')[0])} (${
-                item.integration.name
+              `${capitalize(item.integration.identifier.split('-')[0])} (${item.integration.name
               }): ${item.errors}`,
               'warning'
             );
@@ -416,9 +415,9 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
         addEditSets
           ? addEditSets(data)
           : await fetch('/posts', {
-              method: 'POST',
-              body: JSON.stringify(data),
-            });
+            method: 'POST',
+            body: JSON.stringify(data),
+          });
 
         if (!addEditSets) {
           mutate();
@@ -631,12 +630,12 @@ export const ManageModal: FC<AddEditModalProps> = (props) => {
                     {selectedIntegrations.length === 0
                       ? t('check_circles_above', 'Check the circles above')
                       : dummy
-                      ? t('create_output', 'Create output')
-                      : !existingData?.integration
-                      ? t('add_to_calendar', 'Add to calendar')
-                      : existingData?.posts?.[0]?.state === 'DRAFT'
-                      ? t('schedule', 'Schedule')
-                      : t('update', 'Update')}
+                        ? t('create_output', 'Create output')
+                        : !existingData?.integration
+                          ? t('add_to_calendar', 'Add to calendar')
+                          : existingData?.posts?.[0]?.state === 'DRAFT'
+                            ? t('schedule', 'Schedule')
+                            : t('update', 'Update')}
                   </div>
                   {!dummy && (
                     <div className="flex justify-center items-center h-[20px] w-[20px] pt-[4px] arrow-change">

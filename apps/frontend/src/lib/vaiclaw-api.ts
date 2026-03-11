@@ -1,7 +1,7 @@
 // apps/frontend/src/lib/vaiclaw-api.ts
 
 // Use NEXT_PUBLIC_BACKEND_URL (strips /api suffix), fallback to port 3001
-const _backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001/api'
+const _backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:3001/api'
 const API = _backendBase.replace(/\/api$/, '')
 
 export class VaiClawAPI {
@@ -52,6 +52,12 @@ export class VaiClawAPI {
     generateContent(topic: string, platforms: string[]) {
         return this.fetch('/api/v1/content/generate', {
             method: 'POST', body: JSON.stringify({ topic, platforms })
+        })
+    }
+
+    spinContent(contentId: string, body: string, platform: string, variants?: number, title?: string, hashtags?: string[], vary?: string[]) {
+        return this.fetch('/api/v1/content/spin', {
+            method: 'POST', body: JSON.stringify({ content_id: contentId, body, platform, variants, title, hashtags, vary })
         })
     }
 

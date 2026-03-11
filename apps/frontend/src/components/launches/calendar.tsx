@@ -1092,8 +1092,23 @@ const CalendarItem: FC<{
           />
         </div>
         <div className="w-full flex-1 flex flex-col min-h-[40px]">
-          <div className="text-start">
-            {state === 'DRAFT' ? t('draft', 'Draft') + ': ' : ''}
+          <div className="text-start flex items-center gap-[5px] mb-[2px]">
+            {state === 'DRAFT' && <span className="text-textColor/70 font-medium">{t('draft', 'Draft')}:</span>}
+            {(post as any).mediaStatus === 'PENDING_MEDIA' && (
+              <span className="text-[10px] bg-amber-500/20 text-amber-500 px-[6px] py-[2px] rounded-full font-medium">⏳ {t('pending_media', 'Pending Media')}</span>
+            )}
+            {(post as any).mediaStatus === 'PROCESSING' && (
+              <span className="text-[10px] bg-blue-500/20 text-blue-500 px-[6px] py-[2px] rounded-full font-medium flex items-center gap-[4px]">
+                <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                {t('processing_media', 'Rendering...')}
+              </span>
+            )}
+            {(post as any).mediaStatus === 'FAILED' && (
+              <span className="text-[10px] bg-red-500/20 text-red-500 px-[6px] py-[2px] rounded-full font-medium">❌ {t('failed_media', 'Media Failed')}</span>
+            )}
+            {(post as any).mediaStatus === 'COMPLETED' && (post as any).mediaUrl && (
+              <span className="text-[10px] bg-green-500/20 text-green-400 px-[6px] py-[2px] rounded-full font-medium">✨ {t('media_ready', 'Media Ready')}</span>
+            )}
           </div>
           <div className="w-full relative">
             <div className="absolute top-0 start-0 w-full text-ellipsis break-words line-clamp-1 text-start">
