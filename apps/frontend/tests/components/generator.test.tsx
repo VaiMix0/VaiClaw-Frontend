@@ -6,8 +6,8 @@ import { ContextWrapper } from '@gitroom/frontend/components/layout/user.context
 // Mock the LaunchStore to avoid Zustand context errors
 vi.mock('@gitroom/frontend/components/new-launch/store', () => ({
     useLaunchStore: () => ({
-        integrations: [],
-        selectedIntegrations: [],
+        integrations: [] as any[],
+        selectedIntegrations: [] as any[],
     })
 }));
 

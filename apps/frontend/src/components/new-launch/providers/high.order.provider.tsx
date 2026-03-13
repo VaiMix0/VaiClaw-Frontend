@@ -32,6 +32,7 @@ export enum PostComment {
   ALL,
   POST,
   COMMENT,
+  NO_COMMENT,
 }
 
 interface CharacterCondition {
@@ -128,10 +129,10 @@ export const withProvider = function <T extends object>(params: {
         typeof maximumCharacters === 'number'
           ? maximumCharacters
           : maximumCharacters(
-              JSON.parse(
-                selectedIntegration.integration.additionalSettings || '[]'
-              )
+            JSON.parse(
+              selectedIntegration.integration.additionalSettings || '[]'
             )
+          )
       );
 
       if (isGlobal) {
@@ -151,10 +152,10 @@ export const withProvider = function <T extends object>(params: {
           typeof maximumCharacters === 'number'
             ? maximumCharacters
             : maximumCharacters(
-                JSON.parse(
-                  selectedIntegration.integration.additionalSettings || '[]'
-                )
+              JSON.parse(
+                selectedIntegration.integration.additionalSettings || '[]'
               )
+            )
         );
       }
     }, [justCurrent, current, isGlobal, setTotalChars]);
@@ -205,12 +206,12 @@ export const withProvider = function <T extends object>(params: {
             err: form.formState.errors,
             errors: checkValidity
               ? await checkValidity(
-                  value.map((p) => p.media || []),
-                  settings,
-                  JSON.parse(
-                    selectedIntegration.integration.additionalSettings || '[]'
-                  )
+                value.map((p) => p.media || []),
+                settings,
+                JSON.parse(
+                  selectedIntegration.integration.additionalSettings || '[]'
                 )
+              )
               : true,
             settings,
             values: value,
@@ -218,10 +219,10 @@ export const withProvider = function <T extends object>(params: {
               typeof maximumCharacters === 'number'
                 ? maximumCharacters
                 : maximumCharacters(
-                    JSON.parse(
-                      selectedIntegration.integration.additionalSettings || '[]'
-                    )
-                  ),
+                  JSON.parse(
+                    selectedIntegration.integration.additionalSettings || '[]'
+                  )
+                ),
             fix: () => {
               setCurrent(props.id);
               setHide(true);
@@ -288,11 +289,11 @@ export const withProvider = function <T extends object>(params: {
                     typeof maximumCharacters === 'number'
                       ? maximumCharacters
                       : maximumCharacters(
-                          JSON.parse(
-                            selectedIntegration.integration
-                              .additionalSettings || '[]'
-                          )
+                        JSON.parse(
+                          selectedIntegration.integration
+                            .additionalSettings || '[]'
                         )
+                      )
                   }
                 />
               ) : (
@@ -301,11 +302,11 @@ export const withProvider = function <T extends object>(params: {
                     typeof maximumCharacters === 'number'
                       ? maximumCharacters
                       : maximumCharacters(
-                          JSON.parse(
-                            selectedIntegration.integration
-                              .additionalSettings || '[]'
-                          )
+                        JSON.parse(
+                          selectedIntegration.integration
+                            .additionalSettings || '[]'
                         )
+                      )
                   }
                 />
               ))}
@@ -342,14 +343,14 @@ export const withProvider = function <T extends object>(params: {
                   )}
                 </div>,
                 document.querySelector('#social-settings') ||
-                  document.createElement('div')
+                document.createElement('div')
               )}
             {current &&
               !SettingsComponent &&
               createPortal(
                 <style>{`#wrapper-settings {display: none !important;} #social-empty {display: block !important;}`}</style>,
                 document.querySelector('#social-settings') ||
-                  document.createElement('div')
+                document.createElement('div')
               )}
           </div>
         </FormProvider>
