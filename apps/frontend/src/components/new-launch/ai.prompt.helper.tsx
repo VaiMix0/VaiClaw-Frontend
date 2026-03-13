@@ -129,3 +129,4 @@ export const AIPromptHelper: FC<{ editor: Editor }> = ({ editor }) => {
         </div>
     );
 };
+

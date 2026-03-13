@@ -59,3 +59,4 @@ export const DashboardEmptyState: FC = () => {
         </div>
     );
 };
+

@@ -43,7 +43,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         {!!process.env.DATAFAST_WEBSITE_ID && (
           <Script
             data-website-id={process.env.DATAFAST_WEBSITE_ID}
-            data-domain="postiz.com"
+            data-domain="vaimix.com"
             src="https://datafa.st/js/script.js"
             strategy="afterInteractive"
           />
@@ -95,7 +95,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             <FacebookComponent />
             {hasPlausible ? (
               <PlausibleProvider
-                domain={!!process.env.IS_GENERAL ? 'postiz.com' : 'gitroom.com'}
+                domain={!!process.env.IS_GENERAL ? 'vaimix.com' : 'gitroom.com'}
               >
                 <PHProvider
                   phkey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
@@ -124,3 +124,5 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
+

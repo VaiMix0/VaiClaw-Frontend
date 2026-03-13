@@ -171,3 +171,4 @@ const EmailNotificationsComponent = () => {
 
 export default EmailNotificationsComponent;
 
+

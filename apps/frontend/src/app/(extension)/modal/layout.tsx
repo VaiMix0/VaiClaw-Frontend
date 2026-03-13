@@ -7,3 +7,4 @@ export default async function AppLayoutIn({
 }) {
   return <AppLayout>{children}</AppLayout>;
 }
+

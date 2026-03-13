@@ -28,3 +28,4 @@ export const PurchaseCrypto: FC = () => {
     </div>
   );
 };
+

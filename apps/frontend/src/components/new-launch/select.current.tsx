@@ -207,3 +207,4 @@ export const IsGlobal: FC<{ id: string }> = ({ id }) => {
     />
   );
 };
+

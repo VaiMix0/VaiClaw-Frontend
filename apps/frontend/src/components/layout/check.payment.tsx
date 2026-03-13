@@ -76,3 +76,4 @@ export const CheckPaymentInner: FC<{
   }
   return props.children;
 };
+

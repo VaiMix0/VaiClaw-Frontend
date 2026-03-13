@@ -99,7 +99,7 @@ describe('OnboardingModal Flow', () => {
         const skipBtn = screen.getByText('Skip for Now');
         act(() => { fireEvent.click(skipBtn); });
 
-        expect(screen.getByText('Learn How to Use Postiz')).toBeTruthy();
+        expect(screen.getByText('Learn How to Use VaiMix')).toBeTruthy();
         expect(screen.getByText('Get Started')).toBeTruthy();
     });
 
@@ -118,7 +118,7 @@ describe('OnboardingModal Flow', () => {
 
         // The mock should have been called with a PUT to niches
         expect(mockFetchImpl).toHaveBeenCalledWith(
-            expect.stringContaining('/api/v1/niches/tech'),
+            expect.stringContaining('/v1/niches/tech'),
             expect.objectContaining({ method: 'PUT' })
         );
     });

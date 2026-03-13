@@ -1,0 +1,1031 @@
+﻿
+[1m[46m RUN [49m[22m [36mv3.1.4 [39m[90mD:/Code/VaiMix/VaiClaw-Frontend/apps/frontend[39m
+
+[1m[43m DEPRECATED [49m[22m [33m'basic' reporter is deprecated and will be removed in Vitest v3.
+Remove 'basic' from 'reporters' option. To match 'basic' reporter 100%, use configuration:
+{
+  "test": {
+    "reporters": [
+      [
+        "default",
+        {
+          "summary": false
+        }
+      ]
+    ]
+  }
+}[39m
+ [32mΓ£ô[39m tests/components/localization.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m test/content.api.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32mΓ£ô[39m test/auth.api.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/ai.confirmation.flow.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 108[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/brand-niche.settings.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 126[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/ai.prompt.helper.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 133[2mms[22m[39m
+ [31mΓ¥»[39m tests/components/dashboard.empty.state.test.tsx [2m([22m[2m3 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 99[2mms[22m[39m
+   [32mΓ£ô[39m DashboardEmptyState Component[2m > [22mrenders the welcome message correctly[32m 53[2mms[22m[39m
+   [32mΓ£ô[39m DashboardEmptyState Component[2m > [22mrenders all three step cards[32m 12[2mms[22m[39m
+[31m   [31m├ù[31m DashboardEmptyState Component[2m > [22mnavigates to the onboarding flow when Configure Brand is clicked[39m[32m 31[2mms[22m[39m
+[31m     ΓåÆ expected "spy" to be called with arguments: [ '/launches?onboarding=true' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  [[22m
+[32m-   "/launches?onboarding=true",[90m
+[31m+   "/launches?onboarding=true&step=2",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[90mstdout[2m | tests/components/generator.test.tsx
+[22m[39m≡ƒîÉ i18next is maintained with support from Locize ΓÇö consider powering your project with managed localization (AI, CDN, integrations): https://locize.com ≡ƒÆÖ
+
+[90mstdout[2m | tests/components/billing.test.tsx
+[22m[39m≡ƒîÉ i18next is maintained with support from Locize ΓÇö consider powering your project with managed localization (AI, CDN, integrations): https://locize.com ≡ƒÆÖ
+
+ [31mΓ¥»[39m tests/components/top.menu.test.tsx [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 70[2mms[22m[39m
+[31m   [31m├ù[31m TopMenu Component[2m > [22mdisplays the Quota UI accurately for a Free user[39m[32m 58[2mms[22m[39m
+[31m     ΓåÆ Unable to find an element with the text: /Post Quota/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-1 flex-col minCustom:gap-[16px] blurMe"[31m
+    [36m/>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-col minCustom:gap-[16px] blurMe"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"mt-2 w-full flex flex-col gap-1 items-center justify-center cursor-pointer"[31m
+        [33mtitle[31m=[32m"Post Quota: 45 / Unlimited"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"text-[9px] font-[600] text-textItemBlur"[31m
+        [36m>[31m
+          [0mQuota[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"h-[6px] w-[32px] bg-[#2b2d31] rounded-full overflow-hidden"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"h-full bg-gradient-to-r from-[#622aff] to-[#8b5cf6] rounded-full"[31m
+            [33mstyle[31m=[32m"width: 15%;"[31m
+          [36m/>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[31m   [31m├ù[31m TopMenu Component[2m > [22mdisplays the Quota UI accurately for a Pro user[39m[32m 9[2mms[22m[39m
+[31m     ΓåÆ Unable to find an element with the text: /You are on the Pro plan/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-1 flex-col minCustom:gap-[16px] blurMe"[31m
+    [36m/>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-col minCustom:gap-[16px] blurMe"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"mt-2 w-full flex flex-col gap-1 items-center justify-center cursor-pointer"[31m
+        [33mtitle[31m=[32m"Post Quota: 45 / Unlimited"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"text-[9px] font-[600] text-textItemBlur"[31m
+        [36m>[31m
+          [0mQuota[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"h-[6px] w-[32px] bg-[#2b2d31] rounded-full overflow-hidden"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"h-full bg-gradient-to-r from-[#622aff] to-[#8b5cf6] rounded-full"[31m
+            [33mstyle[31m=[32m"width: 15%;"[31m
+          [36m/>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+node.exe : Sourcemap for "D:/Code/VaiMix/VaiClaw-Frontend/node_modules/
+posthog-js/react/dist/esm/index.js" points to missing source files
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Sourcemap for "...ng sour 
+   ce files:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[90mstderr[2m | tests/components/onboarding.modal.test.tsx[2m > 
+[22m[2mOnboardingModal Flow[2m > [22m[2mcalls PUT 
+/api/v1/niches/:niche when completing Step 2
+[22m[39mDOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///D:/Code/VaiMix/VaiClaw-Fr
+ontend/node_modules/[4mhappy-dom[24m/src/fetch/Fetch.ts:506:17)
+    at Object.<anonymous> (file:///D:/Code/VaiMix/VaiClaw-Frontend/node
+_modules/[4mhappy-dom[24m/src/fetch/Fetch.ts:361:10)
+    at AsyncTaskManager.abortAll (file:///D:/Code/VaiMix/VaiClaw-Fronte
+nd/node_modules/[4mhappy-dom[24m/src/async-task-manager/AsyncTaskMana
+ger.ts:266:21)
+    at AsyncTaskManager.destroy (file:///D:/Code/VaiMix/VaiClaw-Fronten
+d/node_modules/[4mhappy-dom[24m/src/async-task-manager/AsyncTaskManag
+er.ts:69:15)
+    at file:///D:/Code/VaiMix/VaiClaw-Frontend/node_modules/[4mhappy-d
+om[24m/src/browser/utilities/BrowserFrameFactory.ts:49:7
+    at new Promise (<anonymous>)
+    at Function.destroyFrame (file:///D:/Code/VaiMix/VaiClaw-Frontend/n
+ode_modules/[4mhappy-dom[24m/src/browser/utilities/BrowserFrameFactor
+y.ts:34:10)
+    at HTMLIFrameElement.#unloadPage (file:///D:/Code/VaiMix/VaiClaw-Fr
+ontend/node_modules/[4mhappy-dom[24m/src/nodes/html-iframe-element/HT
+MLIFrameElement.ts:415:24)
+    at HTMLIFrameElement.[disconnectedFromDocument] (file:///D:/Code/Va
+iMix/VaiClaw-Frontend/node_modules/[4mhappy-dom[24m/src/nodes/html-if
+rame-element/HTMLIFrameElement.ts:245:19)
+    at HTMLIFrameElement.[disconnectedFromNode] (file:///D:/Code/VaiMix
+/VaiClaw-Frontend/node_modules/[4mhappy-dom[24m/src/nodes/node/Node.t
+s:952:49)
+
+[90mstderr[2m | tests/components/onboarding.modal.test.tsx[2m > 
+[22m[2mOnboardingModal Flow[2m > [22m[2mcalls PUT 
+/api/v1/niches/:niche when completing Step 2
+[22m[39mDOMException [NetworkError]: Failed to execute "fetch()" on 
+"Window" with URL "https://www.youtube.com/embed/BdsCVvEYgHU?si=vvhaZJ8
+I5oXXvVJS?autoplay=1": The operation was aborted.
+    at Fetch.onError (file:///D:/Code/VaiMix/VaiClaw-Frontend/node_modu
+les/[4mhappy-dom[24m/src/fetch/Fetch.ts:495:4)
+[90m    at ClientRequest.emit (node:events:519:28)[39m
+[90m    at emitErrorEvent (node:_http_client:105:11)[39m
+[90m    at _destroy (node:_http_client:898:9)[39m
+[90m    at onSocketNT (node:_http_client:918:5)[39m
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:91:21)[39m
+
+ [31mΓ¥»[39m tests/components/onboarding.modal.test.tsx [2m([22m[2m6 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 466[2mms[22m[39m
+   [32mΓ£ô[39m OnboardingModal Flow[2m > [22mrenders step 1 (Select Plan) correctly[32m 81[2mms[22m[39m
+   [32mΓ£ô[39m OnboardingModal Flow[2m > [22mcan navigate to step 2 (Brand Setup) and requires inputs before continuing[32m 112[2mms[22m[39m
+[31m   [31m├ù[31m OnboardingModal Flow[2m > [22mcan skip step 3 (Connect Channels) and go to step 4 (Tutorial)[39m[32m 150[2mms[22m[39m
+[31m     ΓåÆ Unable to find an element with the text: Learn How to Use Postiz. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"w-full min-h-full flex-1 p-[40px] flex relative"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex flex-1 bg-newBgColorInner rounded-[20px] flex-col relative max-w-[1000px] mx-auto shadow-2xl overflow-y-auto"[31m
+      [36m>[31m
+        [36m<button[31m
+          [33mclass[31m=[32m"outline-none absolute end-[20px] top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa z-50 text-white"[31m
+          [33mtype[31m=[32m"button"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"24"[31m
+            [33mviewBox[31m=[32m"0 0 15 15"[31m
+            [33mwidth[31m=[32m"24"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33mclip-rule[31m=[32m"evenodd"[31m
+              [33md[31m=[32m"M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"[31m
+              [33mfill[31m=[32m"currentColor"[31m
+              [33mfill-rule[31m=[32m"evenodd"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+        [36m</button>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 flex p-[40px]"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex flex-col gap-[24px] flex-1"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex items-center justify-center gap-[16px] overflow-x-auto"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex items-center gap-[8px] whitespace-nowrap"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors bg-[#15161A] text-gray-500 border border-[#2b2d31]"[31m
+                [36m>[31m
+                  [0m1[0m
+                [36m</div>[31m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-[14px] text-customColor18"[31m
+                [36m>[31m
+                  [0mSelect Plan[0m
+                [36m</span>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"w-[24px] h-[2px] bg-boxFocused"[31m
+              [36m/>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex items-center gap-[8px] whitespace-nowrap"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors bg-boxFocused text-textItemFocused"[31m
+                [36m>[31m
+                  [0m2[0m
+                [36m</div>[31m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-[14px] font-[500]"[31m
+                [36m>[31m
+                  [0mBrand Setup[0m
+                [36m</span>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"w-[24px] h-[2px] bg-boxFocused"[31m
+              [36m/>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex items-center gap-[8px] whitespace-nowrap"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors bg-boxFocused text-textItemFocused"[31m
+                [36m>[31m
+                  [0m3[0m
+                [36m</div>[31m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-[14px] font-[500]"[31m
+                [36m>[31m
+                  [0mConnect Channels[0m
+                [36m</span>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"w-[24px] h-[2px] bg-boxFocused"[31m
+              [36m/>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex items-center gap-[8px] whitespace-nowrap"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"min-w-[32px] h-[32px] rounded-full flex items-center justify-center text-[14px] font-[600] transition-colors bg-boxFocused text-textItemFocused"[31m
+                [36m>[31m
+                  [0m4[0m
+                [36m</div>[31m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-[14px] font-[500]"[31m
+                [36m>[31m
+                  [0mWatch Tutorial[0m
+                [36m</span>[31m
+              [36m</div>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col gap-[24px] flex-1"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex gap-[4px] flex-col text-center"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"text-[24px] font-semibold"[31m
+                [36m>[31m
+                  [0mLearn How to Use VaiMix[0m
+                [36m</div>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"text-[14px] text-customColor18"[31m
+                [36m>[31m
+                  [0mWatch this short video to learn how to get the most out of VaiMix[0m
+                [36m</div>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"relative flex-1 rounded-[12px] overflow-hidden"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"absolute left-0 top-0 w-full h-full flex justify-center"[31m
+                [36m>[31m
+                  [36m<iframe[31m
+                    [33mallow[31m=[32m"autoplay"[31m
+                    [33mallowfullscreen[31m=[32m""[31m
+                    [33mclass[31m=[32m"h-full aspect-video"[31m
+                    [33msrc[31m=[32m"https://www.youtube.com/embed/BdsCVvEYgHU?si=vvhaZJ8I5oXXvVJS?autoplay=1"[31m
+                    [33mtitle[31m=[32m"VaiMix Tutorial"[31m
+                  [36m/>[31m
+                [36m</div>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex justify-between pt-[24px] mt-[8px]"[31m
+              [36m>[31m
+                [36m<button[31m
+                  [33mclass[31m=[32m"group flex items-center gap-[8px] bg-transparent border-2 border-boxFocused font-medium px-[24px] py-[12px] rounded-[12px] text-[15px] transition-all"[31m
+                [36m>[31m
+                  [36m<svg[31m
+                    [33mclass[31m=[32m"group-hover:-translate-x-1 transition-transform"[31m
+                    [33mfill[31m=[32m"none"[31m
+                    [33mheight[31m=[32m"18"[31m
+                    [33mstroke[31m=[32m"currentColor"[31m
+                    [33mstroke-linecap[31m=[32m"round"[31m
+                    [33mstroke-linejoin[31m=[32m"round"[31m
+                    [33mstroke-width[31m=[32m"2"[31m
+                    [33mviewBox[31m=[32m"0 0 24 24"[31m
+                    [33mwidth[31m=[32m"18"[31m
+                    [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                  [36m>[31m
+                    [36m<path[31m
+                      [33md[31m=[32m"m12 19-7-7 7-7"[31m
+                    [36m/>[31m
+                    [36m<path[31m
+                      [33md[31m=[32m"M19 12H5"[31m
+                    [36m/>[31m
+                  [36m</svg>[31m
+                  [0mBack[0m
+                [36m</button>[31m
+                [36m<button[31m
+                  [33mclass[31m=[32m"group flex items-center gap-[12px] bg-gradient-to-r from-[#10b981] to-[#059669] hover:from-[#34d399] hover:to-[#10b981] text-white font-semibold px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"[31m
+                [36m>[31m
+                  [0mGet Started[0m
+                  [36m<svg[31m
+                    [33mclass[31m=[32m"group-hover:scale-110 transition-transform"[31m
+                    [33mfill[31m=[32m"none"[31m
+                    [33mheight[31m=[32m"20"[31m
+                    [33mstroke[31m=[32m"currentColor"[31m
+                    [33mstroke-linecap[31m=[32m"round"[31m
+                    [33mstroke-linejoin[31m=[32m"round"[31m
+                    [33mstroke-width[31m=[32m"2"[31m
+                    [33mviewBox[31m=[32m"0 0 24 24"[31m
+                    [33mwidth[31m=[32m"20"[31m
+                    [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                  [36m>[31m
+                    [36m<path[31m
+                      [33md[31m=[32m"M22 11.08V12a10 10 0 1 1-5.93-9.14"[31m
+                    [36m/>[31m
+                    [36m<polyline[31m
+                      [33mpoints[31m=[32m"22 4 12 14.01 9 11.01"[31m
+                    [36m/>[31m
+                  [36m</svg>[31m
+                [36m</button>[31m
+              [36m</div>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[31m   [31m├ù[31m OnboardingModal Flow[2m > [22mcalls PUT /api/v1/niches/:niche when completing Step 2[39m[32m 76[2mms[22m[39m
+[31m     ΓåÆ expected "spy" to be called with arguments: [ StringContaining{ΓÇª}, ΓÇª(1) ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  [[22m
+[32m-   StringContaining "/api/v1/niches/tech",[90m
+[32m-   ObjectContaining {[90m
+[32m-     "method": "PUT",[90m
+[32m-   },[90m
+[31m+   "/v1/niches",[90m
+[2m  ][22m
+
+[1m  2nd spy call:
+
+[22m[2m  [[22m
+[32m-   StringContaining "/api/v1/niches/tech",[90m
+[32m-   ObjectContaining {[90m
+[31m+   "/v1/niches/tech",[90m
+[31m+   {[90m
+[31m+     "body": "{\"enabled\":true,\"brand_voice\":{\"tone\":\"professional\",\"style\":\"informative\",\"emoji_level\":\"Moderate\",\"formality\":\"professional\"}}",[90m
+[2m      "method": "PUT",[22m
+[2m    },[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m2[22m
+[31m[39m
+   [32mΓ£ô[39m OnboardingModal Flow[2m > [22mskips Step 2 when DB already has niche configs[32m 13[2mms[22m[39m
+   [32mΓ£ô[39m OnboardingModal Flow[2m > [22mshows Step 2 when DB has no niche configs[32m 30[2mms[22m[39m
+[90mstderr[2m | tests/components/billing.test.tsx[2m > 
+[22m[2mBilling Component (Phase 4.9)[2m > [22m[2mrenders the 
+billing page structure
+[22m[39mThe above error occurred in the <MainBillingComponent> 
+component:
+
+    at MainBillingComponent (D:\Code\VaiMix\VaiClaw-Frontend\apps\front
+end\src\components\billing\main.billing.component.tsx:263:11)
+    at BillingComponent (D:\Code\VaiMix\VaiClaw-Frontend\apps\frontend\
+src\components\billing\billing.component.tsx:11:53)
+    at ContextWrapper (D:\Code\VaiMix\VaiClaw-Frontend\apps\frontend\sr
+c\components\layout\user.context.tsx:11:27)
+
+Consider adding an error boundary to your tree to customize error 
+handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about 
+error boundaries.
+
+ [31mΓ¥»[39m tests/components/billing.test.tsx [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 64[2mms[22m[39m
+[31m   [31m├ù[31m Billing Component (Phase 4.9)[2m > [22mrenders the billing page structure[39m[32m 61[2mms[22m[39m
+[31m     ΓåÆ [vitest] No "useSWRConfig" export is defined on the "swr" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+[39m
+ [32mΓ£ô[39m tests/components/add.provider.component.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 94[2mms[22m[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Suites 2 
+[49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/components/analytics.test.tsx[2m [ 
+tests/components/analytics.test.tsx ][22m
+[31m[1mError[22m: Failed to resolve import 
+"@gitroom/frontend/components/analytics/analytics" from 
+"tests/components/analytics.test.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mD:/Code/VaiMix/VaiClaw-Frontend/apps/frontend/tests/compon
+ents/analytics.test.tsx[39m:3:0
+[33m  24 |  const __vi_import_0__ = await 
+import("react/jsx-dev-runtime");
+  25 |  const __vi_import_1__ = await import("@testing-library/react");
+  26 |  const __vi_import_2__ = await 
+import("@gitroom/frontend/components/analytics/analytics");
+     |                                       ^
+  27 |  const __vi_import_3__ = await 
+import("@gitroom/frontend/components/layout/user.context");
+  28 |  [39m
+[90m [2mΓ¥»[22m TransformPluginContext._formatLog ../../node_modules
+/vite/dist/node/chunks/dep-D4NMHUTW.js:[2m42528:41[22m[39m
+[90m [2mΓ¥»[22m TransformPluginContext.error ../../node_modules/vite
+/dist/node/chunks/dep-D4NMHUTW.js:[2m42525:16[22m[39m
+[90m [2mΓ¥»[22m normalizeUrl ../../node_modules/vite/dist/node/chunk
+s/dep-D4NMHUTW.js:[2m40504:23[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/vite/dist/node/chunks/dep-D4NMHUT
+W.js:[2m40623:37[22m[39m
+[90m [2mΓ¥»[22m TransformPluginContext.transform ../../node_modules/
+vite/dist/node/chunks/dep-D4NMHUTW.js:[2m40550:7[22m[39m
+[90m [2mΓ¥»[22m EnvironmentPluginContainer.transform ../../node_modu
+les/vite/dist/node/chunks/dep-D4NMHUTW.js:[2m42323:18[22m[39m
+[90m [2mΓ¥»[22m loadAndTransform ../../node_modules/vite/dist/node/c
+hunks/dep-D4NMHUTW.js:[2m35739:27[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[1/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/components/generator.test.tsx[2m [ 
+tests/components/generator.test.tsx ][22m
+[31m[1mError[22m: Directory import 'D:\Code\VaiMix\VaiClaw-Frontend\
+node_modules\@mui\utils\composeClasses' is not supported resolving ES 
+modules imported from 
+D:\Code\VaiMix\VaiClaw-Frontend\node_modules\@mui\material\Chip\Chip.js
+Did you mean to import "@mui/utils/composeClasses/index.js"?[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[2/8]ΓÄ»[22m[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 6 
+[49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/components/billing.test.tsx[2m > 
+[22mBilling Component (Phase 4.9)[2m > [22mrenders the billing page 
+structure
+[31m[1mError[22m: [vitest] No "useSWRConfig" export is defined on 
+the "swr" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" 
+helper inside:
+[39m
+vi[33m.[39m[34mmock[39m([35mimport[39m([32m"swr"[39m)[33m,[39
+m [35masync[39m (importOriginal) [33m=>[39m {
+  [35mconst[39m actual [33m=[39m [35mawait[39m 
+[34mimportOriginal[39m()
+  [35mreturn[39m {
+    [33m...[39mactual[33m,[39m
+    [90m// your mocked methods[39m
+  }
+})
+
+[36m [2mΓ¥»[22m MainBillingComponent 
+src/components/billing/main.billing.component.tsx:[2m216:22[22m[39m
+    [90m214| [39m  [35mconst[39m { sub } [33m=[39m 
+props[33m;[39m
+    [90m215| [39m  [35mconst[39m { isGeneral } [33m=[39m 
+[34museVariables[39m()[33m;[39m
+    [90m216| [39m  [35mconst[39m { mutate } [33m=[39m 
+[34museSWRConfig[39m()[33m;[39m
+    [90m   | [39m                     [31m^[39m
+    [90m217| [39m  [35mconst[39m fetch [33m=[39m 
+[34museFetch[39m()[33m;[39m
+    [90m218| [39m  [35mconst[39m toast [33m=[39m 
+[34museToaster[39m()[33m;[39m
+[90m [2mΓ¥»[22m renderWithHooks ../../node_modules/react-dom/cjs/rea
+ct-dom.development.js:[2m15486:18[22m[39m
+[90m [2mΓ¥»[22m mountIndeterminateComponent ../../node_modules/react
+-dom/cjs/react-dom.development.js:[2m20103:13[22m[39m
+[90m [2mΓ¥»[22m beginWork ../../node_modules/react-dom/cjs/react-dom
+.development.js:[2m21626:16[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.callCallback ../../node_modules/r
+eact-dom/cjs/react-dom.development.js:[2m4164:14[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.#callDispatchEventListeners ../..
+/node_modules/happy-dom/src/event/EventTarget.ts:[2m286:41[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.dispatchEvent ../../node_modules/
+happy-dom/src/event/EventTarget.ts:[2m121:35[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.dispatchEvent ../../node_modules/
+happy-dom/src/nodes/element/Element.ts:[2m1252:29[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[3/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m 
+tests/components/dashboard.empty.state.test.tsx[2m > 
+[22mDashboardEmptyState Component[2m > [22mnavigates to the 
+onboarding flow when Configure Brand is clicked
+[31m[1mAssertionError[22m: expected "spy" to be called with 
+arguments: [ '/launches?onboarding=true' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  [[22m
+[32m-   "/launches?onboarding=true",[90m
+[31m+   "/launches?onboarding=true&step=2",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2mΓ¥»[22m 
+tests/components/dashboard.empty.state.test.tsx:[2m55:26[22m[39m
+    [90m 53| [39m        
+fireEvent[33m.[39m[34mclick[39m(configBrandButton)[33m;[39m
+    [90m 54| [39m
+    [90m 55| [39m        
+expect(mockPush).toHaveBeenCalledWith('/launches?onboarding=trΓÇª
+    [90m   | [39m                         [31m^[39m
+    [90m 56| [39m    })[33m;[39m
+    [90m 57| [39m})[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[4/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m 
+tests/components/onboarding.modal.test.tsx[2m > [22mOnboardingModal 
+Flow[2m > [22mcan skip step 3 (Connect Channels) and go to step 4 
+(Tutorial)
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an 
+element with the text: Learn How to Use Postiz. This could be because 
+the text is broken up by multiple elements. In this case, you can 
+provide a function for your text matcher to make your matcher more 
+flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"w-full min-h-full flex-1 p-[40px] flex 
+relative"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex flex-1 bg-newBgColorInner 
+rounded-[20px] flex-col relative max-w-[1000px] mx-auto shadow-2xl 
+overflow-y-auto"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"outline-none absolute end-[20px] 
+top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root 
+hover:bg-tableBorder cursor-pointer mantine-Modal-close 
+mantine-1dcetaa z-50 text-white"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mviewBox[39m=[32m"0 0 15 15"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33mclip-rule[39m=[32m"evenodd"[39m
+              [33md[39m=[32m"M11.7816 4.03157C12.0062 3.80702 
+12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 
+3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 
+3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 
+7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 
+11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 
+8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 
+11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 
+7.49999L11.7816 4.03157Z"[39m
+              [33mfill[39m=[32m"currentColor"[39m
+              [33mfill-rule[39m=[32m"evenodd"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</button>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 flex p-[40px]"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex flex-col gap-[24px] flex-1"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center justify-center 
+gap-[16px] overflow-x-auto"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex items-center gap-[8px] 
+whitespace-nowrap"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"min-w-[32px] h-[32px] 
+rounded-full flex items-center justify-center text-[14px] font-[600] 
+transition-colors bg-[#15161A] text-gray-500 border 
+border-[#2b2d31]"[39m
+                [36m>[39m
+                  [0m1[0m
+                [36m</div>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-[14px] 
+text-customColor18"[39m
+                [36m>[39m
+                  [0mSelect Plan[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"w-[24px] h-[2px] 
+bg-boxFocused"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex items-center gap-[8px] 
+whitespace-nowrap"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"min-w-[32px] h-[32px] 
+rounded-full flex items-center justify-center text-[14px] font-[600] 
+transition-colors bg-boxFocused text-textItemFocused"[39m
+                [36m>[39m
+                  [0m2[0m
+                [36m</div>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-[14px] font-[500]"[39m
+                [36m>[39m
+                  [0mBrand Setup[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"w-[24px] h-[2px] 
+bg-boxFocused"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex items-center gap-[8px] 
+whitespace-nowrap"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"min-w-[32px] h-[32px] 
+rounded-full flex items-center justify-center text-[14px] font-[600] 
+transition-colors bg-boxFocused text-textItemFocused"[39m
+                [36m>[39m
+                  [0m3[0m
+                [36m</div>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-[14px] font-[500]"[39m
+                [36m>[39m
+                  [0mConnect Channels[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"w-[24px] h-[2px] 
+bg-boxFocused"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex items-center gap-[8px] 
+whitespace-nowrap"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"min-w-[32px] h-[32px] 
+rounded-full flex items-center justify-center text-[14px] font-[600] 
+transition-colors bg-boxFocused text-textItemFocused"[39m
+                [36m>[39m
+                  [0m4[0m
+                [36m</div>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-[14px] font-[500]"[39m
+                [36m>[39m
+                  [0mWatch Tutorial[0m
+                [36m</span>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col gap-[24px] 
+flex-1"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex gap-[4px] flex-col 
+text-center"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"text-[24px] font-semibold"[39m
+                [36m>[39m
+                  [0mLearn How to Use VaiMix[0m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"text-[14px] 
+text-customColor18"[39m
+                [36m>[39m
+                  [0mWatch this short video to learn how to get the 
+most out of VaiMix[0m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"relative flex-1 rounded-[12px] 
+overflow-hidden"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"absolute left-0 top-0 w-full 
+h-full flex justify-center"[39m
+                [36m>[39m
+                  [36m<iframe[39m
+                    [33mallow[39m=[32m"autoplay"[39m
+                    [33mallowfullscreen[39m=[32m""[39m
+                    [33mclass[39m=[32m"h-full aspect-video"[39m
+                    [33msrc[39m=[32m"https://www.youtube.com/embed/B
+dsCVvEYgHU?si=vvhaZJ8I5oXXvVJS?autoplay=1"[39m
+                    [33mtitle[39m=[32m"VaiMix Tutorial"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex justify-between pt-[24px] 
+mt-[8px]"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"group flex items-center 
+gap-[8px] bg-transparent border-2 border-boxFocused font-medium 
+px-[24px] py-[12px] rounded-[12px] text-[15px] transition-all"[39m
+                [36m>[39m
+                  [36m<svg[39m
+                    [33mclass[39m=[32m"group-hover:-translate-x-1 
+transition-transform"[39m
+                    [33mfill[39m=[32m"none"[39m
+                    [33mheight[39m=[32m"18"[39m
+                    [33mstroke[39m=[32m"currentColor"[39m
+                    [33mstroke-linecap[39m=[32m"round"[39m
+                    [33mstroke-linejoin[39m=[32m"round"[39m
+                    [33mstroke-width[39m=[32m"2"[39m
+                    [33mviewBox[39m=[32m"0 0 24 24"[39m
+                    [33mwidth[39m=[32m"18"[39m
+                    
+[33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                  [36m>[39m
+                    [36m<path[39m
+                      [33md[39m=[32m"m12 19-7-7 7-7"[39m
+                    [36m/>[39m
+                    [36m<path[39m
+                      [33md[39m=[32m"M19 12H5"[39m
+                    [36m/>[39m
+                  [36m</svg>[39m
+                  [0mBack[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33mclass[39m=[32m"group flex items-center 
+gap-[12px] bg-gradient-to-r from-[#10b981] to-[#059669] 
+hover:from-[#34d399] hover:to-[#10b981] text-white font-semibold 
+px-[32px] py-[14px] rounded-[12px] text-[16px] transition-all 
+shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"[39m
+                [36m>[39m
+                  [0mGet Started[0m
+                  [36m<svg[39m
+                    [33mclass[39m=[32m"group-hover:scale-110 
+transition-transform"[39m
+                    [33mfill[39m=[32m"none"[39m
+                    [33mheight[39m=[32m"20"[39m
+                    [33mstroke[39m=[32m"currentColor"[39m
+                    [33mstroke-linecap[39m=[32m"round"[39m
+                    [33mstroke-linejoin[39m=[32m"round"[39m
+                    [33mstroke-width[39m=[32m"2"[39m
+                    [33mviewBox[39m=[32m"0 0 24 24"[39m
+                    [33mwidth[39m=[32m"20"[39m
+                    
+[33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                  [36m>[39m
+                    [36m<path[39m
+                      [33md[39m=[32m"M22 11.08V12a10 10 0 1 
+1-5.93-9.14"[39m
+                    [36m/>[39m
+                    [36m<polyline[39m
+                      [33mpoints[39m=[32m"22 4 12 14.01 9 
+11.01"[39m
+                    [36m/>[39m
+                  [36m</svg>[39m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2mΓ¥»[22m Object.getElementError ../../node_modules/@testing-l
+ibrary/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m76:38[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m52:17[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m95:19[22m[39m
+[36m [2mΓ¥»[22m 
+tests/components/onboarding.modal.test.tsx:[2m102:23[22m[39m
+    [90m100| [39m        [34mact[39m(() [33m=>[39m { 
+fireEvent[33m.[39m[34mclick[39m(skipBtn)[33m;[39m })[33m;[39m
+    [90m101| [39m
+    [90m102| [39m        expect(screen.getByText('Learn How to Use 
+Postiz')).toBeTruthyΓÇª
+    [90m   | [39m                      [31m^[39m
+    [90m103| [39m        
+[34mexpect[39m(screen[33m.[39m[34mgetByText[39m([32m'Get 
+Started'[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m104| [39m    })[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[5/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m 
+tests/components/onboarding.modal.test.tsx[2m > [22mOnboardingModal 
+Flow[2m > [22mcalls PUT /api/v1/niches/:niche when completing Step 2
+[31m[1mAssertionError[22m: expected "spy" to be called with 
+arguments: [ StringContaining{ΓÇª}, ΓÇª(1) ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  [[22m
+[32m-   StringContaining "/api/v1/niches/tech",[90m
+[32m-   ObjectContaining {[90m
+[32m-     "method": "PUT",[90m
+[32m-   },[90m
+[31m+   "/v1/niches",[90m
+[2m  ][22m
+
+[1m  2nd spy call:
+
+[22m[2m  [[22m
+[32m-   StringContaining "/api/v1/niches/tech",[90m
+[32m-   ObjectContaining {[90m
+[31m+   "/v1/niches/tech",[90m
+[31m+   {[90m
+[31m+     "body": "{\"enabled\":true,\"brand_voice\":{\"tone\":\"profe
+ssional\",\"style\":\"informative\",\"emoji_level\":\"Moderate\",\"form
+ality\":\"professional\"}}",[90m
+[2m      "method": "PUT",[22m
+[2m    },[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m2[22m
+[31m[39m
+[36m [2mΓ¥»[22m 
+tests/components/onboarding.modal.test.tsx:[2m120:31[22m[39m
+    [90m118| [39m
+    [90m119| [39m        [90m// The mock should have been called 
+with a PUT to niches[39m
+    [90m120| [39m        [34mexpect[39m(mockFetchImpl)[33m.[39m[
+34mtoHaveBeenCalledWith[39m(
+    [90m   | [39m                              [31m^[39m
+    [90m121| [39m            expect[33m.[39m[34mstringContaining[
+39m([32m'/api/v1/niches/tech'[39m)[33m,[39m
+    [90m122| [39m            
+expect[33m.[39m[34mobjectContaining[39m({ method[33m:[39m 
+[32m'PUT'[39m })
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[6/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/components/top.menu.test.tsx[2m > 
+[22mTopMenu Component[2m > [22mdisplays the Quota UI accurately for 
+a Free user
+[31m[1mTestingLibraryElementError[22m: Unable to find an element 
+with the text: /Post Quota/i. This could be because the text is broken 
+up by multiple elements. In this case, you can provide a function for 
+your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-1 flex-col minCustom:gap-[16px] 
+blurMe"[31m
+    [36m/>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-col minCustom:gap-[16px] 
+blurMe"[31m
+    [36m>[31m
+      [36m<div[31m
+
+[2m Test Files [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (13)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m31 passed[39m[22m[90m (37)[39m
+[2m   Start at [22m 10:15:47
+[2m   Duration [22m 6.53s[2m (transform 5.25s, setup 6.89s, collect 8.27s, tests 1.19s, environment 12.76s, prepare 5.15s)[22m
+
+        [33mclass[31m=[32m"mt-2 w-full flex flex-col gap-1 
+items-center justify-center cursor-pointer"[31m
+        [33mtitle[31m=[32m"Post Quota: 45 / Unlimited"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"text-[9px] font-[600] 
+text-textItemBlur"[31m
+        [36m>[31m
+          [0mQuota[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"h-[6px] w-[32px] bg-[#2b2d31] 
+rounded-full overflow-hidden"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"h-full bg-gradient-to-r 
+from-[#622aff] to-[#8b5cf6] rounded-full"[31m
+            [33mstyle[31m=[32m"width: 15%;"[31m
+          [36m/>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2mΓ¥»[22m Object.getElementError ../../node_modules/@testing-l
+ibrary/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m76:38[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m52:17[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m95:19[22m[39m
+[36m [2mΓ¥»[22m 
+tests/components/top.menu.test.tsx:[2m19:23[22m[39m
+    [90m 17| [39m
+    [90m 18| [39m        [90m// Check if the VaiClaw general Top 
+Menu rendered[39m
+    [90m 19| [39m        
+[34mexpect[39m(screen[33m.[39m[34mgetByText[39m([36m/Post 
+Quota/i[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;[39m
+    [90m   | [39m                      [31m^[39m
+    [90m 20| [39m    })[33m;[39m
+    [90m 21| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[7/8]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/components/top.menu.test.tsx[2m > 
+[22mTopMenu Component[2m > [22mdisplays the Quota UI accurately for 
+a Pro user
+[31m[1mTestingLibraryElementError[22m: Unable to find an element 
+with the text: /You are on the Pro plan/i. This could be because the 
+text is broken up by multiple elements. In this case, you can provide 
+a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-1 flex-col minCustom:gap-[16px] 
+blurMe"[31m
+    [36m/>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-col minCustom:gap-[16px] 
+blurMe"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"mt-2 w-full flex flex-col gap-1 
+items-center justify-center cursor-pointer"[31m
+        [33mtitle[31m=[32m"Post Quota: 45 / Unlimited"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"text-[9px] font-[600] 
+text-textItemBlur"[31m
+        [36m>[31m
+          [0mQuota[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"h-[6px] w-[32px] bg-[#2b2d31] 
+rounded-full overflow-hidden"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"h-full bg-gradient-to-r 
+from-[#622aff] to-[#8b5cf6] rounded-full"[31m
+            [33mstyle[31m=[32m"width: 15%;"[31m
+          [36m/>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90m [2mΓ¥»[22m Object.getElementError ../../node_modules/@testing-l
+ibrary/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m76:38[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m52:17[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m95:19[22m[39m
+[36m [2mΓ¥»[22m 
+tests/components/top.menu.test.tsx:[2m38:23[22m[39m
+    [90m 36| [39m        })[33m;[39m
+    [90m 37| [39m
+    [90m 38| [39m        expect(screen.getByText(/You are on the Pro 
+plan/i)).toBeTruthΓÇª
+    [90m   | [39m                      [31m^[39m
+    [90m 39| [39m    })[33m;[39m
+    [90m 40| [39m})[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[8/8]ΓÄ»[22m[39m
+

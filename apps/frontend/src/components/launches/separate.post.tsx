@@ -43,3 +43,4 @@ export const SeparatePost: FC<{
     </Button>
   );
 };
+

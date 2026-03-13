@@ -102,3 +102,4 @@ export const BotPicture: FC<{
     </div>
   );
 };
+

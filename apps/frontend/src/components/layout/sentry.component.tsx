@@ -18,3 +18,4 @@ export const SentryComponent: FC<{ children: ReactNode }> = ({ children }) => {
   // Always render children - don't block the app
   return <>{children}</>;
 };
+

@@ -37,3 +37,4 @@ export const ZaloProvider: FC<Web3ProviderInterface> = () => {
         </div>
     );
 };
+

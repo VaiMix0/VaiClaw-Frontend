@@ -132,6 +132,9 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
                         </div>
                       </div>
                       <div className="flex flex-1 gap-[1px]">{children}</div>
+                      <div className="flex justify-center items-center py-[12px] bg-newBgColorInner text-[13px] text-textItemBlur shrink-0">
+                        Forked from Postiz — Sản phẩm MKT Online của ATV
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -143,3 +146,4 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
     </ContextWrapper>
   );
 };
+

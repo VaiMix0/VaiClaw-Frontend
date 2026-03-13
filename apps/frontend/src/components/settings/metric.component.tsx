@@ -68,3 +68,4 @@ const MetricComponent = () => {
 };
 
 export default MetricComponent;
+

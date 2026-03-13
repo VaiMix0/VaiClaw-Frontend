@@ -67,3 +67,4 @@ export default withProvider<LinkedinDto>({
   },
   maximumCharacters: 3000,
 });
+

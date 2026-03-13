@@ -140,3 +140,4 @@ export const ChartSocial: FC<{
 
   return <canvas className="w-full h-full" ref={ref} />;
 };
+

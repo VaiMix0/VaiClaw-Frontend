@@ -260,3 +260,4 @@ export const StarsTableComponent = () => {
     </div>
   );
 };
+

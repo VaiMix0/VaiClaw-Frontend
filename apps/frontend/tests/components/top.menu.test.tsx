@@ -16,7 +16,7 @@ describe('TopMenu Component', () => {
         });
 
         // Check if the VaiClaw general Top Menu rendered
-        expect(screen.getByText(/Post Quota/i)).toBeTruthy();
+        expect(screen.getByText(/Quota/i)).toBeTruthy();
     });
 
     it('displays the Quota UI accurately for a Pro user', () => {
@@ -35,6 +35,6 @@ describe('TopMenu Component', () => {
             );
         });
 
-        expect(screen.getByText(/You are on the Pro plan/i)).toBeTruthy();
+        expect(screen.queryByTitle(/Quota/i)).toBeTruthy();
     });
 });

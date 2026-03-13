@@ -23,3 +23,5 @@ export const useDubClickId = () => {
   const dubCookie = getCookie('dub_partner_data', '{}');
   return JSON.parse(dubCookie)?.clickId || undefined;
 };
+
+

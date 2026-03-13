@@ -79,3 +79,4 @@ export const MediumTags: FC<{
     </div>
   );
 };
+

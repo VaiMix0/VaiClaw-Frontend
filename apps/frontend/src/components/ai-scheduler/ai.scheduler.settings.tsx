@@ -5,12 +5,16 @@ import { Button } from '@gitroom/react/form/button';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { useToaster } from '@gitroom/react/toaster/toaster';
 import clsx from 'clsx';
+import { MultiMediaComponent } from '@gitroom/frontend/components/media/media.component';
+import { useT } from '@gitroom/react/translation/get.transation.service.client';
 
 export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
     const [messages, setMessages] = useState<any[]>([]);
     const [input, setInput] = useState('');
+    const [media, setMedia] = useState<{ path: string, id: string }[]>([]);
     const [loading, setLoading] = useState(false);
     const toaster = useToaster();
+    const t = useT();
     const chatRef = useRef<HTMLDivElement>(null);
     const fetch = useFetch();
 
@@ -26,7 +30,7 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
 
         const userMessage = input.trim();
         setInput('');
-        setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
+        setMessages((prev) => [...prev, { role: 'user', content: userMessage, media: [...media] }]);
         setLoading(true);
 
         try {
@@ -137,6 +141,7 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                         posts: Object.keys(slot.preview).map((platform) => ({
                             integration: { id: platform },
                             value: [{ content: slot.preview[platform], delay: 0 }],
+                            image: media.length > 0 ? media.map(m => ({ id: m.id, path: m.path })) : undefined,
                             settings: {}
                         }))
                     })
@@ -228,6 +233,20 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                             )}
                         >
                             <div className="whitespace-pre-wrap">{msg.content}</div>
+                            {/* Render user's media snapshot if they attached anything in their prompt */}
+                            {msg.role === 'user' && msg.media?.length > 0 && (
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {msg.media.map((m: any, i: number) => (
+                                        m.path.includes('.mp4') ? (
+                                            <video key={i} controls className="h-[100px] w-[100px] rounded-[8px] bg-black">
+                                                <source src={m.path} type="video/mp4" />
+                                            </video>
+                                        ) : (
+                                            <img key={i} src={m.path} className="h-[100px] w-[100px] max-w-full rounded-[8px] border border-newBgColorInner" />
+                                        )
+                                    ))}
+                                </div>
+                            )}
 
                             {/* Actionable Multi-Schedules Preview inside AI Response */}
                             {msg.schedules && (
@@ -311,8 +330,24 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                 )}
             </div>
 
+            {/* Media Attachments */}
+            <div className="px-4 pt-4 bg-[#1a1c20]">
+                <MultiMediaComponent
+                    allData={[{ content: input }]}
+                    text={input}
+                    label={t('attachments', 'Attachments (includes AI Image & Canvas Design)')}
+                    description=""
+                    value={media}
+                    dummy={false}
+                    name="image"
+                    onChange={(e: any) => setMedia(e.target.value || [])}
+                    onOpen={() => { }}
+                    onClose={() => { }}
+                />
+            </div>
+
             {/* Input Area */}
-            <div className="p-4 border-t border-[#2b2d31] bg-[#1a1c20] flex gap-3 items-center">
+            <div className="p-4 bg-[#1a1c20] flex gap-3 items-center">
                 <input
                     name="ai-prompt"
                     type="text"
@@ -338,3 +373,4 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
         </div>
     );
 };
+

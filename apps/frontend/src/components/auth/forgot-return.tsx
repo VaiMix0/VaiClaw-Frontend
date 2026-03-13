@@ -106,3 +106,4 @@ export function ForgotReturn({ token }: { token: string }) {
     </FormProvider>
   );
 }
+

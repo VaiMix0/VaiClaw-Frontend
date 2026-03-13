@@ -52,6 +52,6 @@ describe('DashboardEmptyState Component', () => {
         const configBrandButton = screen.getByText('Configure Brand');
         fireEvent.click(configBrandButton);
 
-        expect(mockPush).toHaveBeenCalledWith('/launches?onboarding=true');
+        expect(mockPush).toHaveBeenCalledWith('/launches?onboarding=true&step=2');
     });
 });

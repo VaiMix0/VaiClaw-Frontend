@@ -161,3 +161,4 @@ export const PictureGeneratorSection = {
   // we need observer to update component automatically on any store changes
   Panel: PictureGeneratorPanel,
 };
+

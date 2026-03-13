@@ -170,3 +170,4 @@ const ImageSlidesComponent = () => {
 };
 
 videoWrapper('image-text-slides', ImageSlidesComponent);
+

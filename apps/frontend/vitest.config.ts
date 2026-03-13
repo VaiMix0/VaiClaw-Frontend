@@ -8,11 +8,12 @@ export default defineConfig({
         environment: 'happy-dom',
         globals: true,
         setupFiles: ['./tests/setup.ts'],
-        alias: {
-            '@gitroom/frontend': path.resolve(__dirname, './src'),
-            '@gitroom/helpers': path.resolve(__dirname, '../../libraries/helpers/src'),
-            '@gitroom/react': path.resolve(__dirname, '../../libraries/react-shared-libraries/src'),
-            '@gitroom/nestjs-libraries': path.resolve(__dirname, '../../libraries/nestjs-libraries/src'),
-        },
+        alias: [
+            { find: '@gitroom/frontend', replacement: path.resolve(__dirname, './src') },
+            { find: '@gitroom/helpers', replacement: path.resolve(__dirname, '../../libraries/helpers/src') },
+            { find: '@gitroom/react', replacement: path.resolve(__dirname, '../../libraries/react-shared-libraries/src') },
+            { find: '@gitroom/nestjs-libraries', replacement: path.resolve(__dirname, '../../libraries/nestjs-libraries/src') },
+            { find: '@mui/utils/composeClasses', replacement: path.resolve(__dirname, './tests/mock.utils.ts') }
+        ],
     },
 })

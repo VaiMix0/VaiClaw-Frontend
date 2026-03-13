@@ -36,3 +36,4 @@ export default withProvider({
   maximumCharacters: 50000,
   postComment: PostComment.ALL,
 });
+

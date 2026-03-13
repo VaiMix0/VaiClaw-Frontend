@@ -31,3 +31,4 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
     </div>
   );
 };
+

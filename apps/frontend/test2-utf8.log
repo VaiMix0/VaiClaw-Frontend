@@ -1,0 +1,488 @@
+﻿
+[1m[46m RUN [49m[22m [36mv3.1.4 [39m[90mD:/Code/VaiMix/VaiClaw-Frontend/apps/frontend[39m
+
+[1m[43m DEPRECATED [49m[22m [33m'basic' reporter is deprecated and will be removed in Vitest v3.
+Remove 'basic' from 'reporters' option. To match 'basic' reporter 100%, use configuration:
+{
+  "test": {
+    "reporters": [
+      [
+        "default",
+        {
+          "summary": false
+        }
+      ]
+    ]
+  }
+}[39m
+ [32mΓ£ô[39m tests/components/localization.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32mΓ£ô[39m test/content.api.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32mΓ£ô[39m test/auth.api.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/brand-niche.settings.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 139[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/ai.prompt.helper.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 145[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/ai.confirmation.flow.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 160[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/dashboard.empty.state.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 113[2mms[22m[39m
+[90mstdout[2m | tests/components/generator.test.tsx
+[22m[39m≡ƒîÉ i18next is maintained with support from Locize ΓÇö consider powering your project with managed localization (AI, CDN, integrations): https://locize.com ≡ƒÆÖ
+
+[90mstdout[2m | tests/components/billing.test.tsx
+[22m[39m≡ƒîÉ i18next is maintained with support from Locize ΓÇö consider powering your project with managed localization (AI, CDN, integrations): https://locize.com ≡ƒÆÖ
+
+ [32mΓ£ô[39m tests/components/top.menu.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 53[2mms[22m[39m
+node.exe : [90mstderr[2m | tests/components/analytics.test.tsx[2m > 
+[22m[2mAnalytics Dashboard Component[2m > [22m[2mrenders the 
+analytics headers and skeleton
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...rs and  
+   skeleton:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39mThe above error occurred in the <StarsAndForks> component:
+
+    at StarsAndForks (D:\Code\VaiMix\VaiClaw-Frontend\apps\frontend\src
+\components\analytics\stars.and.forks.tsx:9:11)
+    at div
+    at div
+    at AnalyticsComponent (D:\Code\VaiMix\VaiClaw-Frontend\apps\fronten
+d\src\components\analytics\analytics.component.tsx:12:53)
+    at ContextWrapper (D:\Code\VaiMix\VaiClaw-Frontend\apps\frontend\sr
+c\components\layout\user.context.tsx:11:27)
+
+Consider adding an error boundary to your tree to customize error 
+handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about 
+error boundaries.
+
+Sourcemap for "D:/Code/VaiMix/VaiClaw-Frontend/node_modules/posthog-js/
+react/dist/esm/index.js" points to missing source files
+ [31mΓ¥»[39m tests/components/analytics.test.tsx [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 76[2mms[22m[39m
+[31m   [31m├ù[31m Analytics Dashboard Component[2m > [22mrenders the analytics headers and skeleton[39m[32m 73[2mms[22m[39m
+[31m     ΓåÆ Cannot read properties of null (reading 'map')[39m
+[90mstderr[2m | tests/components/onboarding.modal.test.tsx[2m > 
+[22m[2mOnboardingModal Flow[2m > [22m[2mcalls PUT 
+/api/v1/niches/:niche when completing Step 2
+[22m[39mDOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///D:/Code/VaiMix/VaiClaw-Fr
+ontend/node_modules/[4mhappy-dom[24m/src/fetch/Fetch.ts:506:17)
+    at Object.<anonymous> (file:///D:/Code/VaiMix/VaiClaw-Frontend/node
+_modules/[4mhappy-dom[24m/src/fetch/Fetch.ts:361:10)
+    at AsyncTaskManager.abortAll (file:///D:/Code/VaiMix/VaiClaw-Fronte
+nd/node_modules/[4mhappy-dom[24m/src/async-task-manager/AsyncTaskMana
+ger.ts:266:21)
+    at AsyncTaskManager.destroy (file:///D:/Code/VaiMix/VaiClaw-Fronten
+d/node_modules/[4mhappy-dom[24m/src/async-task-manager/AsyncTaskManag
+er.ts:69:15)
+    at file:///D:/Code/VaiMix/VaiClaw-Frontend/node_modules/[4mhappy-d
+om[24m/src/browser/utilities/BrowserFrameFactory.ts:49:7
+    at new Promise (<anonymous>)
+    at Function.destroyFrame (file:///D:/Code/VaiMix/VaiClaw-Frontend/n
+ode_modules/[4mhappy-dom[24m/src/browser/utilities/BrowserFrameFactor
+y.ts:34:10)
+    at HTMLIFrameElement.#unloadPage (file:///D:/Code/VaiMix/VaiClaw-Fr
+ontend/node_modules/[4mhappy-dom[24m/src/nodes/html-iframe-element/HT
+MLIFrameElement.ts:415:24)
+    at HTMLIFrameElement.[disconnectedFromDocument] (file:///D:/Code/Va
+iMix/VaiClaw-Frontend/node_modules/[4mhappy-dom[24m/src/nodes/html-if
+rame-element/HTMLIFrameElement.ts:245:19)
+    at HTMLIFrameElement.[disconnectedFromNode] (file:///D:/Code/VaiMix
+/VaiClaw-Frontend/node_modules/[4mhappy-dom[24m/src/nodes/node/Node.t
+s:952:49)
+
+[90mstderr[2m | tests/components/onboarding.modal.test.tsx[2m > 
+[22m[2mOnboardingModal Flow[2m > [22m[2mcalls PUT 
+/api/v1/niches/:niche when completing Step 2
+[22m[39mDOMException [NetworkError]: Failed to execute "fetch()" on 
+"Window" with URL "https://www.youtube.com/embed/BdsCVvEYgHU?si=vvhaZJ8
+I5oXXvVJS?autoplay=1": The operation was aborted.
+    at Fetch.onError (file:///D:/Code/VaiMix/VaiClaw-Frontend/node_modu
+les/[4mhappy-dom[24m/src/fetch/Fetch.ts:495:4)
+[90m    at ClientRequest.emit (node:events:519:28)[39m
+[90m    at emitErrorEvent (node:_http_client:105:11)[39m
+[90m    at _destroy (node:_http_client:898:9)[39m
+[90m    at onSocketNT (node:_http_client:918:5)[39m
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:91:21)[39m
+
+ [32mΓ£ô[39m tests/components/onboarding.modal.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[33m 416[2mms[22m[39m
+ [32mΓ£ô[39m tests/components/add.provider.component.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 129[2mms[22m[39m
+ [31mΓ¥»[39m tests/components/billing.test.tsx [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 179[2mms[22m[39m
+[31m   [31m├ù[31m Billing Component (Phase 4.9)[2m > [22mrenders the billing page structure[39m[32m 176[2mms[22m[39m
+[31m     ΓåÆ Unable to find an element with the text: /Billing/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"flex flex-col gap-[16px]"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex flex-row"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 text-[20px]"[31m
+        [36m>[31m
+          [0mPlans[0m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-[16px]"[31m
+        [36m>[31m
+          [36m<div>[31m
+            [0mMONTHLY[0m
+          [36m</div>[31m
+          [36m<div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"w-[57px] h-[34px] p-[4px] border-fifth border rounded-[100px]"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"w-full h-full relative rounded-[100px]"[31m
+              [36m>[31m
+                [36m<div[31m
+                  [33mclass[31m=[32m"absolute left-0 top-0 w-[24px] h-[24px] bg-customColor5 rounded-full transition-all cursor-pointer left-0"[31m
+                [36m/>[31m
+              [36m</div>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div>[31m
+            [0mYEARLY[0m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex gap-[16px] [@media(max-width:1024px)]:flex-col [@media(max-width:1024px)]:text-center"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 bg-sixth border border-customColor6 rounded-[4px] p-[24px] gap-[16px] flex flex-col [@media(max-width:1024px)]:items-center"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"text-[18px]"[31m
+          [36m>[31m
+            [0mSTANDARD[0m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"text-[38px] flex gap-[2px] items-center"[31m
+          [36m>[31m
+            [36m<div>[31m
+              [0m$[0m
+              [0m29[0m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-[14px] text-customColor18"[31m
+            [36m>[31m
+              [0m/month[0m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"text-[14px] flex gap-[10px]"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"bg-forth text-white px-[24px] h-[40px] cursor-pointer items-center justify-center flex relative"[31m
+              [33mtype[31m=[32m"button"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex-1 items-center justify-center flex"[31m
+              [36m>[31m
+                [0mPurchase[0m
+              [36m</div>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex flex-col gap-[10px] justify-center text-[16px] text-customColor18"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex gap-[20px]"[31m
+            [36m>[31m
+              [36m<div>[31m
+                [36m<svg[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"24"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"24"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M16.2806 9.21937C16.3504 9.28903 16.4057 9.37175 16.4434 9.46279C16.4812 9.55384 16.5006 9.65144 16.5006 9.75C16.5006 9.84856 16.4812 9.94616 16.4434 10.0372C16.4057 10.1283 16.3504 10.211 16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.289 9.14964 15.3718 9.09432 15.4628 9.05658C15.5538 9.01884 15.6514 8.99941 15.75 8.99941C15.8486 8.99941 15.9462 9.01884 16.0372 9.05658C16.1283 9.09432 16.211 9.14964 16.2806 9.21937ZM21.75 12C21.75 13.9284 21.1782 15.8134 20.1068 17.4168C19.0355 19.0202 17.5127 20.2699 15.7312 21.0078C13.9496 21.7458 11.9892 21.9389 10.0979 21.5627C8.20656 21.1865 6.46928 20.2579 5.10571 18.8943C3.74215 17.5307 2.81355 15.7934 2.43735 13.9021C2.06114 12.0108 2.25422 10.0504 2.99218 8.26884C3.73013 6.48726 4.97982 4.96451 6.58319 3.89317C8.18657 2.82183 10.0716 2.25 12 2.25C14.585 2.25273 17.0634 3.28084 18.8913 5.10872C20.7192 6.93661 21.7473 9.41498 21.75 12ZM20.25 12C20.25 10.3683 19.7661 8.77325 18.8596 7.41655C17.9531 6.05984 16.6646 5.00242 15.1571 4.37799C13.6497 3.75357 11.9909 3.59019 10.3905 3.90852C8.79017 4.22685 7.32016 5.01259 6.16637 6.16637C5.01259 7.32015 4.22685 8.79016 3.90853 10.3905C3.5902 11.9908 3.75358 13.6496 4.378 15.1571C5.00242 16.6646 6.05984 17.9531 7.41655 18.8596C8.77326 19.7661 10.3683 20.25 12 20.25C14.1873 20.2475 16.2843 19.3775 17.8309 17.8309C19.3775 16.2843 20.2475 14.1873 20.25 12Z"[31m
+                    [33mfill[31m=[32m"#06ff00"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+              [36m</div>[31m
+              [36m<div>[31m
+                [0m5 channels[0m
+              [36m</div>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex gap-[20px]"[31m
+            [36m>[31m
+              [36m<div>[31m
+                [36m<svg[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"24"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"24"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M16.2806 9.21937C16.3504 9.28903 16.4057 9.37175 16.4434 9.46279C16.4812 9.55384 16.5006 9.65144 16.5006 9.75C16.5006 9.84856 16.4812 9.94616 16.4434 10.0372C16.4057 10.1283 16.3504 10.211 16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.289 9.14964 15.3718 9.09432 15.4628 9.05658C15.5538 9.01884 15.6514 8.99941 15.75 8.99941C15.8486 8.99941 15.9462 9.01884 16.0372 9.05658C16.1283 9.09432 16.211 ...[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Suites 1 
+[49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/components/generator.test.tsx[2m [ 
+tests/components/generator.test.tsx ][22m
+[31m[1mError[22m: Directory import 'D:\Code\VaiMix\VaiClaw-Frontend\
+node_modules\@mui\utils\composeClasses' is not supported resolving ES 
+modules imported from 
+D:\Code\VaiMix\VaiClaw-Frontend\node_modules\@mui\material\Chip\Chip.js
+Did you mean to import "@mui/utils/composeClasses/index.js"?[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[1/3]ΓÄ»[22m[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 2 
+[49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/components/analytics.test.tsx[2m > 
+[22mAnalytics Dashboard Component[2m > [22mrenders the analytics 
+headers and skeleton
+[31m[1mTypeError[22m: Cannot read properties of null (reading 
+'map')[39m
+[36m [2mΓ¥»[22m StarsAndForks 
+src/components/analytics/stars.and.forks.tsx:[2m14:13[22m[39m
+    [90m 12| [39m  [35mreturn[39m (
+    [90m 13| [39m    [33m<[39m[33m>[39m
+    [90m 14| [39m      
+[33m{[39mlist[33m.[39m[34mmap[39m((item) [33m=>[39m (
+    [90m   | [39m            [31m^[39m
+    [90m 15| [39m        [33m<[39m[33mdiv[39m 
+[33mclassName[39m[33m=[39m[32m"flex gap-[24px] h-[272px]"[39m [3
+3mkey[39m[33m=[39m[33m{[39mitem[33m.[39mlogin[33m}[39m[33m>[
+39m
+    [90m 16| [39m          <div className="flex-1 bg-secondary 
+py-[10px] px-[16px] flexΓÇª
+[90m [2mΓ¥»[22m renderWithHooks ../../node_modules/react-dom/cjs/rea
+ct-dom.development.js:[2m15486:18[22m[39m
+[90m [2mΓ¥»[22m mountIndeterminateComponent ../../node_modules/react
+-dom/cjs/react-dom.development.js:[2m20103:13[22m[39m
+[90m [2mΓ¥»[22m beginWork ../../node_modules/react-dom/cjs/react-dom
+.development.js:[2m21626:16[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.callCallback ../../node_modules/r
+eact-dom/cjs/react-dom.development.js:[2m4164:14[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.#callDispatchEventListeners ../..
+/node_modules/happy-dom/src/event/EventTarget.ts:[2m286:41[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.dispatchEvent ../../node_modules/
+happy-dom/src/event/EventTarget.ts:[2m121:35[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.dispatchEvent ../../node_modules/
+happy-dom/src/nodes/element/Element.ts:[2m1252:29[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.#goThroughDispatchEventPhases ../
+../node_modules/happy-dom/src/event/EventTarget.ts:[2m184:32[22m[39m
+[90m [2mΓ¥»[22m HTMLUnknownElement.dispatchEvent ../../node_modules/
+happy-dom/src/event/EventTarget.ts:[2m116:38[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[2/3]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/components/billing.test.tsx[2m > 
+[22mBilling Component (Phase 4.9)[2m > [22mrenders the billing page 
+structure
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an 
+element with the text: /Billing/i. This could be because the text is 
+broken up by multiple elements. In this case, you can provide a 
+function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col gap-[16px]"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex flex-row"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 text-[20px]"[39m
+        [36m>[39m
+          [0mPlans[0m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-[16px]"[39m
+        [36m>[39m
+          [36m<div>[39m
+            [0mMONTHLY[0m
+          [36m</div>[39m
+          [36m<div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"w-[57px] h-[34px] p-[4px] 
+border-fifth border rounded-[100px]"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"w-full h-full relative 
+rounded-[100px]"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"absolute left-0 top-0 w-[24px] 
+h-[24px] bg-customColor5 rounded-full transition-all cursor-pointer 
+left-0"[39m
+                [36m/>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div>[39m
+            [0mYEARLY[0m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex gap-[16px] 
+[@media(max-width:1024px)]:flex-col 
+[@media(max-width:1024px)]:text-center"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 bg-sixth border 
+border-customColor6 rounded-[4px] p-[24px] gap-[16px] flex flex-col 
+[@media(max-width:1024px)]:items-center"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"text-[18px]"[39m
+          [36m>[39m
+            [0mSTANDARD[0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"text-[38px] flex gap-[2px] 
+items-center"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [0m$[0m
+              [0m29[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"text-[14px] 
+text-customColor18"[39m
+            [36m>[39m
+              [0m/month[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"text-[14px] flex gap-[10px]"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"bg-forth text-white px-[24px] 
+h-[40px] cursor-pointer items-center justify-center flex relative"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex-1 items-center 
+justify-center flex"[39m
+              [36m>[39m
+                [0mPurchase[0m
+              [36m</div>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex flex-col gap-[10px] 
+justify-center text-[16px] text-customColor18"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex gap-[20px]"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<svg[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  
+[33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M16.2806 9.21937C16.3504 9.28903 
+16.4057 9.37175 16.4434 9.46279C16.4812 9.55384 16.5006 9.65144 
+16.5006 9.75C16.5006 9.84856 16.4812 9.94616 16.4434 10.0372C16.4057 
+10.1283 16.3504 10.211 16.2806 10.2806L11.0306 15.5306C10.961 15.6004 
+10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 
+15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 
+15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 
+7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 
+12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 
+8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.289 
+9.14964 15.3718 9.09432 15.4628 9.05658C15.5538 9.01884 15.6514 
+8.99941 15.75 8.99941C15.8486 8.99941 15.9462 9.01884 16.0372 
+9.05658C16.1283 9.09432 16.211 9.14964 16.2806 9.21937ZM21.75 12C21.75 
+13.9284 21.1782 15.8134 20.1068 17.4168C19.0355 19.0202 17.5127 
+20.2699 15.7312 21.0078C13.9496 21.7458 11.9892 21.9389 10.0979 
+21.5627C8.20656 21.1865 6.46928 20.2579 5.10571 18.8943C3.74215 
+17.5307 2.81355 15.7934 2.43735 13.9021C2.06114 12.0108 2.25422 
+10.0504 2.99218 8.26884C3.73013 6.48726 4.97982 4.96451 6.58319 
+3.89317C8.18657 2.82183 10.0716 2.25 12 2.25C14.585 2.25273 17.0634 
+3.28084 18.8913 5.10872C20.7192 6.93661 21.7473 9.41498 21.75 
+12ZM20.25 12C20.25 10.3683 19.7661 8.77325 18.8596 7.41655C17.9531 
+6.05984 16.6646 5.00242 15.1571 4.37799C13.6497 3.75357 11.9909 
+3.59019 10.3905 3.90852C8.79017 4.22685 7.32016 5.01259 6.16637 
+6.16637C5.01259 7.32015 4.22685 8.79016 3.90853 10.3905C3.5902 11.9908 
+3.75358 13.6496 4.378 15.1571C5.00242 16.6646 6.05984 17.9531 7.41655 
+18.8596C8.77326 19.7661 10.3683 20.25 12 20.25C14.1873 20.2475 16.2843 
+19.3775 17.8309 17.8309C19.3775 16.2843 20.2475 14.1873 20.25 12Z"[39m
+                    [33mfill[39m=[32m"#06ff00"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div>[39m
+                [0m5 channels[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex gap-[20px]"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<svg[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  
+[33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M16.2806 9.21937C16.3504 9.28903 
+16.4057 9.37175 16.4434 9.46279C16.4812 9.55384 16.5006 9.65144 
+16.5006 9.75C16.5006 9.84856 16.4812 9.94616 16.4434 10.0372C16.4057 
+10.1283 16.3504 10.211 16.2806 10.2806L11.0306 15.5306C10.961 15.6004 
+10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 
+15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 
+15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 
+7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 
+12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 
+8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.289 
+9.14964 15.3718 9.09432 15.4628 9.05658C15.5538 9.01884 15.6514 
+8.99941 15.75 8.99941C15.8486 8.99941 15.9462 9.01884 16.0372 
+9.05658C16.1283 9.09432 16.211 ...
+[90m [2mΓ¥»[22m Object.getElementError ../../node_modules/@testing-l
+ibrary/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m76:38[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m52:17[22m[39m
+[90m [2mΓ¥»[22m ../../node_modules/@testing-library/dom/dist/query-h
+elpers.js:[2m95:19[22m[39m
+[36m [2mΓ¥»[22m 
+tests/components/billing.test.tsx:[2m16:23[22m[39m
+    [90m 14| [39m        })[33m;[39m
+    [90m 15| [39m
+    [90m 16| [39m        [34mexpect[39m(screen[33m.[39m[34mgetBy
+Text[39m([36m/Billing/i[39m))[33m.[39m[34mtoBeTruthy[39m()[33m;
+[39m
+    [90m   | [39m                      [31m^[39m
+    [90m 17| [39m    })[33m;[39m
+    [90m 18| [39m})[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»[3/3]ΓÄ»[22m[39m
+
+
+[2m Test Files [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m10 passed[39m[22m[90m (13)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m36 passed[39m[22m[90m (38)[39m
+[2m   Start at [22m 10:21:56
+[2m   Duration [22m 6.55s[2m (transform 5.27s, setup 6.24s, collect 9.52s, tests 1.45s, environment 12.19s, prepare 4.56s)[22m
+

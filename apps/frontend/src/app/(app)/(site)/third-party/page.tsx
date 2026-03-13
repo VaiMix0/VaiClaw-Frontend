@@ -5,10 +5,12 @@ import { Metadata } from 'next';
 import { isGeneralServerSide } from '@gitroom/helpers/utils/is.general.server.side';
 export const metadata: Metadata = {
   title: `${
-    isGeneralServerSide() ? 'Postiz Integrations' : 'Gitroom Integrations'
+    isGeneralServerSide() ? 'VaiMix Integrations' : 'ATV Integrations'
   }`,
   description: '',
 };
 export default async function Index() {
   return <ThirdPartyComponent />;
 }
+
+

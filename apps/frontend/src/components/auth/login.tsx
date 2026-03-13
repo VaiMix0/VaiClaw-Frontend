@@ -63,7 +63,7 @@ export function Login() {
         const body = await login.json();
         if (body.access_token) {
           // VaiClaw returns JWT in JSON body — set it as auth cookie
-          // for Postiz middleware compatibility (it checks cookie, not localStorage)
+          // for VaiMix middleware compatibility (it checks cookie, not localStorage)
           document.cookie = `auth=${body.access_token};path=/;max-age=${365 * 24 * 60 * 60}`;
           localStorage.setItem('vaiclaw_token', body.access_token);
           window.location.href = '/';
@@ -187,3 +187,5 @@ export function Login() {
     </FormProvider>
   );
 }
+
+

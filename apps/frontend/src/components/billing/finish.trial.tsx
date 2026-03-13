@@ -82,3 +82,4 @@ export const FinishTrial: FC<{ close: () => void }> = (props) => {
     </div>
   );
 };
+

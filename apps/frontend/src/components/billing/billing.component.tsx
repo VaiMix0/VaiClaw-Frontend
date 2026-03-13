@@ -23,3 +23,4 @@ export const BillingComponent = () => {
   }
   return <MainBillingComponent sub={subscription?.subscription} />;
 };
+

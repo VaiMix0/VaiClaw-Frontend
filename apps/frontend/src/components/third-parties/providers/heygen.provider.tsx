@@ -245,3 +245,4 @@ const HeygenProviderComponent = () => {
 };
 
 export default thirdPartyWrapper('heygen', HeygenProviderComponent);
+

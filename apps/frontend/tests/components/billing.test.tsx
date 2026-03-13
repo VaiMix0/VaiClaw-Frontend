@@ -13,6 +13,6 @@ describe('Billing Component (Phase 4.9)', () => {
             );
         });
 
-        expect(screen.getByText(/Billing/i)).toBeTruthy();
+        expect(screen.getByText('Plans')).toBeTruthy();
     });
 });

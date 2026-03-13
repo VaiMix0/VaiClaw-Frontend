@@ -93,3 +93,4 @@ export const SettingsModal: FC<{
     </div>
   );
 };
+

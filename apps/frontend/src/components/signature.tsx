@@ -66,3 +66,4 @@ export const SignatureModal: FC<{
   const { appendSignature } = props;
   return <SignaturesComponent appendSignature={appendSignature} />;
 };
+

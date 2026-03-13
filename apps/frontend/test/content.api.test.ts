@@ -31,8 +31,9 @@ describe('VaiClawAPI - Content Endpoints', () => {
             expect.stringContaining('/api/v1/content/generate'),
             expect.objectContaining({
                 method: 'POST',
+                credentials: 'include',
                 headers: expect.objectContaining({
-                    'Authorization': 'Bearer test_token',
+                    'Content-Type': 'application/json',
                 }),
                 body: JSON.stringify({ topic, platforms })
             })

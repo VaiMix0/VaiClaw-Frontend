@@ -121,3 +121,4 @@ export const TelegramProvider: FC<Web3ProviderInterface> = (props) => {
     </>
   );
 };
+

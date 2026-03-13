@@ -63,3 +63,4 @@ export const SkoolLabelSelect: FC<{
     </Select>
   );
 };
+

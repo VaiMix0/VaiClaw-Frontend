@@ -53,7 +53,7 @@ export const OrganizationSelector: FC<{ asOpenSelect?: boolean }> = ({
           {!asOpenSelect && (
             <div className="flex items-center">
               <svg
-                className={user?.tier.current === 'FREE' ? 'animate-bounce drop-shadow-glow' : ''}
+                className={(user?.tier?.current === 'FREE' || user?.tier === 'FREE' || user?.tier === 'Free') ? 'animate-bounce drop-shadow-glow' : ''}
                 width="24"
                 height="24"
                 viewBox="0 0 26 26"
@@ -87,3 +87,4 @@ export const OrganizationSelector: FC<{ asOpenSelect?: boolean }> = ({
     </>
   );
 };
+

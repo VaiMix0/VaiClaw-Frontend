@@ -30,9 +30,9 @@ describe('VaiClawAPI - Auth Endpoints', () => {
             expect.stringContaining('/api/v1/platform/login'),
             expect.objectContaining({
                 method: 'POST',
+                credentials: 'include',
                 headers: expect.objectContaining({
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ', // empty token initially
                 }),
                 body: JSON.stringify({ email: 'test@vaimix.vn', password: 'password123' })
             })
@@ -56,9 +56,10 @@ describe('VaiClawAPI - Auth Endpoints', () => {
         expect(global.fetch).toHaveBeenCalledWith(
             expect.stringContaining('/api/v1/platform/me'),
             expect.objectContaining({
+                credentials: 'include',
                 headers: expect.objectContaining({
-                    'Authorization': 'Bearer mock_jwt_token_123'
-                })
+                    'Content-Type': 'application/json',
+                }),
             })
         );
     });

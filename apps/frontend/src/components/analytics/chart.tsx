@@ -69,3 +69,4 @@ export const Chart: FC<{
   }, []);
   return <canvas className="w-full h-full" ref={ref} />;
 };
+

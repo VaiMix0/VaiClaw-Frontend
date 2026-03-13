@@ -55,3 +55,4 @@ export const WordpressPostType: FC<{
     </Select>
   );
 };
+

@@ -41,3 +41,4 @@ export const WrapcasterProvider: FC<Web3ProviderInterface> = (props) => {
     </div>
   );
 };
+
