@@ -71,7 +71,7 @@ export const PublicComponent = () => {
           </a>
           <a
             className="underline hover:font-bold hover:underline"
-            href="https://www.npmjs.com/package/n8n-nodes-postiz"
+            href="https://vaimix.com"
             target="_blank"
           >
             <br />
