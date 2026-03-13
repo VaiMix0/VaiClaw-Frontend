@@ -132,8 +132,12 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
                         </div>
                       </div>
                       <div className="flex flex-1 gap-[1px]">{children}</div>
-                      <div className="flex justify-center items-center py-[12px] bg-newBgColorInner text-[13px] text-textItemBlur shrink-0">
-                        Forked from Postiz — Sản phẩm MKT Online của ATV
+                      <div className="flex justify-center items-center gap-[16px] py-[12px] bg-newBgColorInner text-[13px] text-textItemBlur shrink-0">
+                        <span>© 2026 VaiMix — ATV MKT Online</span>
+                        <span>·</span>
+                        <a href="/privacy-policy" className="hover:text-newTextColor transition-colors">Chính sách Bảo mật</a>
+                        <span>·</span>
+                        <a href="/terms-of-service" className="hover:text-newTextColor transition-colors">Điều khoản Dịch vụ</a>
                       </div>
                     </div>
                   </div>
