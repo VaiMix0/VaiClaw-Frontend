@@ -333,7 +333,9 @@ export const WeekView = () => {
       const day = weekStart.add(i, 'day');
       days.push({
         name: day.format('dddd'),
+        shortName: day.format('ddd'),
         day: day.format('L'),
+        shortDay: day.format('DD/MM'),
         date: day,
       });
     }
@@ -343,33 +345,35 @@ export const WeekView = () => {
   return (
     <div className="flex flex-col text-textColor flex-1">
       <div className="flex-1 relative">
-        <div className="grid [grid-template-columns:136px_repeat(7,_minmax(0,_1fr))] gap-[4px] rounded-[10px] absolute h-full start-0 top-0 w-full overflow-auto scrollbar scrollbar-thumb-fifth scrollbar-track-newBgColor">
-          <div className="z-10 bg-newTableHeader flex justify-center items-center flex-col h-[62px] rounded-[8px] sticky top-0"></div>
+        <div className="grid [grid-template-columns:50px_repeat(7,_minmax(0,_1fr))] lg:[grid-template-columns:136px_repeat(7,_minmax(0,_1fr))] gap-[2px] lg:gap-[4px] rounded-[10px] absolute h-full start-0 top-0 w-full overflow-auto scrollbar scrollbar-thumb-fifth scrollbar-track-newBgColor">
+          <div className="z-10 bg-newTableHeader flex justify-center items-center flex-col h-[50px] lg:h-[62px] rounded-[8px] sticky top-0"></div>
           {localizedDays.map((day, index) => (
             <div
               key={day.name}
-              className="p-2 text-center bg-newTableHeader flex justify-center items-center flex-col h-[62px] rounded-[8px] sticky top-0 z-[20]"
+              className="p-1 lg:p-2 text-center bg-newTableHeader flex justify-center items-center flex-col h-[50px] lg:h-[62px] rounded-[8px] sticky top-0 z-[20]"
             >
-              <div className="text-[14px] font-[500] text-newTableText">
-                {day.name}
+              <div className="text-[10px] lg:text-[14px] font-[500] text-newTableText truncate w-full">
+                <span className="hidden lg:inline">{day.name}</span>
+                <span className="lg:hidden">{day.shortName}</span>
               </div>
               <div
                 className={clsx(
-                  'text-[14px] font-[600] flex items-center justify-center gap-[6px]',
+                  'text-[10px] lg:text-[14px] font-[600] flex items-center justify-center gap-[2px] lg:gap-[6px]',
                   day.day === newDayjs().format('L') &&
                   'text-newTableTextFocused'
                 )}
               >
                 {day.day === newDayjs().format('L') && (
-                  <div className="w-[6px] h-[6px] bg-newTableTextFocused rounded-full" />
+                  <div className="w-[4px] h-[4px] lg:w-[6px] lg:h-[6px] bg-newTableTextFocused rounded-full" />
                 )}
-                {day.day}
+                <span className="hidden lg:inline">{day.day}</span>
+                <span className="lg:hidden">{day.shortDay}</span>
               </div>
             </div>
           ))}
           {hours.map((hour) => (
             <Fragment key={hour}>
-              <div className="p-2 pe-4 text-center items-center justify-center flex text-[14px] text-newTableText">
+              <div className="p-1 lg:p-2 lg:pe-4 text-center items-center justify-center flex text-[10px] lg:text-[14px] text-newTableText">
                 {convertTimeFormatBasedOnLocality(hour)}
               </div>
               {localizedDays.map((day, indexDay) => (
@@ -402,7 +406,10 @@ export const MonthView = () => {
     const days = [];
     // Starting from Monday (1) to Sunday (7)
     for (let i = 1; i <= 7; i++) {
-      days.push(newDayjs().day(i).format('dddd'));
+      days.push({
+        full: newDayjs().day(i).format('dddd'),
+        short: newDayjs().day(i).format('ddd'),
+      });
     }
     return days;
   }, [i18next.resolvedLanguage]);
@@ -442,13 +449,16 @@ export const MonthView = () => {
   return (
     <div className="flex flex-col text-textColor flex-1">
       <div className="flex-1 flex relative">
-        <div className="grid grid-cols-7 grid-rows-[62px_auto] gap-[4px] rounded-[10px] absolute start-0 top-0 overflow-auto w-full h-full scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary">
+        <div className="grid grid-cols-7 grid-rows-[40px_auto] lg:grid-rows-[62px_auto] gap-[2px] lg:gap-[4px] rounded-[10px] absolute start-0 top-0 overflow-auto w-full h-full scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary">
           {localizedDays.map((day) => (
             <div
-              key={day}
-              className="z-[20] p-2 bg-newTableHeader flex justify-center items-center flex-col h-[62px] rounded-[8px] sticky top-0"
+              key={day.full}
+              className="z-[20] p-1 lg:p-2 bg-newTableHeader flex justify-center items-center flex-col h-[40px] lg:h-[62px] rounded-[8px] sticky top-0"
             >
-              <div>{day}</div>
+              <div className="text-[10px] lg:text-[14px] truncate w-full text-center">
+                <span className="hidden lg:inline">{day.full}</span>
+                <span className="lg:hidden">{day.short}</span>
+              </div>
             </div>
           ))}
           {calendarDays.map((date, index) => (

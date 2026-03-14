@@ -252,6 +252,14 @@ export default {
         },
       }),
       screens: {
+        // Standard mobile-first breakpoints
+        xs: '375px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+        // Legacy breakpoints (kept for backward compatibility)
         mobile: {
           raw: '(max-width: 1025px)',
         },
@@ -269,9 +277,6 @@ export default {
         },
         custom: {
           raw: '(max-height: 800px)',
-        },
-        xs: {
-          max: '401px',
         },
       },
     },

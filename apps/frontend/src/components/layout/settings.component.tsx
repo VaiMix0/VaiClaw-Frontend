@@ -119,8 +119,27 @@ export const SettingsPopup: FC<{
   }, []);
 
   return (
-    <>
-      <div className="bg-newBgColorInner p-[20px] flex flex-col transition-all w-[260px]">
+    <div className="flex flex-col lg:flex-row flex-1">
+      {/* Mobile: horizontal scrollable tabs */}
+      <div className="lg:hidden bg-newBgColorInner p-[12px] flex gap-[8px] overflow-x-auto shrink-0 scrollbar-none rounded-t-[12px]">
+        {list.map(({ tab: tabKey, label }) => (
+          <button
+            key={tabKey}
+            className={clsx(
+              'px-[12px] py-[8px] rounded-[8px] text-[13px] font-[600] whitespace-nowrap transition-colors',
+              tabKey === tab
+                ? 'bg-boxFocused text-textItemFocused'
+                : 'text-textItemBlur hover:bg-boxHover'
+            )}
+            onClick={() => setTab(tabKey)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Desktop: vertical sidebar */}
+      <div className="hidden lg:flex bg-newBgColorInner p-[20px] flex-col transition-all w-[260px]">
         <div className="flex flex-1 flex-col gap-[15px]">
           {list.map(({ tab: tabKey, label }) => (
             <div
@@ -151,7 +170,7 @@ export const SettingsPopup: FC<{
           )}
         </div>
       </div>
-      <div className="bg-newBgColorInner flex-1 flex-col flex p-[20px] gap-[12px]">
+      <div className="bg-newBgColorInner flex-1 flex-col flex p-[12px] lg:p-[20px] gap-[12px]">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(submit)}>
             {!!getRef && (
@@ -223,7 +242,7 @@ export const SettingsPopup: FC<{
           </form>
         </FormProvider>
       </div>
-    </>
+    </div>
   );
 };
 export const SettingsComponent = () => {
@@ -235,7 +254,7 @@ export const SettingsComponent = () => {
     }
     settings.openModal({
       children: (
-        <div className="relative flex gap-[20px] flex-col flex-1 rounded-[4px] border border-customColor6 bg-sixth p-[16px] w-[500px] mx-auto">
+        <div className="relative flex gap-[20px] flex-col flex-1 rounded-[4px] border border-customColor6 bg-sixth p-[16px] w-full max-w-[500px] mx-auto">
           <SettingsPopup />
         </div>
       ),

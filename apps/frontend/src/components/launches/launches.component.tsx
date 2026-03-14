@@ -497,7 +497,9 @@ export const LaunchesComponent = () => {
         <div
           className={clsx(
             'flex relative flex-col',
-            collapseMenu === '1' ? 'group sidebar w-[100px]' : 'w-[260px]'
+            collapseMenu === '1'
+              ? 'group sidebar w-[100px] hidden lg:flex'
+              : 'hidden lg:flex lg:w-[260px]'
           )}
         >
           <div
@@ -584,7 +586,7 @@ export const LaunchesComponent = () => {
             </div>
           </div>
         </div>
-        <div className="bg-newBgColorInner flex-1 flex-col flex p-[20px] gap-[12px]">
+        <div className="bg-newBgColorInner flex-1 flex-col flex p-[12px] lg:p-[20px] gap-[12px] min-w-0 overflow-x-auto">
           {sortedIntegrations.length === 0 ? (
             <DashboardEmptyState />
           ) : (

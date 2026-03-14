@@ -40,6 +40,7 @@ import { StreakComponent } from '@gitroom/frontend/components/layout/streak.comp
 import { PreConditionComponent } from '@gitroom/frontend/components/layout/pre-condition.component';
 import { AttachToFeedbackIcon } from '@gitroom/frontend/components/new-layout/sentry.feedback.component';
 import { FirstBillingComponent } from '@gitroom/frontend/components/billing/first.billing.component';
+import { MobileHeader, MobileBottomNav } from '@gitroom/frontend/components/new-layout/mobile-nav';
 
 const jakartaSans = Plus_Jakarta_Sans({
   weight: ['600', '500', '700'],
@@ -87,7 +88,7 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
             <ContinueProvider />
             <div
               className={clsx(
-                'flex flex-col min-h-screen min-w-screen text-newTextColor p-[12px]',
+                'flex flex-col min-h-screen text-newTextColor p-[8px] lg:p-[12px]',
                 jakartaSans.className
               )}
             >
@@ -95,53 +96,80 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
               {user.tier === 'FREE' && isGeneral && billingEnabled ? (
                 <FirstBillingComponent />
               ) : (
-                <div className="flex-1 flex gap-[8px]">
-                  <Support />
-                  <div className="flex flex-col bg-newBgColorInner w-[80px] rounded-[12px]">
-                    <div
-                      className={clsx(
-                        'fixed h-full w-[64px] start-[17px] flex flex-1 top-0',
-                        user?.admin && 'pt-[60px] max-h-[1000px]:w-[500px]'
-                      )}
-                    >
-                      <div className="flex flex-col h-full gap-[32px] flex-1 py-[12px]">
-                        <Logo />
-                        <TopMenu />
+                <>
+                  {/* Mobile header */}
+                  <MobileHeader />
+
+                  <div className="flex-1 flex gap-[8px]">
+                    <Support />
+
+                    {/* Desktop sidebar - hidden on mobile */}
+                    <div className="hidden lg:flex flex-col bg-newBgColorInner w-[80px] rounded-[12px]">
+                      <div
+                        className={clsx(
+                          'fixed h-full w-[64px] start-[17px] flex flex-1 top-0',
+                          user?.admin && 'pt-[60px]'
+                        )}
+                      >
+                        <div className="flex flex-col h-full gap-[32px] flex-1 py-[12px]">
+                          <Logo />
+                          <TopMenu />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex-1 bg-newBgLineColor rounded-[12px] overflow-auto flex flex-col gap-[1px] blurMe">
-                    <div className="flex flex-col flex-1 gap-[1px] min-w-[1000px]">
-                      <div className="flex bg-newBgColorInner h-[80px] px-[20px] items-center shrink-0">
-                        <div className="text-[24px] font-[600] flex flex-1">
-                          <Title />
-                        </div>
-                        <div className="flex gap-[20px] text-textItemBlur">
-                          <StreakComponent />
-                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                          <OrganizationSelector />
-                          <div className="hover:text-newTextColor">
-                            <ModeComponent />
+
+                    {/* Main content area */}
+                    <div className="flex-1 bg-newBgLineColor rounded-[12px] overflow-auto flex flex-col gap-[1px] blurMe">
+                      <div className="flex flex-col flex-1 gap-[1px] min-w-0">
+                        {/* Desktop top bar */}
+                        <div className="hidden lg:flex bg-newBgColorInner h-[80px] px-[20px] items-center shrink-0">
+                          <div className="text-[24px] font-[600] flex flex-1">
+                            <Title />
                           </div>
-                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                          <LanguageComponent />
-                          <ChromeExtensionComponent />
-                          <div className="w-[1px] h-[20px] bg-blockSeparator" />
-                          <AttachToFeedbackIcon />
-                          <NotificationComponent />
+                          <div className="flex gap-[20px] text-textItemBlur">
+                            <StreakComponent />
+                            <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                            <OrganizationSelector />
+                            <div className="hover:text-newTextColor">
+                              <ModeComponent />
+                            </div>
+                            <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                            <LanguageComponent />
+                            <ChromeExtensionComponent />
+                            <div className="w-[1px] h-[20px] bg-blockSeparator" />
+                            <AttachToFeedbackIcon />
+                            <NotificationComponent />
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex flex-1 gap-[1px]">{children}</div>
-                      <div className="flex justify-center items-center gap-[16px] py-[12px] bg-newBgColorInner text-[13px] text-textItemBlur shrink-0">
-                        <span>© 2026 VaiMix — ATV MKT Online</span>
-                        <span>·</span>
-                        <a href="/privacy-policy" className="hover:text-newTextColor transition-colors">Chính sách Bảo mật</a>
-                        <span>·</span>
-                        <a href="/terms-of-service" className="hover:text-newTextColor transition-colors">Điều khoản Dịch vụ</a>
+
+                        {/* Mobile compact top bar */}
+                        <div className="flex lg:hidden bg-newBgColorInner/90 backdrop-blur-md px-[14px] py-[10px] items-center shrink-0 gap-[8px]">
+                          <div className="text-[16px] font-[600] flex flex-1 truncate">
+                            <Title />
+                          </div>
+                          <div className="flex gap-[10px] text-textItemBlur items-center">
+                            <OrganizationSelector />
+                            <NotificationComponent />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-1 gap-[1px] pb-[72px] lg:pb-0">{children}</div>
+
+                        {/* Footer - simplified on mobile */}
+                        <div className="hidden md:flex justify-center items-center gap-[16px] py-[12px] bg-newBgColorInner text-[13px] text-textItemBlur shrink-0">
+                          <span>© 2026 VaiMix — ATV MKT Online</span>
+                          <span>·</span>
+                          <a href="/privacy-policy" className="hover:text-newTextColor transition-colors">Chính sách Bảo mật</a>
+                          <span>·</span>
+                          <a href="/terms-of-service" className="hover:text-newTextColor transition-colors">Điều khoản Dịch vụ</a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+
+                  {/* Mobile bottom navigation */}
+                  <MobileBottomNav />
+                </>
               )}
             </div>
           </CheckPayment>
