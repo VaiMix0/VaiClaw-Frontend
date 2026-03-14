@@ -447,7 +447,13 @@ div div .set-font-family {
   transform: translate(-50%, -50%);
   white-space: nowrap;
   opacity: 30%;
-  font-size: 14px;
+  font-size: 9px;
+}
+
+@media (min-width: 1024px) {
+  .col-calendar:hover:before {
+    font-size: 14px;
+  }
 }
 
 .loading-shimmer {

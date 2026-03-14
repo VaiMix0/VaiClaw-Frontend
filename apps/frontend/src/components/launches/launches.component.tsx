@@ -586,7 +586,7 @@ export const LaunchesComponent = () => {
             </div>
           </div>
         </div>
-        <div className="bg-newBgColorInner flex-1 flex-col flex p-[12px] lg:p-[20px] gap-[12px] min-w-0 overflow-x-auto">
+        <div className="bg-newBgColorInner flex-1 flex-col flex p-[8px] lg:p-[20px] gap-[8px] lg:gap-[12px] min-w-0 overflow-x-auto">
           {sortedIntegrations.length === 0 ? (
             <DashboardEmptyState />
           ) : (
