@@ -521,6 +521,15 @@ export const AddProviderComponent: FC<{
             return;
           }
 
+          // Validate URL is absolute to prevent relative navigation (404)
+          if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            toaster.show(
+              t('invalid_oauth_url', 'OAuth URL không hợp lệ. Vui lòng thử lại.'),
+              'warning'
+            );
+            return;
+          }
+
           window.location.href = url;
         };
         if (isWeb3) {

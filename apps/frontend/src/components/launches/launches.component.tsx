@@ -302,7 +302,8 @@ export const MenuComponent: FC<
             width={20}
           />
         ) : (
-          <Image
+          <ImageWithFallback
+            fallbackSrc={'/no-picture.jpg'}
             src={`/icons/platforms/${integration.identifier}.png`}
             className="rounded-[8px] absolute z-10 bottom-[5px] -end-[5px] border border-fifth"
             alt={integration.identifier}
@@ -587,6 +588,11 @@ export const LaunchesComponent = () => {
           </div>
         </div>
         <div className="bg-newBgColorInner flex-1 flex-col flex p-[8px] lg:p-[20px] gap-[8px] lg:gap-[12px] min-w-0 overflow-x-auto">
+          {/* Mobile-only toolbar: Add Channel + Create Post */}
+          <div className="flex lg:hidden gap-[8px]">
+            <AddProviderButton update={() => update(true)} />
+            {sortedIntegrations?.length > 0 && <NewPost />}
+          </div>
           {sortedIntegrations.length === 0 ? (
             <DashboardEmptyState />
           ) : (

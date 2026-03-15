@@ -50,9 +50,58 @@ import {
 import { useLaunchStore } from '@gitroom/frontend/components/new-launch/store';
 import { useShallow } from 'zustand/react/shallow';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
-const Polonto = dynamic(
+const PolontoRaw = dynamic(
   () => import('@gitroom/frontend/components/launches/polonto'),
   { ssr: false }
+);
+
+class PolontoErrorBoundary extends React.Component<
+  { children: React.ReactNode; closeModal?: () => void },
+  { hasError: boolean }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center gap-4 p-8 text-center">
+          <p className="text-lg font-medium">
+            Media editor is temporarily unavailable
+          </p>
+          <p className="text-sm text-gray-500">
+            The image editor (Polotno) is not compatible with the current React
+            version. Please use the standard media upload instead.
+          </p>
+          {this.props.closeModal && (
+            <button
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              onClick={this.props.closeModal}
+            >
+              Close
+            </button>
+          )}
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+const Polonto: FC<{
+  setMedia: (params: { id: string; path: string }[]) => void;
+  type?: 'image' | 'video';
+  closeModal: () => void;
+  width?: number;
+  height?: number;
+}> = (props) => (
+  <PolontoErrorBoundary closeModal={props.closeModal}>
+    <PolontoRaw {...props} />
+  </PolontoErrorBoundary>
 );
 const showModalEmitter = new EventEmitter();
 export const Pagination: FC<{
