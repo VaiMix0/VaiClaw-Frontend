@@ -51,7 +51,8 @@ import { useLaunchStore } from '@gitroom/frontend/components/new-launch/store';
 import { useShallow } from 'zustand/react/shallow';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
 const Polonto = dynamic(
-  () => import('@gitroom/frontend/components/launches/polonto')
+  () => import('@gitroom/frontend/components/launches/polonto'),
+  { ssr: false }
 );
 const showModalEmitter = new EventEmitter();
 export const Pagination: FC<{
@@ -393,7 +394,7 @@ export const MediaBox: FC<{
         ) : (
           <PlusIcon size={14} />
         )}
-        <div className={loading && 'invisible'}>{t('upload', 'Upload')}</div>
+        <div className={loading ? 'invisible' : undefined}>{t('upload', 'Upload')}</div>
       </button>
     );
   }, [t, loading]);
@@ -654,6 +655,7 @@ export const MultiMediaComponent: FC<{
   const user = useUser();
   const modals = useModals();
   const t = useT();
+  const [showInlineMedia, setShowInlineMedia] = useState(false);
   useEffect(() => {
     if (value) {
       setCurrentMedia(value);
@@ -687,18 +689,8 @@ export const MultiMediaComponent: FC<{
     [currentMedia]
   );
   const showModal = useCallback(() => {
-    modals.openModal({
-      title: t('media_library', 'Media Library'),
-      askClose: false,
-      closeOnEscape: true,
-      fullScreen: true,
-      size: 'calc(100% - 80px)',
-      height: 'calc(100% - 80px)',
-      children: (close) => (
-        <MediaBox setMedia={changeMedia} closeModal={close} />
-      ),
-    });
-  }, [changeMedia, t]);
+    setShowInlineMedia(true);
+  }, []);
 
   const clearMedia = useCallback(
     (topIndex: number) => () => {
@@ -858,6 +850,28 @@ export const MultiMediaComponent: FC<{
         </div>
       </div>
       <div className="text-[12px] text-red-400">{error}</div>
+      {showInlineMedia && (
+        <div className="border border-newBorder rounded-[12px] mt-[8px] bg-newBgColor overflow-hidden">
+          <div className="flex items-center justify-between px-[12px] py-[8px] bg-newBgColorInner border-b border-newBorder">
+            <span className="text-[14px] font-[600]">{t('media_library', 'Media Library')}</span>
+            <button
+              onClick={() => setShowInlineMedia(false)}
+              className="text-[12px] px-[10px] py-[4px] rounded-[6px] border border-newBorder hover:bg-newBgColor transition-colors"
+            >
+              {t('close', 'Close')}
+            </button>
+          </div>
+          <div className="max-h-[400px] overflow-y-auto p-[8px]">
+            <MediaBox
+              setMedia={(items) => {
+                changeMedia(items);
+                setShowInlineMedia(false);
+              }}
+              closeModal={() => setShowInlineMedia(false)}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

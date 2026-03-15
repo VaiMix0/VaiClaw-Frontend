@@ -28,6 +28,7 @@ import { useRouter } from 'next/navigation';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { AddEditModal } from '@gitroom/frontend/components/new-launch/add.edit.modal';
+import { QuickCreatePost } from '@gitroom/frontend/components/launches/quick-create-post';
 import dayjs from 'dayjs';
 import { ModalWrapperComponent } from '@gitroom/frontend/components/new-launch/modal.wrapper.component';
 import copy from 'copy-to-clipboard';
@@ -69,7 +70,7 @@ export const Menu: FC<{
   const ref = useClickOutside<HTMLDivElement>(() => {
     setShow(false);
   });
-  const showRef = useRef();
+  const showRef = useRef(null);
 
   // Adjust menu position if it would overflow viewport
   useLayoutEffect(() => {
@@ -214,33 +215,8 @@ export const Menu: FC<{
         await fetch(`/posts/find-slot/${integration.id}`)
       ).json();
 
-      modal.openModal({
-        id: 'add-edit-modal',
-        closeOnClickOutside: false,
-        removeLayout: true,
-        closeOnEscape: false,
-        withCloseButton: false,
-        askClose: true,
-        fullScreen: true,
-        classNames: {
-          modal: 'w-[100%] max-w-[1400px] text-textColor',
-        },
-        children: (
-          <AddEditModal
-            allIntegrations={integrations.map((p) => ({
-              ...p,
-            }))}
-            reopenModal={createPost(integration)}
-            mutate={reloadCalendarView}
-            integrations={integrations}
-            selectedChannels={[integration.id]}
-            // focusedChannel={integration.id}
-            date={dayjs.utc(date).local()}
-          />
-        ),
-        size: '80%',
-        title: ``,
-      });
+      const dateParam = dayjs.utc(date).local().format('YYYY-MM-DDTHH:mm:ss');
+      window.location.href = `/launches/create?date=${encodeURIComponent(dateParam)}`;
     },
     [integrations]
   );

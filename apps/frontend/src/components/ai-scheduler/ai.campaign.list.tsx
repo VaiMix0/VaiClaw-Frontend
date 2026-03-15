@@ -50,7 +50,42 @@ export function AiCampaignList() {
                     Chưa có chiến dịch Auto-Pilot nào. Hãy tạo một chiến dịch mới ở trang AI Scheduler.
                 </div>
             ) : (
-                <div className="w-full border rounded-lg overflow-hidden border-gray-200 dark:border-[#27272a]">
+                <>
+                {/* Mobile: card layout */}
+                <div className="lg:hidden flex flex-col gap-[12px]">
+                    {campaigns.map((c: any) => (
+                        <div key={c.id} className="border border-gray-200 dark:border-[#27272a] rounded-lg p-[12px] bg-[#fafafa] dark:bg-[#18181b]">
+                            <div className="font-medium text-base mb-[8px] truncate" title={c.topic}>{c.topic}</div>
+                            <div className="flex gap-1 flex-wrap mb-[8px]">
+                                {c.platforms.map((p: string) => (
+                                    <span key={p} className="bg-gray-100 dark:bg-[#27272a] px-2 py-0.5 rounded text-xs border border-transparent dark:border-[#3f3f46]">
+                                        {p}
+                                    </span>
+                                ))}
+                            </div>
+                            <div className="flex items-center justify-between mb-[8px]">
+                                <span className={`px-2 py-1 rounded-md text-xs font-semibold border ${c.status === 'active' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800' : 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800'}`}>
+                                    {c.status.toUpperCase()}
+                                </span>
+                                <span className="text-xs text-gray-500">Published: <strong className="text-green-600 dark:text-green-500">{c.published_count || 0}</strong> | Failed: <strong className="text-red-600 dark:text-red-500">{c.failed_count || 0}</strong></span>
+                            </div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mb-[8px]">
+                                Next: <span className="font-medium text-blue-600 dark:text-blue-400">{c.next_post_date ? new Date(c.next_post_date).toLocaleString() : 'Scheduling...'}</span>
+                            </div>
+                            <div className="flex gap-[12px] pt-[8px] border-t border-gray-200 dark:border-[#27272a]">
+                                <button onClick={() => toggleStatus(c.id, c.status)} className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                                    {c.status === 'active' ? 'Pause' : 'Resume'}
+                                </button>
+                                <button onClick={() => deleteCampaign(c.id)} className="text-xs font-medium text-red-600 dark:text-red-400">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop: table layout */}
+                <div className="hidden lg:block w-full border rounded-lg overflow-hidden border-gray-200 dark:border-[#27272a]">
                     <table className="w-full text-left text-sm">
                         <thead className="bg-[#f4f4f5] dark:bg-[#27272a] text-[#71717a] dark:text-[#a1a1aa]">
                             <tr>
@@ -64,7 +99,6 @@ export function AiCampaignList() {
                         <tbody>
                             {campaigns.map((c: any) => (
                                 <tr key={c.id} className="border-b border-gray-200 dark:border-[#27272a] last:border-0 hover:bg-[#fafafa] dark:hover:bg-[#18181b]">
-                                    {/* Campaign Info */}
                                     <td className="px-4 py-4 select-text max-w-[250px]">
                                         <div className="font-medium mb-2 text-base truncate" title={c.topic}>{c.topic}</div>
                                         <div className="flex gap-1 flex-wrap mb-2">
@@ -76,8 +110,6 @@ export function AiCampaignList() {
                                         </div>
                                         <div className="text-xs text-gray-500 dark:text-gray-400">Media source: {c.media_source}</div>
                                     </td>
-
-                                    {/* Schedule */}
                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                         <div className="mb-1.5 flex items-center gap-2">
                                             <span className="text-gray-500 dark:text-gray-400 w-16 text-xs">Cron:</span>
@@ -96,8 +128,6 @@ export function AiCampaignList() {
                                             </span>
                                         </div>
                                     </td>
-
-                                    {/* Performance */}
                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                         <div className="mb-1.5 flex items-center gap-2">
                                             <span className="text-gray-500 dark:text-gray-400 w-16 text-xs">Published:</span>
@@ -114,8 +144,6 @@ export function AiCampaignList() {
                                             </span>
                                         </div>
                                     </td>
-
-                                    {/* Status */}
                                     <td className="px-4 py-4">
                                         <span className={`px-2 py-1 rounded-md text-xs font-semibold border ${c.status === 'active' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800' : 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800'}`}>
                                             {c.status.toUpperCase()}
@@ -137,6 +165,7 @@ export function AiCampaignList() {
                         </tbody>
                     </table>
                 </div>
+                </>
             )}
         </div>
     );

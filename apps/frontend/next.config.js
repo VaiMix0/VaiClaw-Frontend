@@ -17,6 +17,10 @@ const nextConfig = {
     },];
   },
   reactStrictMode: false,
+  eslint: {
+    // Skip ESLint during build — run separately with flat config
+    ignoreDuringBuilds: true,
+  },
   transpilePackages: ['crypto-hash'],
   // Enable production sourcemaps for Sentry
   productionBrowserSourceMaps: true,

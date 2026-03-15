@@ -172,9 +172,60 @@ export const PlatformAnalytics = () => {
   }
   return (
     <>
+      {/* Mobile: horizontal scrollable channel selector */}
+      <div className="lg:hidden bg-newBgColorInner px-[12px] py-[8px] flex gap-[8px] overflow-x-auto shrink-0 scrollbar-none">
+        {sortedIntegrations.map((integration, index) => (
+          <div
+            key={integration.id}
+            onClick={() => {
+              if (integration.refreshNeeded) {
+                toaster.show(
+                  'Please refresh the integration from the calendar',
+                  'warning'
+                );
+                return;
+              }
+              setRefresh(true);
+              setTimeout(() => {
+                setRefresh(false);
+              }, 10);
+              setCurrent(index);
+            }}
+            className={clsx(
+              'flex gap-[6px] items-center px-[10px] py-[6px] rounded-[8px] cursor-pointer shrink-0 transition-colors',
+              currentIntegration?.id === integration.id
+                ? 'bg-boxFocused'
+                : 'opacity-50 hover:opacity-100'
+            )}
+          >
+            <div className="relative">
+              <ImageWithFallback
+                fallbackSrc={`/icons/platforms/${integration.identifier}.png`}
+                src={integration.picture}
+                className="rounded-[6px]"
+                alt={integration.identifier}
+                width={28}
+                height={28}
+              />
+              <Image
+                src={`/icons/platforms/${integration.identifier}.png`}
+                className="rounded-[4px] absolute z-10 bottom-[2px] -end-[4px] border border-fifth"
+                alt={integration.identifier}
+                width={14}
+                height={14}
+              />
+            </div>
+            <span className="text-[12px] font-[600] whitespace-nowrap max-w-[80px] truncate">
+              {integration.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: vertical sidebar */}
       <div
         className={clsx(
-          'bg-newBgColorInner p-[20px] flex flex-col gap-[15px] transition-all',
+          'hidden lg:flex bg-newBgColorInner p-[20px] flex-col gap-[15px] transition-all',
           collapseMenu === '1' ? 'group sidebar w-[100px]' : 'w-[260px]'
         )}
       >
@@ -272,10 +323,10 @@ export const PlatformAnalytics = () => {
           ))}
         </div>
       </div>
-      <div className="bg-newBgColorInner flex-1 flex-col flex p-[20px] gap-[12px]">
+      <div className="bg-newBgColorInner flex-1 flex-col flex p-[12px] lg:p-[20px] gap-[12px]">
         {!!options.length && (
           <div className="flex-1 flex flex-col gap-[14px]">
-            <div className="max-w-[200px]">
+            <div className="w-full lg:max-w-[200px]">
               <Select
                 label=""
                 name="date"

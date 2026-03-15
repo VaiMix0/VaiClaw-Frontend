@@ -16,7 +16,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import clsx from 'clsx';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import ReactLoading from 'react-loading';
+import { Spinner } from '@gitroom/frontend/components/layout/loading';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 
 export const UpDown: FC<{
@@ -197,7 +197,7 @@ export const StarsTableComponent = () => {
         </div>
         <div>
           {loading && (
-            <ReactLoading type="spin" color="#fff" width={20} height={20} />
+            <Spinner color="#fff" width={20} height={20} />
           )}
         </div>
       </div>

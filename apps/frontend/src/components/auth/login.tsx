@@ -12,7 +12,15 @@ import { GithubProvider } from '@gitroom/frontend/components/auth/providers/gith
 import { OauthProvider } from '@gitroom/frontend/components/auth/providers/oauth.provider';
 import { GoogleProvider } from '@gitroom/frontend/components/auth/providers/google.provider';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
-import { FarcasterProvider } from '@gitroom/frontend/components/auth/providers/farcaster.provider';
+import dynamic from 'next/dynamic';
+
+const FarcasterProvider = dynamic(
+  () =>
+    import('@gitroom/frontend/components/auth/providers/farcaster.provider').then(
+      (mod) => ({ default: mod.FarcasterProvider })
+    ),
+  { ssr: false, loading: () => null }
+);
 import WalletProvider from '@gitroom/frontend/components/auth/providers/wallet.provider';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 type Inputs = {

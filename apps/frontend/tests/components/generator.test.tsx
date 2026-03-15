@@ -11,6 +11,16 @@ vi.mock('@gitroom/frontend/components/new-launch/store', () => ({
     })
 }));
 
+// Mock MUI composeClasses to avoid ESM import errors
+vi.mock('@mui/utils/composeClasses', () => ({
+    default: (slots: any, getUtilityClass: any, classes: any) => classes || {}
+}));
+
+// Mock deep components to avoid transitive dependency ESM errors
+vi.mock('@gitroom/frontend/components/new-launch/add.edit.modal', () => ({
+    AddEditModal: () => <div data-testid="add-edit-modal">Add Edit Modal</div>
+}));
+
 describe('Generator UI (Content Studio)', () => {
     it('displays VaiClaw AI Generator branding', () => {
         act(() => {
@@ -34,6 +44,6 @@ describe('Generator UI (Content Studio)', () => {
         });
 
         expect(screen.getByText(/Write anything/i)).toBeTruthy();
-        expect(screen.getByText(/Output Format/i)).toBeTruthy();
+        expect(screen.getAllByText(/Output Format/i).length).toBeGreaterThan(0);
     });
 });

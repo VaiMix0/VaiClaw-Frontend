@@ -33,6 +33,7 @@ import { SVGLine } from '@gitroom/frontend/components/launches/launches.componen
 import { GlobalSettings } from '@gitroom/frontend/components/settings/global.settings';
 import { BrandNicheSettings } from './brand-niche.settings';
 import { ChannelsSettings } from './channels.settings';
+import { ScrollableTabs } from '@gitroom/frontend/components/ui/scrollable-tabs';
 
 export const SettingsPopup: FC<{
   getRef?: Ref<any>;
@@ -121,21 +122,12 @@ export const SettingsPopup: FC<{
   return (
     <div className="flex flex-col lg:flex-row flex-1">
       {/* Mobile: horizontal scrollable tabs */}
-      <div className="lg:hidden bg-newBgColorInner p-[12px] flex gap-[8px] overflow-x-auto shrink-0 scrollbar-none rounded-t-[12px]">
-        {list.map(({ tab: tabKey, label }) => (
-          <button
-            key={tabKey}
-            className={clsx(
-              'px-[12px] py-[8px] rounded-[8px] text-[13px] font-[600] whitespace-nowrap transition-colors',
-              tabKey === tab
-                ? 'bg-boxFocused text-textItemFocused'
-                : 'text-textItemBlur hover:bg-boxHover'
-            )}
-            onClick={() => setTab(tabKey)}
-          >
-            {label}
-          </button>
-        ))}
+      <div className="lg:hidden bg-newBgColorInner p-[12px] rounded-t-[12px]">
+        <ScrollableTabs
+          tabs={list.map(({ tab: tabKey, label }) => ({ key: tabKey, label }))}
+          activeTab={tab}
+          onTabChange={setTab}
+        />
       </div>
 
       {/* Desktop: vertical sidebar */}

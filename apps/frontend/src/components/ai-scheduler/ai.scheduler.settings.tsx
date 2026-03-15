@@ -193,7 +193,7 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
     };
 
     return (
-        <div className="w-full max-w-4xl bg-newBgColor border border-[#2b2d31] rounded-lg shadow-xl flex flex-col h-[700px] overflow-hidden">
+        <div className="w-full max-w-4xl bg-newBgColor border border-[#2b2d31] rounded-lg shadow-xl flex flex-col flex-1 min-h-0 max-h-[calc(100vh-180px)] lg:max-h-[calc(100vh-120px)] overflow-hidden">
             {/* Header */}
             <div className="p-4 border-b border-[#2b2d31] bg-[#1a1c20]">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
@@ -226,7 +226,7 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                     >
                         <div
                             className={clsx(
-                                "max-w-[80%] rounded-xl p-4",
+                                "max-w-[95%] sm:max-w-[80%] rounded-xl p-3 sm:p-4",
                                 msg.role === 'user'
                                     ? "bg-blue-600 text-white rounded-tr-none"
                                     : "bg-[#2b2d31] text-white rounded-tl-none border border-[#3b3d41]"
@@ -253,34 +253,34 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                                 <div className="mt-4 space-y-4">
                                     {msg.schedules.map((slot: any, sIdx: number) => (
                                         <div key={sIdx} className="bg-[#1a1c20] border border-[#3b3d41] rounded-lg p-3">
-                                            <h4 className="text-base font-bold mb-3 text-yellow-500">
-                                                🗓 Lịch đăng số {sIdx + 1}: {new Date(slot.date).toLocaleString()}
+                                            <h4 className="text-sm sm:text-base font-bold mb-3 text-yellow-500 break-words">
+                                                🗓 #{sIdx + 1}: {new Date(slot.date).toLocaleString()}
                                             </h4>
                                             <div className="space-y-3">
                                                 {Object.keys(slot.preview).map((platform) => (
                                                     <div key={platform} className="bg-[#131517] p-2 rounded border border-[#2b2d31]">
                                                         <div className="text-xs text-textColor uppercase tracking-wider mb-1">{platform}</div>
-                                                        <div className="text-sm whitespace-pre-wrap">{slot.preview[platform]}</div>
+                                                        <div className="text-xs sm:text-sm whitespace-pre-wrap break-words">{slot.preview[platform]}</div>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
                                     ))}
 
-                                    <div className="mt-4 pt-3 border-t border-[#3b3d41] flex justify-end gap-2 bg-[#2b2d31] p-3 rounded-b-lg">
+                                    <div className="mt-4 pt-3 border-t border-[#3b3d41] flex flex-col sm:flex-row justify-end gap-2 bg-[#2b2d31] p-3 rounded-b-lg">
                                         <Button
-                                            className="bg-transparent border border-[#3b3d41] hover:bg-[#3b3d41] text-white"
+                                            className="bg-transparent border border-[#3b3d41] hover:bg-[#3b3d41] text-white text-sm"
                                             onClick={() => {/* Edit flow here */ }}
                                             disabled={loading}
                                         >
                                             Edit Variants
                                         </Button>
                                         <Button
-                                            className="bg-primary hover:opacity-90 text-white font-medium shadow-md"
+                                            className="bg-primary hover:opacity-90 text-white font-medium shadow-md text-sm"
                                             onClick={() => handleConfirmSchedule(msg.schedules)}
                                             loading={loading}
                                         >
-                                            Chấp nhận & Lưu Lịch Phát
+                                            Chấp nhận & Lưu
                                         </Button>
                                     </div>
                                 </div>
@@ -290,20 +290,20 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                             {msg.campaign && (
                                 <div className="mt-4 space-y-4">
                                     <div className="bg-[#1a1c20] border border-blue-500 rounded-lg p-4 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <span className="text-2xl">🚀</span>
-                                            <h4 className="text-lg font-bold text-blue-400">
-                                                Auto-Pilot Campaign: {msg.campaign.topic}
+                                        <div className="flex items-start gap-2 mb-3">
+                                            <span className="text-2xl shrink-0">🚀</span>
+                                            <h4 className="text-base font-bold text-blue-400 break-words min-w-0">
+                                                Auto-Pilot: {msg.campaign.topic}
                                             </h4>
                                         </div>
-                                        <div className="grid grid-cols-2 gap-4 text-sm text-gray-300">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
                                             <div>
                                                 <span className="text-gray-500 block mb-1">Nền tảng</span>
-                                                <div className="font-medium">{msg.campaign.platforms.join(', ')}</div>
+                                                <div className="font-medium break-words">{msg.campaign.platforms.join(', ')}</div>
                                             </div>
                                             <div>
-                                                <span className="text-gray-500 block mb-1">Lịch đăng (Mỗi ngày)</span>
-                                                <div className="font-medium text-yellow-500">{msg.campaign.cron_configs.join(', ')}</div>
+                                                <span className="text-gray-500 block mb-1">Lịch đăng</span>
+                                                <div className="font-medium text-yellow-500 break-words">{msg.campaign.cron_configs.join(', ')}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -360,7 +360,7 @@ export const AiSchedulerSettings = ({ accountInfo }: { accountInfo: any }) => {
                         }
                     }}
                     className="flex-1 bg-[#2b2d31] border-none !mt-0 h-[50px] rounded-lg px-4 text-white focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="E.g. Lên lịch bài đăng về bộ sưu tập vòng tay mới cho tất cả nền tảng vào 8h sáng mai..."
+                    placeholder="E.g. Lên lịch bài đăng về bộ sưu tập vòng tay mới"
                 />
                 <Button
                     onClick={handleSend}

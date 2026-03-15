@@ -1,19 +1,16 @@
 import { SettingsPopup } from '@gitroom/frontend/components/layout/settings.component';
 export const dynamic = 'force-dynamic';
 import { Metadata } from 'next';
-import { isGeneralServerSide } from '@gitroom/helpers/utils/is.general.server.side';
 export const metadata: Metadata = {
-  title: `${isGeneralServerSide() ? 'VaiMix' : 'ATV'} Settings`,
+  title: 'VaiMix Settings',
   description: '',
 };
 export default async function Index({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     code: string;
-  };
+  }>;
 }) {
   return <SettingsPopup />;
 }
-
-

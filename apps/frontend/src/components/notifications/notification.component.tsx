@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { FC, useCallback, useState } from 'react';
 import clsx from 'clsx';
 import { useClickAway } from '@uidotdev/usehooks';
-import ReactLoading from 'react-loading';
+import { Spinner } from '@gitroom/frontend/components/layout/loading';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 function replaceLinks(text: string) {
   const urlRegex =
@@ -60,7 +60,7 @@ export const NotificationOpenComponent = () => {
       <div className="flex flex-col">
         {isLoading && (
           <div className="flex-1 flex justify-center pt-12">
-            <ReactLoading type="spin" color="#fff" width={36} height={36} />
+            <Spinner color="#fff" width={36} height={36} />
           </div>
         )}
         {!isLoading && !data.notifications.length && (

@@ -390,7 +390,7 @@ export const LinkedinPreview: FC<{
             viewBox="0 0 18 25"
             fill="none"
           >
-            <g clip-path="url(#clip0_2511_140348)">
+            <g clipPath="url(#clip0_2511_140348)">
               <path
                 d="M14.69 4.17L10.2 0H7.56L11.08 3.27H3.61C1.62 3.27 0 4.89 0 6.88V15.94H1.8V6.88C1.8 5.88 2.61 5.07 3.61 5.07H11.08L7.58 8.32H10.22L14.69 4.17Z"
                 fill="currentColor"

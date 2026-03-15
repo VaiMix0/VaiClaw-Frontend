@@ -767,12 +767,12 @@ html[dir='rtl'] [dir='ltr'] {
 }
 
 .blackGradBottomBg {
-  background: linear-gradient(180deg, #0e0e0e 0%, rgba(14, 14, 14, 0) 100%);
+  background: linear-gradient(180deg, #0a0a12 0%, rgba(10, 10, 18, 0) 100%);
   rotate: 180deg;
 }
 
 .blackGradTopBg {
-  background: linear-gradient(180deg, #0e0e0e 0%, rgba(14, 14, 14, 0) 100%);
+  background: linear-gradient(180deg, #0a0a12 0%, rgba(10, 10, 18, 0) 100%);
 }
 
 .billing-form input {
@@ -810,8 +810,22 @@ html[dir='rtl'] [dir='ltr'] {
 }
 
 .w8-max {
-  width: calc(100% / 6);
-  max-width: calc(100% / 6);
+  width: calc(100% / 3);
+  max-width: calc(100% / 3);
+}
+
+@media (min-width: 640px) {
+  .w8-max {
+    width: calc(100% / 4);
+    max-width: calc(100% / 4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .w8-max {
+    width: calc(100% / 6);
+    max-width: calc(100% / 6);
+  }
 }
 
 .withp3 {
@@ -830,10 +844,19 @@ html[dir='rtl'] [dir='ltr'] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   VaiMix Design System – TechForge-Inspired Theme (Hybrid Integrations)
+   VaiMix Design System – TechForge-Inspired Dark Premium Theme
+   Primary: #0A66C2 (Tech Blue) | Accent: #FF6B00 (Vibrant Orange)
    ═══════════════════════════════════════════════════════════════ */
 
 /* ═══ Mesh Gradient Backgrounds ═══ */
+.mesh-hero {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(10, 102, 194, 0.3), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.15), transparent),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(255, 107, 0, 0.08), transparent),
+    var(--new-bgColor);
+}
+
 .mesh-section {
   background:
     radial-gradient(ellipse 70% 40% at 30% 50%, rgba(10, 102, 194, 0.08), transparent),
@@ -846,6 +869,13 @@ html[dir='rtl'] [dir='ltr'] {
     radial-gradient(ellipse 80% 60% at 50% 50%, rgba(10, 102, 194, 0.12), transparent),
     radial-gradient(ellipse 40% 40% at 80% 30%, rgba(124, 58, 237, 0.1), transparent),
     linear-gradient(180deg, var(--new-bgColorInner) 0%, var(--new-bgColor) 100%);
+}
+
+.mesh-cta {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(124, 58, 237, 0.4), transparent),
+    radial-gradient(ellipse 50% 40% at 30% 60%, rgba(219, 39, 119, 0.2), transparent),
+    linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f97316 100%);
 }
 
 /* ═══ Glassmorphism Cards ═══ */
@@ -883,10 +913,81 @@ html[dir='rtl'] [dir='ltr'] {
 
 /* ═══ Gradient Text ═══ */
 .gradient-text {
-  background: linear-gradient(135deg, #2E96F0, #FF8C33);
+  background: linear-gradient(135deg, var(--vm-primary-400, #2E96F0), var(--vm-accent-400, #FF8C33));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.gradient-text-vivid {
+  background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ Gradient Stats Cards ═══ */
+.stat-card {
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: all 0.35s ease;
+}
+
+.stat-primary {
+  background: linear-gradient(135deg, #064170, #0A66C2);
+  box-shadow: 0 12px 40px rgba(10, 102, 194, 0.2);
+}
+
+.stat-accent {
+  background: linear-gradient(135deg, #994000, #FF6B00);
+  box-shadow: 0 12px 40px rgba(255, 107, 0, 0.2);
+}
+
+.stat-purple {
+  background: linear-gradient(135deg, #6d28d9, #a855f7);
+  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.2);
+}
+
+.stat-white {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* ═══ Icon Boxes ═══ */
+.icon-box {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.icon-box:hover {
+  transform: scale(1.1);
+}
+
+/* ═══ Section Label ═══ */
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vm-primary-400, #2E96F0);
+}
+
+/* ═══ Heading font ═══ */
+.font-heading {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
 /* ═══ Glow Borders ═══ */
@@ -915,6 +1016,16 @@ html[dir='rtl'] [dir='ltr'] {
   50% { transform: translateY(-14px); }
 }
 
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(12px); }
+}
+
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px rgba(10, 102, 194, 0.2); }
   50% { box-shadow: 0 0 40px rgba(10, 102, 194, 0.4); }
@@ -924,7 +1035,45 @@ html[dir='rtl'] [dir='ltr'] {
   animation: float 3s ease-in-out infinite;
 }
 
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 3.5s ease-in-out infinite;
+}
+
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ═══ Dividers ═══ */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(10, 102, 194, 0.3), rgba(124, 58, 237, 0.2), transparent);
+}
+
+/* ═══ Scrollbar (VaiMix themed) ═══ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--new-bgColor);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a40;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a50;
+}
+
+/* ═══ Focus Ring ═══ */
+*:focus-visible {
+  outline: 2px solid var(--vm-primary-400, #2E96F0);
+  outline-offset: 2px;
 }
 

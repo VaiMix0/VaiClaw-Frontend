@@ -10,13 +10,14 @@ export const metadata: Metadata = {
   title: `${isGeneralServerSide() ? 'VaiMix' : 'ATV'} Register`,
   description: '',
 };
-export default async function Auth(params: {searchParams: {provider: string}}) {
+export default async function Auth({ searchParams }: {searchParams: Promise<{provider: string}>}) {
+  const resolvedSearchParams = await searchParams;
   const t = await getT();
   if (process.env.DISABLE_REGISTRATION === 'true') {
     const canRegister = (
       await (await internalFetch('/auth/can-register')).json()
     ).register;
-    if (!canRegister && !params?.searchParams?.provider) {
+    if (!canRegister && !resolvedSearchParams?.provider) {
       return (
         <>
           <LoginWithOidc />

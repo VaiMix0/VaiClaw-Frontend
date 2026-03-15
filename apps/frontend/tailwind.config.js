@@ -116,6 +116,29 @@ export default {
         youtubeButton: 'var(--youtube-button)',
         youtubeBgAction: 'var(--youtube-action-color)',
         youtubeSvg: 'var(--youtube-svg-border)',
+        // VaiMix brand colors
+        vmPrimary: {
+          50: 'var(--vm-primary-50)',
+          100: 'var(--vm-primary-100)',
+          200: 'var(--vm-primary-200)',
+          300: 'var(--vm-primary-300)',
+          400: 'var(--vm-primary-400)',
+          500: 'var(--vm-primary-500)',
+          600: 'var(--vm-primary-600)',
+          700: 'var(--vm-primary-700)',
+          800: 'var(--vm-primary-800)',
+          900: 'var(--vm-primary-900)',
+        },
+        vmAccent: {
+          50: 'var(--vm-accent-50)',
+          100: 'var(--vm-accent-100)',
+          200: 'var(--vm-accent-200)',
+          300: 'var(--vm-accent-300)',
+          400: 'var(--vm-accent-400)',
+          500: 'var(--vm-accent-500)',
+          600: 'var(--vm-accent-600)',
+          700: 'var(--vm-accent-700)',
+        },
       },
       gridTemplateColumns: {
         13: 'repeat(13, minmax(0, 1fr));',
@@ -125,7 +148,8 @@ export default {
         loginBg: 'url(/auth/bg-login.png)',
       },
       fontFamily: {
-        sans: ['Helvetica Neue'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
       },
       animation: {
         fade: 'fadeOut 0.5s ease-in-out',
@@ -139,6 +163,11 @@ export default {
         newMessages: 'newMessages 1s ease-in-out 4s forwards',
         marqueeUp: 'marquee-up 100s linear infinite',
         marqueeDown: 'marquee-down 100s linear infinite',
+        // VaiMix animations
+        vmFloat: 'vmFloat 3s ease-in-out infinite',
+        vmFloatSlow: 'vmFloatSlow 4s ease-in-out infinite',
+        vmFloatReverse: 'vmFloatReverse 3.5s ease-in-out infinite',
+        vmPulseGlow: 'vmPulseGlow 3s ease-in-out infinite',
       },
       boxShadow: {
         yellow: '0 0 60px 20px #6b6237',
@@ -249,6 +278,23 @@ export default {
             backgroundColor: 'var(--color-third)',
             fontWeight: 'normal',
           },
+        },
+        // VaiMix keyframes
+        vmFloat: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-14px)' },
+        },
+        vmFloatSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        vmFloatReverse: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(12px)' },
+        },
+        vmPulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(10, 102, 194, 0.2)' },
+          '50%': { boxShadow: '0 0 40px rgba(10, 102, 194, 0.4)' },
         },
       }),
       screens: {

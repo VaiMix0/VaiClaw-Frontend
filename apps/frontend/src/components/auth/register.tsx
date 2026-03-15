@@ -18,8 +18,15 @@ import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { useTrack } from '@gitroom/react/helpers/use.track';
 import { TrackEnum } from '@gitroom/nestjs-libraries/user/track.enum';
-import { FarcasterProvider } from '@gitroom/frontend/components/auth/providers/farcaster.provider';
 import dynamic from 'next/dynamic';
+
+const FarcasterProvider = dynamic(
+  () =>
+    import('@gitroom/frontend/components/auth/providers/farcaster.provider').then(
+      (mod) => ({ default: mod.FarcasterProvider })
+    ),
+  { ssr: false, loading: () => null }
+);
 import { WalletUiProvider } from '@gitroom/frontend/components/auth/providers/placeholder/wallet.ui.provider';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import useCookie from 'react-use-cookie';

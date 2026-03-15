@@ -37,7 +37,7 @@ export class AgenciesService {
     if (action === 'approve') {
       await this._notificationService.sendEmail(
         agency?.user?.email!,
-        'Your Agency has been approved and added to Postiz 🚀',
+        'Your Agency has been approved and added to VaiMix 🚀',
         `
 <html lang="en">
 
@@ -73,7 +73,7 @@ export class AgenciesService {
 
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
   Hi there, <br /><br />
-  Your agency ${agency?.name} has been declined to Postiz!<br />
+  Your agency ${agency?.name} has been declined to VaiMix!<br />
   If you think we have made a mistake, please reply to this email and let us know
 </body>
 </html>`

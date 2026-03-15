@@ -122,8 +122,8 @@ export const Plugs = () => {
     <>
       <div
         className={clsx(
-          'bg-newBgColorInner p-[20px] flex flex-col gap-[15px] transition-all',
-          collapseMenu === '1' ? 'group sidebar w-[100px]' : 'w-[260px]'
+          'bg-newBgColorInner p-[20px] flex-col gap-[15px] transition-all hidden lg:flex',
+          collapseMenu === '1' ? 'group sidebar w-[100px]' : 'lg:w-[260px]'
         )}
       >
         <div className="flex gap-[12px] flex-col">
@@ -220,7 +220,45 @@ export const Plugs = () => {
           ))}
         </div>
       </div>
-      <div className="bg-newBgColorInner flex-1 flex-col flex p-[20px] gap-[12px]">
+      <div className="bg-newBgColorInner flex-1 flex-col flex p-[12px] lg:p-[20px] gap-[12px] min-w-0">
+        {/* Mobile channel selector */}
+        <div className="flex lg:hidden gap-[8px] overflow-x-auto pb-[4px] scrollbar-none snap-x snap-mandatory">
+          {sortedIntegrations.map((integration: any, index: number) => (
+            <div
+              key={integration.id}
+              onClick={() => {
+                if (integration.refreshNeeded) {
+                  toaster.show(
+                    'Please refresh the integration from the calendar',
+                    'warning'
+                  );
+                  return;
+                }
+                setRefresh(true);
+                setTimeout(() => {
+                  setRefresh(false);
+                }, 10);
+                setCurrent(index);
+              }}
+              className={clsx(
+                'flex items-center gap-[6px] px-[10px] py-[6px] rounded-[8px] cursor-pointer shrink-0',
+                currentIntegration?.id === integration.id
+                  ? 'bg-forth/20 border border-forth'
+                  : 'bg-newBgColorInner border border-tableBorder opacity-60'
+              )}
+            >
+              <ImageWithFallback
+                fallbackSrc={`/icons/platforms/${integration.identifier}.png`}
+                src={integration.picture}
+                className="rounded-[4px]"
+                alt={integration.identifier}
+                width={24}
+                height={24}
+              />
+              <span className="text-[12px] whitespace-nowrap">{integration.name}</span>
+            </div>
+          ))}
+        </div>
         <PlugsContext.Provider value={currentIntegrationPlug}>
           <Plug />
         </PlugsContext.Provider>

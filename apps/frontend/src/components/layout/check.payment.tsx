@@ -1,5 +1,5 @@
 import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
-import Loading from 'react-loading';
+import { Spinner } from '@gitroom/frontend/components/layout/loading';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { timer } from '@gitroom/helpers/utils/timer';
 import { useToaster } from '@gitroom/react/toaster/toaster';
@@ -69,7 +69,7 @@ export const CheckPaymentInner: FC<{
     return (
       <div className="fixed bg-black/40 w-full h-full flex justify-center items-center z-[400]">
         <div>
-          <Loading type="spin" color="#612AD5" height={250} width={250} />
+          <Spinner color="#612AD5" height={250} width={250} />
         </div>
       </div>
     );

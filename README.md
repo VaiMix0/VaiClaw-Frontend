@@ -2,7 +2,7 @@
   <a href="https://postiz.com/" target="_blank">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/765e9d72-3ee7-4a56-9d59-a2c9befe2311">
-    <img alt="Postiz Logo" src="https://github.com/user-attachments/assets/f0d30d70-dddb-4142-8876-e9aa6ed1cb99" width="280"/>
+    <img alt="VaiMix Logo" src="https://github.com/user-attachments/assets/f0d30d70-dddb-4142-8876-e9aa6ed1cb99" width="280"/>
   </picture>
   </a>
 </p>
@@ -13,13 +13,13 @@
 </a>
 </p>
 
-<h3 align="center"><strong><a href="https://github.com/gitroomhq/postiz-agent">NEW: check out Postiz agent CLI! perfect for OpenClaw and other agents</a></strong></h3>
+<h3 align="center"><strong><a href="https://github.com/gitroomhq/postiz-agent">NEW: check out VaiMix agent CLI! perfect for OpenClaw and other agents</a></strong></h3>
 <div align="center">
   <strong>
   <h2>Your ultimate AI social media scheduling tool</h2><br />
-  <a href="https://postiz.com">Postiz</a>: An alternative to: Buffer.com, Hypefury, Twitter Hunter, etc...<br /><br />
+  <a href="https://postiz.com">VaiMix</a>: An alternative to: Buffer.com, Hypefury, Twitter Hunter, etc...<br /><br />
   </strong>
-  Postiz offers everything you need to manage your social media posts,<br />build an audience, capture leads, and grow your business.
+  VaiMix offers everything you need to manage your social media posts,<br />build an audience, capture leads, and grow your business.
 </div>
 
 <div class="flex" align="center">
@@ -68,10 +68,10 @@
 
 <br />
 
-## New - Postiz-as-a-service - Enterprise (Cloud)
+## New - VaiMix-as-a-service - Enterprise (Cloud)
 
 Integrate powerful social media scheduling capabilities into your SaaS. <br />Multi-tenant architecture designed for SaaS companies who want to offer social media management to their users.
-- **Skip App Approvals** - Use Postiz apps directly without going through lengthy social platform approval processes. Get the full power of Postiz instantly.
+- **Skip App Approvals** - Use VaiMix apps directly without going through lengthy social platform approval processes. Get the full power of VaiMix instantly.
 - **Multi-Tenant Architecture** - each of your customers gets their own isolated environment with separate accounts, channels, and team management.
 - **Headless API** - Full REST API access to build your own frontend experience. Complete control over the user interface and branding.
 - **Full OAuth Support** - Connect all major social platforms including Facebook, Instagram, Twitter, LinkedIn, TikTok, and more.
@@ -81,11 +81,11 @@ Integrate powerful social media scheduling capabilities into your SaaS. <br />Mu
 
 <br /><br />
 
-## 🔌 See the leading Postiz features
+## 🔌 See the leading VaiMix features
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=BdsCVvEYgHU" target="_blank">
-    <img alt="Postiz" src="https://github.com/user-attachments/assets/8b9b7939-da1a-4be5-95be-42c6fce772de" />
+    <img alt="VaiMix" src="https://github.com/user-attachments/assets/8b9b7939-da1a-4be5-95be-42c6fce772de" />
   </a>
 </p>
 
@@ -123,23 +123,23 @@ Integrate powerful social media scheduling capabilities into your SaaS. <br />Mu
 
 To have the project up and running, please follow the [Quick Start Guide](https://docs.postiz.com/quickstart)
 
-## Sponsor Postiz
+## Sponsor VaiMix
 
-We now give a few options to Sponsor Postiz:
+We now give a few options to Sponsor VaiMix:
 - Just a donation: You like what we are building, and want to buy us some coffees so we can build faster.
-- Main Repository: Get your logo with a backlink from the main Postiz repository. Postiz has almost 3m downloads and 20k views per month.
+- Main Repository: Get your logo with a backlink from the main VaiMix repository. VaiMix has almost 3m downloads and 20k views per month.
 - Main Repository + Website: Get your logo on the central repository and the main website. Here are some metrics: - Website has 20k hits per month + 65 DR (strong backlink) - Repository has 20k hits per month + Almost 3m docker downloads.
 
 Link: https://opencollective.com/postiz
 
-## Postiz Compliance
+## VaiMix Compliance
 
-- Postiz is an open-source, self-hosted social media scheduling tool that supports platforms like X (formerly Twitter), Bluesky, Mastodon, Discord, and others.
-- Postiz hosted service uses official, platform-approved OAuth flows.
-- Postiz does not automate or scrape content from social media platforms.
-- Postiz does not collect, store, or proxy API keys or access tokens from users.
-- Postiz never ask users to paste API keys into our hosted product.
-- Postiz Users always authenticate directly with the social platform (e.g., X, Discord, etc.), ensuring platform compliance and data privacy.
+- VaiMix is an open-source, self-hosted social media scheduling tool that supports platforms like X (formerly Twitter), Bluesky, Mastodon, Discord, and others.
+- VaiMix hosted service uses official, platform-approved OAuth flows.
+- VaiMix does not automate or scrape content from social media platforms.
+- VaiMix does not collect, store, or proxy API keys or access tokens from users.
+- VaiMix never ask users to paste API keys into our hosted product.
+- VaiMix Users always authenticate directly with the social platform (e.g., X, Discord, etc.), ensuring platform compliance and data privacy.
 
 ## Star History
 

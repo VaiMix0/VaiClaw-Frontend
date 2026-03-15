@@ -4,14 +4,16 @@ import { cookies } from 'next/headers';
 export const dynamic = 'force-dynamic';
 
 export default async function Page({
-  params: { provider },
+  params,
   searchParams,
 }: {
-  params: {
+  params: Promise<{
     provider: string;
-  };
-  searchParams: any;
+  }>;
+  searchParams: Promise<any>;
 }) {
-  const get = cookies().get('auth');
-  return <ContinueIntegration searchParams={searchParams} provider={provider} logged={!!get?.name} />;
+  const { provider } = await params;
+  const resolvedSearchParams = await searchParams;
+  const get = (await cookies()).get('auth');
+  return <ContinueIntegration searchParams={resolvedSearchParams} provider={provider} logged={!!get?.name} />;
 }

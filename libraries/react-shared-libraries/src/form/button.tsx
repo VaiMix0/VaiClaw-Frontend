@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { clsx } from 'clsx';
-import ReactLoading from 'react-loading';
+import { Spinner } from '@gitroom/frontend/components/layout/loading';
 export const Button: FC<
   DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
@@ -40,8 +40,7 @@ export const Button: FC<
     >
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <ReactLoading
-            type="spin"
+          <Spinner
             color="#fff"
             width={height! / 2}
             height={height! / 2}

@@ -282,13 +282,13 @@ export const ModalManagerInner: FC = () => {
 
   return (
     <>
-      <style>{`body, html { overflow: hidden !important; }`}</style>
+      <style>{`body, html { overflow: hidden !important; } .mobile-bottom-nav { display: none !important; }`}</style>
       {modalManager.map((modal, index) => (
         <Component
           isLast={modalManager.length - 1 === index}
           key={modal.id}
           modal={modal}
-          zIndex={200 + index}
+          zIndex={10000 + index}
           closeModal={closeModal}
         />
       ))}

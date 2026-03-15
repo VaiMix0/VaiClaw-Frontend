@@ -6,7 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import '@copilotkit/react-ui/styles.css';
 import LayoutContext from '@gitroom/frontend/components/layout/layout.context';
 import { ReactNode } from 'react';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import PlausibleProvider from 'next-plausible';
 import clsx from 'clsx';
 import { VariableContextComponent } from '@gitroom/react/helpers/variable.context';
@@ -27,14 +27,22 @@ import Script from 'next/script';
 //   }
 // );
 
-const jakartaSans = Plus_Jakarta_Sans({
-  weight: ['600', '500'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
+const inter = Inter({
+  weight: ['400', '500', '600', '700'],
+  style: ['normal'],
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-inter',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  weight: ['500', '600', '700'],
+  style: ['normal'],
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-heading',
 });
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
-  const allHeaders = headers();
+  const allHeaders = await headers();
   const hasPlausible = !!process.env.STRIPE_PUBLISHABLE_KEY;
   return (
     <html>
@@ -51,7 +59,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         )}
       </head>
       <body
-        className={clsx(jakartaSans.className, 'dark text-primary !bg-primary')}
+        className={clsx(inter.variable, spaceGrotesk.variable, inter.className, 'dark text-primary !bg-primary')}
       >
         <VariableContextComponent
           storageProvider={
@@ -96,7 +104,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             <FacebookComponent />
             {hasPlausible ? (
               <PlausibleProvider
-                domain={!!process.env.IS_GENERAL ? 'vaimix.com' : 'gitroom.com'}
+                domain="vaimix.com"
               >
                 <PHProvider
                   phkey={process.env.NEXT_PUBLIC_POSTHOG_KEY}

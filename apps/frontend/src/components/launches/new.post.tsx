@@ -1,82 +1,13 @@
-import React, { useCallback } from 'react';
-import { useModals } from '@gitroom/frontend/components/layout/new-modal';
-import dayjs from 'dayjs';
-import { useCalendar } from '@gitroom/frontend/components/launches/calendar.context';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import React from 'react';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
-import { SetSelectionModal } from '@gitroom/frontend/components/launches/calendar';
-import { AddEditModal } from '@gitroom/frontend/components/new-launch/add.edit.modal';
-import { ModalWrapperComponent } from '@gitroom/frontend/components/new-launch/modal.wrapper.component';
+import Link from 'next/link';
 
 export const NewPost = () => {
-  const fetch = useFetch();
-  const modal = useModals();
-  const { integrations, reloadCalendarView, sets } = useCalendar();
   const t = useT();
 
-  const createAPost = useCallback(async () => {
-    const date = (await (await fetch('/posts/find-slot')).json()).date;
-
-    const set: any = !sets.length
-      ? undefined
-      : await new Promise((resolve) => {
-          modal.openModal({
-            title: t('select_set', 'Select a Set'),
-            closeOnClickOutside: true,
-            closeOnEscape: true,
-            withCloseButton: false,
-            onClose: () => resolve('exit'),
-            classNames: {
-              modal: 'text-textColor',
-            },
-            children: (
-              <SetSelectionModal
-                sets={sets}
-                onSelect={(selectedSet) => {
-                  resolve(selectedSet);
-                  modal.closeAll();
-                }}
-                onContinueWithoutSet={() => {
-                  resolve(undefined);
-                  modal.closeAll();
-                }}
-              />
-            ),
-          });
-        });
-
-    if (set === 'exit') return;
-
-    modal.openModal({
-      id: 'add-edit-modal',
-      closeOnClickOutside: false,
-      removeLayout: true,
-      closeOnEscape: false,
-      withCloseButton: false,
-      askClose: true,
-      fullScreen: true,
-      classNames: {
-        modal: 'w-[100%] max-w-[1400px] text-textColor',
-      },
-      children: (
-        <AddEditModal
-          allIntegrations={integrations.map((p) => ({
-            ...p,
-          }))}
-          {...(set?.content ? { set: JSON.parse(set.content) } : {})}
-          reopenModal={createAPost}
-          mutate={reloadCalendarView}
-          integrations={integrations}
-          date={dayjs.utc(date).local()}
-        />
-      ),
-      size: '80%',
-      title: ``,
-    });
-  }, [integrations, sets]);
   return (
-    <button
-      onClick={createAPost}
+    <Link
+      href="/launches/create"
       className="text-white flex-1 pt-[12px] pb-[14px] ps-[16px] pe-[20px] group-[.sidebar]:p-0 min-h-[44px] max-h-[44px] rounded-md bg-btnPrimary flex justify-center items-center gap-[5px] outline-none"
     >
       <svg
@@ -98,7 +29,6 @@ export const NewPost = () => {
       <div className="flex-1 text-start text-[14px] group-[.sidebar]:hidden">
         {t('create_new_post', 'Create Post')}
       </div>
-    </button>
+    </Link>
   );
 };
-

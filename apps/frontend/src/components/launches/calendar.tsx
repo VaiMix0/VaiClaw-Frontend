@@ -51,6 +51,7 @@ import { MissingReleaseModal } from '@gitroom/frontend/components/launches/missi
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import i18next from 'i18next';
 import { AddEditModal } from '@gitroom/frontend/components/new-launch/add.edit.modal';
+import { QuickCreatePost } from '@gitroom/frontend/components/launches/quick-create-post';
 import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { stripHtmlValidation } from '@gitroom/helpers/utils/strip.html.validation';
@@ -345,7 +346,7 @@ export const WeekView = () => {
   return (
     <div className="flex flex-col text-textColor flex-1">
       <div className="flex-1 relative">
-        <div className="grid [grid-template-columns:32px_repeat(7,_minmax(0,_1fr))] lg:[grid-template-columns:136px_repeat(7,_minmax(0,_1fr))] gap-[1px] lg:gap-[4px] rounded-[10px] absolute h-full start-0 top-0 w-full overflow-auto scrollbar scrollbar-thumb-fifth scrollbar-track-newBgColor">
+        <div className="grid [grid-template-columns:32px_repeat(7,_minmax(0,_1fr))] lg:[grid-template-columns:136px_repeat(7,_minmax(0,_1fr))] gap-[1px] lg:gap-[4px] rounded-[10px] absolute h-full start-0 top-0 w-full overflow-auto scrollbar scrollbar-thumb-fifth scrollbar-track-newBgColor pr-[8px] pb-[8px] lg:pr-[12px] lg:pb-[12px]">
           <div className="z-10 bg-newTableHeader flex justify-center items-center flex-col h-[40px] lg:h-[62px] rounded-[6px] lg:rounded-[8px] sticky top-0"></div>
           {localizedDays.map((day, index) => (
             <div
@@ -450,7 +451,7 @@ export const MonthView = () => {
   return (
     <div className="flex flex-col text-textColor flex-1">
       <div className="flex-1 flex relative">
-        <div className="grid grid-cols-7 grid-rows-[32px_auto] lg:grid-rows-[62px_auto] gap-[1px] lg:gap-[4px] rounded-[10px] absolute start-0 top-0 overflow-auto w-full h-full scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary">
+        <div className="grid grid-cols-7 grid-rows-[32px_auto] lg:grid-rows-[62px_auto] gap-[1px] lg:gap-[4px] rounded-[10px] absolute start-0 top-0 overflow-auto w-full h-full scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary pr-[8px] pb-[8px] lg:pr-[12px] lg:pb-[12px]">
           {localizedDays.map((day) => (
             <div
               key={day.full}
@@ -759,49 +760,15 @@ export const CalendarColumn: FC<{
 
     if (set === 'exit') return;
 
-    modal.openModal({
-      id: 'add-edit-modal',
-      closeOnClickOutside: false,
-      removeLayout: true,
-      closeOnEscape: false,
-      withCloseButton: false,
-      askClose: true,
-      fullScreen: true,
-      classNames: {
-        modal: 'w-[100%] max-w-[1400px] text-textColor',
-      },
-      children: (
-        <AddEditModal
-          allIntegrations={integrations.map((p) => ({
-            ...p,
-          }))}
-          integrations={integrations.slice(0).map((p) => ({
-            ...p,
-          }))}
-          mutate={reloadCalendarView}
-          {...(signature?.id && !set
-            ? {
-              onlyValues: [
-                {
-                  content: '\n' + signature.content,
-                },
-              ],
-            }
-            : {})}
-          date={
-            randomHour
-              ? getDate.hour(Math.floor(Math.random() * 24))
-              : getDate.format('YYYY-MM-DDTHH:mm:ss') ===
-                newDayjs().startOf('hour').format('YYYY-MM-DDTHH:mm:ss')
-                ? newDayjs().add(10, 'minute')
-                : getDate
-          }
-          {...(set?.content ? { set: JSON.parse(set.content) } : {})}
-          reopenModal={() => ({})}
-        />
-      ),
-      size: '80%',
-    });
+    const selectedDate = randomHour
+      ? getDate.hour(Math.floor(Math.random() * 24))
+      : getDate.format('YYYY-MM-DDTHH:mm:ss') ===
+          newDayjs().startOf('hour').format('YYYY-MM-DDTHH:mm:ss')
+        ? newDayjs().add(10, 'minute')
+        : getDate;
+
+    const dateParam = selectedDate.format('YYYY-MM-DDTHH:mm:ss');
+    window.location.href = `/launches/create?date=${encodeURIComponent(dateParam)}`;
   }, [integrations, getDate, sets, signature]);
 
   const addProvider = useAddProvider();
@@ -1006,6 +973,11 @@ const CalendarItem: FC<{
     }),
     []
   );
+
+  if (!post?.integration) {
+    return null;
+  }
+
   return (
     <div
       // @ts-ignore
@@ -1029,7 +1001,7 @@ const CalendarItem: FC<{
             'group-hover:hidden cursor-pointer'
           )}
         >
-          {post.tags.map((p: any) => p.tag.name).join(', ')}
+          {post.tags?.map((p: any) => p.tag.name).join(', ')}
         </div>
         <div
           className={clsx(
